@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Balatro Tracker
 
-## Getting Started
+A full-stack web app for tracking gold sticker progress across every joker in [Balatro](https://www.playbalatro.com/). Sign in to sync your collection across devices — no password required.
 
-First, run the development server:
+![Gold poker chip favicon](app/icon.svg)
+
+---
+
+## Features
+
+- Browse all 150+ jokers with sprite art, rarity, and description
+- Tap a poker chip to cycle through stake levels (White → Gold)
+- Progress persists per-user in a cloud database when signed in
+- Unauthenticated users get a fully functional local-only experience
+- Magic link sign-in — no passwords, no OAuth friction
+- Responsive layout with a Balatro-inspired pixel font and felt aesthetic
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Framework** | [Next.js 15](https://nextjs.org) — App Router, Server Components, Server Actions |
+| **Language** | TypeScript |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com) with CSS custom properties for theming |
+| **UI Components** | [shadcn/ui](https://ui.shadcn.com) built on [Base UI](https://base-ui.com) primitives |
+| **Authentication** | [Auth.js v5](https://authjs.dev) (NextAuth) with magic link via [Resend](https://resend.com) |
+| **Email** | [Resend](https://resend.com) + [React Email](https://react.email) for transactional templates |
+| **Database** | [Neon](https://neon.tech) — serverless Postgres |
+| **ORM** | [Prisma](https://www.prisma.io) |
+| **Deployment** | [Vercel](https://vercel.com) |
+| **Component Explorer** | [Storybook 8](https://storybook.js.org) with Next.js Vite adapter |
+| **Testing** | [Vitest](https://vitest.dev) |
+
+## Architecture Highlights
+
+**Server Components + Server Actions** — data fetching and mutations happen on the server by default. Client components are opt-in and scoped to interactive UI only (chip toggles, sign-in modal, user menu).
+
+**Auth pattern** — `Auth.js` issues a session cookie after email verification. The `Navbar` server component reads the session and passes server actions down to client sub-components as props, keeping `next-auth` and database imports out of the browser bundle entirely.
+
+**Design tokens** — rarity and stake colours are defined once in `config/colors.ts`, injected as CSS custom properties at the root layout level, and consumed by Tailwind utility classes throughout. No colour values are duplicated.
+
+**Component library** — all primitives (Input, PokerChip, JokerCard, ProgressBar, etc.) are documented in Storybook with stories covering variants and states. Colour tokens and typography have dedicated design token stories.
+
+## Local Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Fill in AUTH_SECRET, AUTH_RESEND_KEY, DATABASE_URL
+
+# Push the Prisma schema to your database
+npx prisma db push
+
+# Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Run Storybook
+npm run storybook
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/                  # Next.js App Router pages and layouts
+  tracker/jokers/     # Main joker tracker page
+  api/auth/           # Auth.js route handler
+components/
+  ui/                 # Reusable UI primitives (each with a Storybook story)
+    Navbar/           # Auth-aware site header
+  tracker/            # Feature-specific components
+config/               # Static data — joker catalogue, colour tokens, types
+emails/               # React Email templates
+lib/
+  actions/            # Server actions (auth, joker progress)
+  auth.ts             # Auth.js configuration
+  db.ts               # Prisma client singleton
+prisma/               # Schema and migrations
+stories/              # Design token Storybook docs (colours, typography, icon)
+```
