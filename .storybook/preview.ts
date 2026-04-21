@@ -12,6 +12,13 @@ Object.entries(colors.stake).forEach(([key, value]) =>
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: (a, b) => {
+        if (a.type === 'docs' && b.type !== 'docs') return -1;
+        if (a.type !== 'docs' && b.type === 'docs') return 1;
+        return 0;
+      },
+    },
     controls: {
       matchers: {
        color: /(background|color)$/i,

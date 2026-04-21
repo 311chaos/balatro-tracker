@@ -107,7 +107,7 @@ export const FilterBar = () => {
       />
 
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-base font-semibold uppercase tracking-wide text-zinc-500 font-balatro">
+        <span className="text-base font-semibold uppercase tracking-wide text-zinc-400 font-balatro">
           Rarity:
         </span>
         <button
@@ -143,7 +143,7 @@ export const FilterBar = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-base font-semibold uppercase tracking-wide text-zinc-500 font-balatro">
+        <span className="text-base font-semibold uppercase tracking-wide text-zinc-400 font-balatro">
           Status:
         </span>
         {STATUS_OPTIONS.map(({ value, label }) => (

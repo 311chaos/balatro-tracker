@@ -52,7 +52,7 @@ export const ProgressBar = ({
         </span>
         <span className="text-base font-semibold text-zinc-400">{pct}%</span>
       </div>
-      <ProgressRoot value={pct} className="w-full">
+      <ProgressRoot value={pct} className="w-full" aria-label={`${current} of ${total}`}>
         <ProgressTrack height={height}>
           <ProgressIndicator color={fillColor} />
         </ProgressTrack>

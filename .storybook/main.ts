@@ -5,6 +5,7 @@ const config: StorybookConfig = {
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     "../stories/**/*.mdx",
     "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../components/**/*.mdx",
     "../emails/**/*.mdx"
   ],
   "addons": [
@@ -18,6 +19,18 @@ const config: StorybookConfig = {
   "staticDirs": [
     "../public",
     "../app"
-  ]
+  ],
+  viteFinal: (config) => ({
+    ...config,
+    optimizeDeps: {
+      ...config.optimizeDeps,
+      include: [
+        ...(config.optimizeDeps?.include ?? []),
+        "react-email",
+        "prismjs",
+        "marked",
+      ],
+    },
+  }),
 };
 export default config;

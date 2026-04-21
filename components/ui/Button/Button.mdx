@@ -1,0 +1,88 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as ButtonStories from "./Button.stories";
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Built on the shadcn/Base UI button primitive. Supports all standard shadcn `variant` and `size` options, plus a `color` prop that applies any rarity or stake colour with fully automatic interaction states.
+
+---
+
+## Playground
+
+Use the controls panel below to explore every combination of props interactively.
+
+<Canvas of={ButtonStories.Playground} />
+<Controls of={ButtonStories.Playground} />
+
+---
+
+## Color palette
+
+When `color` is set, the button ignores `variant` and derives its hover, active,
+and focus states automatically using CSS `color-mix()` — no pre-computed
+interaction colours needed.
+
+**Text colour** is pre-assigned per colour based on luminance contrast:
+dark text for light backgrounds (legendary, gold, white), white text for
+dark backgrounds (red, green, blue, purple, orange, black).
+
+<Canvas of={ButtonStories.ColorPalette} />
+
+---
+
+## Sizes
+
+<Canvas of={ButtonStories.Sizes} />
+
+---
+
+## Variants
+
+Standard shadcn variants — used when no `color` prop is provided.
+
+<Canvas of={ButtonStories.Variants} />
+
+---
+
+## States
+
+Every colour shown in default, hover, active, focus, and disabled states.
+
+<Canvas of={ButtonStories.States} />
+
+### Variants
+
+Standard variants shown in all states. Note: `default` has no hover style on `<button>` by design (only applies when rendered as `<a>`), and `link` has no background change on active.
+
+<Canvas of={ButtonStories.VariantStates} />
+
+---
+
+## Props
+
+| Prop       | Type                                                                               | Default   | Description                                                      |
+| ---------- | ---------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------- |
+| `variant`  | `default` \| `outline` \| `secondary` \| `ghost` \| `destructive` \| `link`        | `default` | shadcn variant — ignored when `color` is set                     |
+| `size`     | `xs` \| `sm` \| `default` \| `lg` \| `icon` \| `icon-sm` \| `icon-lg` \| `icon-xs` | `default` | Controls height and padding                                      |
+| `color`    | `ButtonColor`                                                                      | —         | Rarity or stake colour. Overrides `variant` background and text. |
+| `disabled` | `boolean`                                                                          | `false`   | Disables interaction and reduces opacity                         |
+
+## Usage
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+// Standard shadcn variants
+<Button variant="outline">Cancel</Button>
+<Button variant="destructive">Delete</Button>
+
+// Coloured — rarity
+<Button color="rarity-legendary">Legendary</Button>
+
+// Coloured — stake
+<Button color="stake-gold">Gold Stake</Button>
+<Button color="stake-gold" size="lg">Large</Button>
+<Button color="stake-gold" disabled>Disabled</Button>
+```

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import {
   Dialog,
   DialogContent,
@@ -28,10 +28,10 @@ export const SignInModal = ({ action }: Props) => (
     >
       Sign in
     </DialogTrigger>
-    <DialogContent>
+    <DialogContent className="bg-zinc-800">
       <DialogHeader>
-        <DialogTitle>Sync your progress</DialogTitle>
-        <DialogDescription>
+        <DialogTitle className="text-zinc-50">Sync your progress</DialogTitle>
+        <DialogDescription className="text-zinc-50">
           Sign in to track your gold sticker collection across every device.
           Your progress is saved automatically every time you update a joker.
         </DialogDescription>
@@ -40,15 +40,20 @@ export const SignInModal = ({ action }: Props) => (
         <Input
           type="email"
           name="email"
-          placeholder="you@example.com"
+          placeholder="balatro@example.com"
           required
           autoComplete="email"
           size="lg"
         />
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          variant="ghost"
+          size="lg"
+          className="w-full bg-stake-gold text-black"
+        >
           Send magic link
         </Button>
-        <p className="text-center text-xs text-muted-foreground">
+        <p className="text-center text-xs text-zinc-300">
           No password needed — we'll email you a one-time sign-in link.
         </p>
       </form>
