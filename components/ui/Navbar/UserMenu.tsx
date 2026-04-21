@@ -23,8 +23,8 @@ export const UserMenu = ({ email, onSignOut }: Props) => {
         render={
           <Button
             variant="ghost"
-            size="sm"
-            className="gap-1.5 text-zinc-100 hover:text-black hover:bg-stake-gold active:bg-stake-gold data-popup-open:bg-stake-gold data-popup-open:text-black"
+            size="lg"
+            className="gap-1.5 text-zinc-100 hover:text-black hover:bg-stake-gold active:bg-stake-gold data-popup-open:bg-stake-gold data-popup-open:text-black text-base"
           />
         }
       >

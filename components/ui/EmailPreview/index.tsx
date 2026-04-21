@@ -1,4 +1,4 @@
-import { render } from "@react-email/components";
+import { render } from "react-email";
 import { useEffect, useRef, useState } from "react";
 
 type EmailPreviewProps = {

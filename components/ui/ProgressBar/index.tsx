@@ -47,11 +47,10 @@ export const ProgressBar = ({
   return (
     <div className="flex flex-col gap-1.5 w-full">
       <div className="flex items-baseline justify-between">
-        <span className="text-sm font-semibold text-zinc-100">
-          {current}{" "}
-          <span className="font-normal text-zinc-400">/ {total}</span>
+        <span className="text-base font-semibold text-zinc-100">
+          {current} <span className="font-normal text-zinc-400">/ {total}</span>
         </span>
-        <span className="text-sm font-semibold text-zinc-400">{pct}%</span>
+        <span className="text-base font-semibold text-zinc-400">{pct}%</span>
       </div>
       <ProgressRoot value={pct} className="w-full">
         <ProgressTrack height={height}>

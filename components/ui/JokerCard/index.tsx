@@ -42,28 +42,28 @@ export const JokerCard = ({ joker, stickerLevel, onToggle }: Props) => {
       style={{ border: `2px solid ${borderColor}` }}
       title={joker.name}
     >
-      <div style={{ position: "relative", width: 71 }}>
+      <div style={{ position: "relative" }}>
         <ItemSprite
           spriteX={joker.spriteX}
           spriteY={joker.spriteY}
           additionalLayers={joker.additionalLayers}
           sheetUrl={JOKER_SHEET_URL}
           name={joker.id}
-          size={75}
+          size={100}
         />
         {isStickered && (
-          <div style={{ position: "absolute", top: 4, right: 4 }}>
-            <PokerChip variant={stickerLevel} size={18} />
+          <div style={{ position: "absolute", top: 8, right: 8 }}>
+            <PokerChip variant={stickerLevel} size={24} />
           </div>
         )}
       </div>
 
       <div className="flex w-full flex-col items-center gap-0.5">
-        <span className="w-full truncate text-center text-md font-semibold text-zinc-100 font-balatro tracking-widest">
+        <span className="w-full truncate text-center text-lg font-semibold text-zinc-100 font-balatro tracking-widest">
           {joker.name}
         </span>
         <span
-          className="text-[10px] font-medium uppercase tracking-wide font-balatro"
+          className="text-xs font-medium uppercase tracking-wide font-balatro"
           style={{ color: RARITY_COLORS[joker.rarity] }}
         >
           {RARITY_LABELS[joker.rarity]}

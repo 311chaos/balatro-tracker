@@ -9,7 +9,7 @@ import {
   Preview,
   Section,
   Text,
-} from "@react-email/components";
+} from "react-email";
 import { colors } from "@/config/colors";
 
 type MagicLinkEmailProps = {

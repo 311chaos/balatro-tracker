@@ -107,12 +107,12 @@ export const FilterBar = () => {
       />
 
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-s font-semibold uppercase tracking-wide text-zinc-500 font-balatro">
+        <span className="text-base font-semibold uppercase tracking-wide text-zinc-500 font-balatro">
           Rarity:
         </span>
         <button
           onClick={() => update("rarity", null)}
-          className="rounded-full border px-3 py-1 text-xs font-medium transition-colors cursor-pointer font-balatro"
+          className="rounded-full border px-3 py-1 text-sm font-medium transition-colors cursor-pointer font-balatro tracking-widest"
           style={{
             borderColor:
               rarities.length === 0 ? "var(--stake-gold)" : "#52525b",
@@ -129,7 +129,7 @@ export const FilterBar = () => {
             <button
               key={rarity}
               onClick={() => toggleRarityType(rarity)}
-              className="rounded-full border px-3 py-1 text-xs font-medium transition-colors cursor-pointer font-balatro"
+              className="rounded-full border px-3 py-1 text-sm font-medium transition-colors cursor-pointer font-balatro tracking-widest"
               style={{
                 borderColor: RARITY_COLORS[rarity],
                 color: active ? "#09090b" : RARITY_COLORS[rarity],
@@ -143,14 +143,14 @@ export const FilterBar = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-s font-semibold uppercase tracking-wide text-zinc-500 font-balatro">
+        <span className="text-base font-semibold uppercase tracking-wide text-zinc-500 font-balatro">
           Status:
         </span>
         {STATUS_OPTIONS.map(({ value, label }) => (
           <button
             key={value}
             onClick={() => update("status", value === "all" ? null : value)}
-            className="rounded-full border px-3 py-1 text-xs font-medium transition-colors cursor-pointer font-balatro"
+            className="rounded-full border px-3 py-1 text-sm font-medium transition-colors cursor-pointer font-balatro tracking-widest"
             style={{
               borderColor: status === value ? "var(--stake-gold)" : "#52525b",
               color: status === value ? "#09090b" : "#a1a1aa",

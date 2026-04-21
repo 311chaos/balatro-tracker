@@ -14,7 +14,6 @@
     "@auth/prisma-adapter": "^2.11.2",
     "@base-ui/react": "^1.4.0",
     "@prisma/client": "^6.19.3",
-    "@react-email/components": "^1.0.12",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.8.0",
@@ -31,7 +30,6 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
-    "@react-email/ui": "^6.0.0",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-onboarding": "^10.3.5",
