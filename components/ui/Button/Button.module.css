@@ -1,0 +1,97 @@
+/* === Default (solid fill) === */
+.colored {
+  background-color: var(--btn-color);
+  color: var(--btn-text);
+  border-color: color-mix(in srgb, var(--btn-color) 70%, black);
+}
+
+.colored:hover,
+.colored.pseudo-hover {
+  background-color: color-mix(in srgb, var(--btn-color) 82%, white);
+}
+
+.colored:active,
+.colored.pseudo-active {
+  background-color: color-mix(in srgb, var(--btn-color) 80%, black);
+}
+
+.colored:focus-visible,
+.colored.pseudo-focus {
+  border-color: color-mix(in srgb, var(--btn-color) 60%, black);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--btn-color) 35%, transparent);
+}
+
+/* === Ghost: transparent bg, colored text === */
+.colored[data-variant="ghost"] {
+  background-color: transparent;
+  color: var(--btn-color);
+  border-color: transparent;
+}
+
+.colored[data-variant="ghost"]:hover,
+.colored[data-variant="ghost"].pseudo-hover {
+  background-color: color-mix(in srgb, var(--btn-color) 15%, transparent);
+}
+
+.colored[data-variant="ghost"]:active,
+.colored[data-variant="ghost"].pseudo-active {
+  background-color: color-mix(in srgb, var(--btn-color) 22%, transparent);
+}
+
+.colored[data-variant="ghost"]:focus-visible,
+.colored[data-variant="ghost"].pseudo-focus {
+  border-color: color-mix(in srgb, var(--btn-color) 60%, black);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--btn-color) 35%, transparent);
+}
+
+/* === Outline: transparent bg, colored border === */
+.colored[data-variant="outline"] {
+  background-color: transparent;
+  color: var(--btn-color);
+  border-color: color-mix(in srgb, var(--btn-color) 70%, black);
+}
+
+.colored[data-variant="outline"]:hover,
+.colored[data-variant="outline"].pseudo-hover {
+  background-color: color-mix(in srgb, var(--btn-color) 10%, transparent);
+}
+
+.colored[data-variant="outline"]:active,
+.colored[data-variant="outline"].pseudo-active {
+  background-color: color-mix(in srgb, var(--btn-color) 18%, transparent);
+}
+
+/* === Secondary: tinted fill === */
+.colored[data-variant="secondary"] {
+  background-color: color-mix(in srgb, var(--btn-color) 15%, transparent);
+  color: var(--btn-color);
+  border-color: transparent;
+}
+
+.colored[data-variant="secondary"]:hover,
+.colored[data-variant="secondary"].pseudo-hover {
+  background-color: color-mix(in srgb, var(--btn-color) 22%, transparent);
+}
+
+.colored[data-variant="secondary"]:active,
+.colored[data-variant="secondary"].pseudo-active {
+  background-color: color-mix(in srgb, var(--btn-color) 30%, transparent);
+}
+
+/* === Link: colored text, underline on hover === */
+.colored[data-variant="link"] {
+  background-color: transparent;
+  color: var(--btn-color);
+  border-color: transparent;
+}
+
+.colored[data-variant="link"]:hover,
+.colored[data-variant="link"].pseudo-hover {
+  text-decoration-line: underline;
+}
+
+.colored[data-variant="link"]:focus-visible,
+.colored[data-variant="link"].pseudo-focus {
+  border-color: color-mix(in srgb, var(--btn-color) 60%, black);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--btn-color) 35%, transparent);
+}

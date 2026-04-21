@@ -32,6 +32,14 @@ dark backgrounds (red, green, blue, purple, orange, black).
 
 ---
 
+## Color + variant
+
+`color` and `variant` are orthogonal — the variant controls the *structure* (solid, ghost, outline, etc.) while `color` controls *what* colour fills that structure. Every non-`default` variant gets a transparent background with the colour applied to text and border instead.
+
+<Canvas of={ButtonStories.ColorVariants} />
+
+---
+
 ## Sizes
 
 <Canvas of={ButtonStories.Sizes} />
@@ -54,9 +62,15 @@ Every colour shown in default, hover, active, focus, and disabled states.
 
 ### Variants
 
-Standard variants shown in all states. Note: `default` has no hover style on `<button>` by design (only applies when rendered as `<a>`), and `link` has no background change on active.
+Standard variants shown in all states.
 
 <Canvas of={ButtonStories.VariantStates} />
+
+### As anchor
+
+`default` dims its background on hover only when rendered as an `<a>` — it has no hover style on a plain `<button>` by design. Use `render={<a href="..." />}` to render the button as a link.
+
+<Canvas of={ButtonStories.AsAnchor} />
 
 ---
 
@@ -66,7 +80,7 @@ Standard variants shown in all states. Note: `default` has no hover style on `<b
 | ---------- | ---------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------- |
 | `variant`  | `default` \| `outline` \| `secondary` \| `ghost` \| `destructive` \| `link`        | `default` | shadcn variant — ignored when `color` is set                     |
 | `size`     | `xs` \| `sm` \| `default` \| `lg` \| `icon` \| `icon-sm` \| `icon-lg` \| `icon-xs` | `default` | Controls height and padding                                      |
-| `color`    | `ButtonColor`                                                                      | —         | Rarity or stake colour. Overrides `variant` background and text. |
+| `color`    | `ButtonColor`                                                                      | —         | Rarity or stake colour. Works alongside `variant` — variant controls structure, colour fills it. |
 | `disabled` | `boolean`                                                                          | `false`   | Disables interaction and reduces opacity                         |
 
 ## Usage
@@ -85,4 +99,7 @@ import { Button } from '@/components/ui/Button';
 <Button color="stake-gold">Gold Stake</Button>
 <Button color="stake-gold" size="lg">Large</Button>
 <Button color="stake-gold" disabled>Disabled</Button>
+
+// Rendered as an anchor (enables hover style on default variant)
+<Button render={<a href="/jokers" />}>Browse jokers</Button>
 ```
