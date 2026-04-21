@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(bash /Users/hickman/.claude/scripts/statusline.sh)",
-      "WebSearch",
-      "Bash(gh api *)"
-    ]
-  }
-}
