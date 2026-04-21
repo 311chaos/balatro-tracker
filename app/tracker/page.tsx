@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-const LandingPage = () => {
+const TrackerPage = () => {
   redirect("/tracker/jokers");
 };
 
-export default LandingPage;
+export default TrackerPage;
