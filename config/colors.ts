@@ -1,0 +1,31 @@
+export const colors = {
+  rarity: {
+    common: "#a1a1aa",
+    uncommon: "#60a5fa",
+    rare: "#f87171",
+    legendary: "#facc15",
+  },
+  stake: {
+    white: "#E8E8E8",
+    red: "#CC2222",
+    green: "#339944",
+    black: "#606060",
+    blue: "#2288DD",
+    purple: "#7744BB",
+    orange: "#DB663C",
+    gold: "#FA9108",
+  },
+  zinc: {
+    50: "#fafafa",
+    100: "#f4f4f5",
+    200: "#e4e4e7",
+    300: "#d4d4d8",
+    400: "#a1a1aa",
+    500: "#71717a",
+    600: "#52525b",
+    700: "#3f3f46",
+    800: "#27272a",
+    900: "#18181b",
+    950: "#09090b",
+  },
+} as const;

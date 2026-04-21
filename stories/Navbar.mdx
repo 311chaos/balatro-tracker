@@ -1,0 +1,63 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { SignInModal } from '../components/ui/Navbar/SignInModal';
+import { UserMenu } from '../components/ui/Navbar/UserMenu';
+
+<Meta title="Components/Navbar" />
+
+# Navbar
+
+Site-wide navigation header. The right side adapts based on auth state.
+
+The `Navbar` component itself is a **server component** that calls `auth()` and
+renders one of the two client sub-components below based on whether a session exists.
+
+---
+
+## Signed-out state — Sign In modal
+
+Clicking "Sign in" opens a dialog explaining the value of creating an account,
+with an email input that sends a magic link via Resend.
+
+The `action` prop is injectable so the component works in Storybook without a
+server environment — in production it defaults to the real `signInWithEmail`
+server action.
+
+<div className="flex items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950 px-6 py-3 not-prose">
+  <span className="font-balatro text-2xl text-zinc-100 tracking-wide mr-auto">Balatro Tracker</span>
+  <SignInModal action={() => alert('signInWithEmail() would fire here')} />
+</div>
+
+---
+
+## Signed-in state — User menu
+
+Shows the user's email as a dropdown trigger. The menu contains a "Sign out"
+item that calls the `onSignOut` server action.
+
+<div className="flex items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950 px-6 py-3 not-prose">
+  <span className="font-balatro text-2xl text-zinc-100 tracking-wide mr-auto">Balatro Tracker</span>
+  <UserMenu email="player@example.com" onSignOut={() => alert('signOutAction() would fire here')} />
+</div>
+
+---
+
+## Usage
+
+```tsx
+// app/tracker/jokers/page.tsx
+import { Navbar } from '@/components/ui/Navbar';
+
+const Page = async () => (
+  <main>
+    <Navbar />
+    {/* page content */}
+  </main>
+);
+```
+
+The sub-components can also be used standalone with custom actions if needed:
+
+```tsx
+import { SignInModal } from '@/components/ui/Navbar/SignInModal';
+import { UserMenu }    from '@/components/ui/Navbar/UserMenu';
+```
