@@ -1,0 +1,13 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { MagicLinkEmail } from './MagicLinkEmail';
+import { EmailPreview } from '../components/ui/EmailPreview';
+
+<Meta title="Emails/Magic Link" />
+
+# Magic Link Email
+
+Sent by Resend when a user requests a sign-in link. The `url` prop is the one-time Auth.js verification URL.
+
+## Preview
+
+<EmailPreview email={<MagicLinkEmail url="https://balatro-tracker.vercel.app/api/auth/callback/resend?callbackUrl=%2Ftracker%2Fjokers&token=abc123&email=player%40example.com" />} />
