@@ -8,3 +8,48 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - **Named exports only.** Do not use `export default function X()`. Exception: Next.js page/layout files require a default export — declare the component as `const X = () => {}` and add `export default X` on a separate line at the end.
 - **Arrow functions only.** Use `const X = () => {}` instead of `function X() {}` everywhere — top-level functions, component inner functions, and helpers alike.
+
+# Component Structure
+
+## Folder conventions
+
+| Location | Purpose | Examples |
+|---|---|---|
+| `components/ui/ComponentName/` | Base-level UI primitives — no app/domain knowledge | `Button`, `Input`, `ProgressBar`, `PokerChip` |
+| `components/ui/*.tsx` (flat) | Thin shadcn re-exports with no local logic | `dialog.tsx`, `dropdown-menu.tsx` |
+| `components/{domain}/` | Compound or domain-specific components that compose primitives | `tracker/`, `emails/` |
+
+**When to use a folder vs a flat file:** if a component has stories, docs, a CSS module, or internal sub-components, it lives in its own folder with an `index.tsx` entry point. Flat files are only for simple shadcn wrappers.
+
+## Required files for every `components/ui/` component
+
+Every base component folder must ship with:
+
+- `index.tsx` — the component
+- `ComponentName.stories.tsx` — Storybook stories (Playground + any state/variant grids)
+- `ComponentName.mdx` — Storybook docs (prop table, usage examples, canvas embeds)
+
+Compound components in `components/{domain}/` do not require stories unless they are reused across more than one page.
+
+# UI Primitives
+
+## Interactive elements
+
+Use **Base UI** (`@base-ui/react/*`) for all interactive primitives (buttons, dialogs, menus, etc.). Base UI provides accessible behaviour without opinionated styles. Wrap it with CVA for variants.
+
+- Render-prop pattern for element swapping: `<Button render={<a href="..." />}>`
+- Never use plain HTML `<button>` or `<a>` where a Base UI primitive exists.
+
+## Variants and styling
+
+- **CVA** (`class-variance-authority`) for all variant/size logic. Keep variant strings in the `cva()` call — do not derive classes in render.
+- **Pseudo-state variants** — use `pseudo-hover:`, `pseudo-active:`, `pseudo-focus-visible:` (defined in `globals.css` via `@custom-variant`) instead of plain `hover:`/`active:`/`focus-visible:`. This keeps real browser states and Storybook simulation states defined in one place.
+- **CSS modules** — use a colocated `ComponentName.module.css` only when styles cannot be expressed as Tailwind classes (e.g. `color-mix()` values). Do not put component styles in `globals.css`.
+
+## Color system
+
+Rarity and stake colours live in `config/buttonColors.ts` and are exposed as Tailwind theme tokens (`rarity-legendary`, `stake-gold`, etc.). When a component needs a game colour:
+
+- Pass it via a `color` prop that maps to CSS variables (`--btn-color`, `--btn-text`).
+- Let the CSS module handle interaction states with `color-mix()` — do not pre-compute hover colours.
+- `color` and `variant` are orthogonal: variant controls structure (ghost, outline, solid), colour fills that structure.
