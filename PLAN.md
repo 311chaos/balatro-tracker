@@ -2,7 +2,7 @@
 
 ## Overview
 
-A web app for tracking which Balatro collectibles you have earned a gold sticker on. Starts with jokers, but is structured to incrementally support other item categories (tarots, vouchers, planet cards). Features a filterable item grid, live progress bar, and user auth for per-user persistence.
+A web app for tracking which Balatro collectibles you have earned a gold sticker on. Starts with jokers, but is structured to incrementally support other item categories (tarots, vouchers, planet cards). Features a filterable item grid, live progress bar, and **localStorage-first persistence** — no account required. Signing in is optional and enables cross-device sync by storing progress in the database.
 
 ---
 
@@ -12,7 +12,7 @@ A web app for tracking which Balatro collectibles you have earned a gold sticker
 | ------------ | ------------------------ | ---------------------------------------------------------------- |
 | Framework    | Next.js (App Router)     | Full SSR/SSG support, file-based routing                         |
 | Styling      | Tailwind CSS + shadcn/ui | SSR-compatible, no runtime cost, great DX                        |
-| Auth         | Auth.js v5               | Magic link via email, Prisma adapter                             |
+| Auth         | Auth.js v5               | Magic link via email, Prisma adapter — **optional for users**    |
 | Email        | Resend                   | Free tier (3k/month), first-class Auth.js integration            |
 | Database     | Postgres via Neon        | Free tier, serverless, Vercel-native                             |
 | ORM          | Prisma                   | Type-safe queries, easy migrations                               |
@@ -122,22 +122,22 @@ model UserPlanetProgress {
 
 ## Item Config Structure
 
-All item definitions live in static TypeScript config files under `src/config/`. The `spriteX` and `spriteY` values are pixel offsets into the relevant 2x sprite sheet. A shared base type keeps the `ItemSprite` component generic.
+All item definitions live in static TypeScript config files under `config/`. The `spriteX` and `spriteY` values are pixel offsets into the relevant 2x sprite sheet. A shared base type keeps the `ItemSprite` component generic.
 
 ```ts
-// src/config/types.ts
+// config/types.ts
 
 // Ordered lowest → highest stake
 export type StickerLevel =
-  | "white"
-  | "red"
-  | "green"
-  | "black"
-  | "blue"
-  | "purple"
-  | "orange"
-  | "gold";
-export type Rarity = "common" | "uncommon" | "rare" | "legendary";
+  | "WHITE"
+  | "RED"
+  | "GREEN"
+  | "BLACK"
+  | "BLUE"
+  | "PURPLE"
+  | "ORANGE"
+  | "GOLD";
+export type Rarity = "COMMON" | "UNCOMMON" | "RARE" | "LEGENDARY";
 
 // Shared by all item types — used by generic components
 export type CollectibleItem = {
@@ -159,16 +159,10 @@ export type PlanetCard = CollectibleItem;
 ```
 
 ```ts
-// src/config/jokers.ts
+// config/jokers.ts
 export const JOKERS: Joker[] = [
-  { id: "joker", name: "Joker", rarity: "common", spriteX: 0, spriteY: 0 },
-  {
-    id: "greedy",
-    name: "Greedy Joker",
-    rarity: "common",
-    spriteX: 71,
-    spriteY: 0,
-  },
+  { id: "joker", name: "Joker", rarity: "COMMON", spriteX: 0, spriteY: 0 },
+  { id: "greedy", name: "Greedy Joker", rarity: "COMMON", spriteX: 71, spriteY: 0 },
   // ... all ~150 jokers
 ];
 ```
@@ -182,42 +176,11 @@ Vouchers: https://cdn.jsdelivr.net/gh/Signez/balatro-sprites-i18n@main/dist/en/2
 Planets:  https://cdn.jsdelivr.net/gh/Signez/balatro-sprites-i18n@main/dist/en/2x/boosters.png
 ```
 
-**Sticker/stake badge images:**
+**Sticker/stake badge component:**
 
-Sticker badges will be rendered as pure CSS poker chips — no image assets needed. The design uses a radial gradient for the concentric rings and three rotated divs for the cross notches (0°, 45°, -45°).
-https://www.cssbattlesolutions.com/154-poker-chip
-
-This will be a `PokerChip` React component that accepts `chipColor` and `notchColor` props, sized as a small badge overlay on the `JokerCard`. Each sticker level maps to a color pair:
-
-```ts
-// src/config/types.ts
-export const STICKER_COLORS: Record<
-  StickerLevel,
-  { chip: string; notch: string }
-> = {
-  white: { chip: "#FFFFFF", notch: "#AAAAAA" },
-  red: { chip: "#CC3333", notch: "#7A1A1A" },
-  green: { chip: "#33AA55", notch: "#1A6632" },
-  black: { chip: "#333333", notch: "#111111" },
-  blue: { chip: "#3366CC", notch: "#1A3D7A" },
-  purple: { chip: "#7733CC", notch: "#421A7A" },
-  orange: { chip: "#E87722", notch: "#8A4010" },
-  gold: { chip: "#FCBE5C", notch: "#998235" },
-};
-```
-
-The `PokerChip` component will be a self-contained div using inline styles (not Tailwind) since the radial gradient and absolute positioning don't map cleanly to utility classes. It renders as a fixed-size badge overlaid in the corner of the `JokerCard`.
-
-```
-components/
-  ui/
-    PokerChip.tsx   ← accepts chipColor, notchColor, size props
-```
-
-**Implementation notes for `PokerChip`:**
-- The reference CSS is designed at ~200px. Keep internal dimensions at original scale and use `transform: scale()` with `transform-origin: top left` to size it down to badge size (~28–32px) — avoids recalculating all pixel values.
-- The notch divs use `position: absolute`, so the component's outer container needs `position: relative` with an explicit width and height to contain them.
-- Use inline styles throughout — the dynamic `chipColor`/`notchColor` values in the radial gradient can't be set via Tailwind utility classes at runtime.
+`PokerChip` / `PokerChipBase` — pure CSS poker chips, no image assets needed.
+- `PokerChipBase` — low-level: accepts raw `chipColor`, `ringColor`, `notch1Color`, `notch2Color`, `size` props
+- `PokerChip` — convenience wrapper: accepts `variant: StickerLevel` + `size`, maps to colors automatically
 
 > When adding DLC content, add new entries to the relevant config file and confirm sprite offsets from the 2x sheet. No DB migration required.
 
@@ -226,9 +189,9 @@ components/
 ## App Routes
 
 ```
-/                          → Landing page with sign-in form (magic link email input)
-/verify                    → "Check your email" confirmation screen
-/tracker                   → Overview: progress summary across all categories (protected)
+/                          → Landing page: "Start Tracking" CTA + optional sign-in link
+/verify                    → "Check your email" confirmation screen (post magic-link send)
+/tracker                   → Overview: progress summary across all categories (public)
 /tracker/jokers            → Joker tracker — filterable grid with sticker levels (V1)
 /tracker/tarots            → Tarot tracker (future)
 /tracker/vouchers          → Voucher tracker (future)
@@ -236,25 +199,27 @@ components/
 /api/auth/[...nextauth]    → Auth.js catch-all route
 ```
 
-> V1 only builds `/tracker/jokers`. The `/tracker` overview page can start as a simple redirect to `/tracker/jokers` and be expanded into a real dashboard when more categories are added.
+> All `/tracker` routes are **public** — no auth required. Auth is opt-in for cross-device sync.
+> V1 only builds `/tracker/jokers`. The `/tracker` overview can start as a redirect to `/tracker/jokers`.
 
 ---
 
-## Page: `/tracker`
+## Page: `/tracker/jokers`
 
-This is the core of the app. Rendered server-side with the user's completed joker IDs fetched from the DB, then handed to a client component for interactive filtering.
+This is the core of the app. The page is fully client-rendered for interactive filtering.
 
 ### Data flow
 
-1. Server component fetches `UserJokerProgress` for the current user from Neon via Prisma
-2. Passes `completedJokerIds: string[]` as a prop to the client component
-3. Client component owns all filter state (name search, rarity, completion toggle)
+1. `TrackerClient` mounts and reads progress from **localStorage** (key: `joker-progress`)
+2. If the user is signed in, progress is fetched from the DB and merged/synced with localStorage
+3. All mutations write to localStorage immediately (optimistic); if signed in, also fire a Server Action to persist to DB
+4. When a signed-in user first visits, if localStorage has data and DB is empty, prompt to import local progress into their account
 
 ### UI Layout
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  Balatro Gold Sticker Tracker           [Sign out]  │
+│  Balatro Gold Sticker Tracker     [Sign in to sync] │  ← or [user@email.com  Sign out]
 ├─────────────────────────────────────────────────────┤
 │  Progress: ████████████░░░░░░░  47 / 150  (31%)     │  ← updates with filters
 ├─────────────────────────────────────────────────────┤
@@ -272,68 +237,71 @@ This is the core of the app. Rendered server-side with the user's completed joke
 ### Filter behavior
 
 - Progress bar numerator/denominator reflects **currently visible jokers** only
-- Rarity filter: multi-select or single dropdown (common / uncommon / rare / legendary)
+- Rarity filter: multi-select or single dropdown (COMMON / UNCOMMON / RARE / LEGENDARY)
 - Completion toggle: All / Collected / Missing
 - Name search: client-side substring match against joker name
 
 ### Toggling a joker
 
-- Clicking a joker card fires a **Server Action** (`markGoldSticker` / `removeGoldSticker`)
-- Optimistic UI update on the client while the server action completes
-- No separate API route needed — Server Actions handle the DB write
+- Clicking a joker card immediately updates localStorage
+- If signed in, also fires a **Server Action** to persist to DB
+- No loading state needed — localStorage write is synchronous
 
 ---
 
 ## Key Components
 
-Generic components are driven by `CollectibleItem` so they work across all categories without modification. Category-specific logic (sticker levels, rarity filtering) lives only in the joker-specific layer.
-
 ```
-src/
-  app/
-    page.tsx                        ← Landing / sign-in page (server component)
-    verify/page.tsx                 ← "Check your email" screen
-    tracker/
-      page.tsx                      ← Overview: category summary cards (V1: redirect to /jokers)
-      jokers/
-        page.tsx                    ← Server component: fetches joker progress, renders TrackerClient
-        actions.ts                  ← Server Actions: set/update joker sticker level
-      tarots/                       ← Future
-      vouchers/                     ← Future
-      planets/                      ← Future
-  components/
-    tracker/
-      TrackerClient.tsx             ← Client component: owns filter state, renders grid
-      ItemGrid.tsx                  ← Renders filtered list of ItemCard (generic)
-      ItemCard.tsx                  ← Single item: sprite + name + completion state (generic)
-      ItemSprite.tsx                ← CSS sprite positioning (generic — takes spriteX/Y + sheetUrl)
-      ProgressBar.tsx               ← Progress bar + fraction display
-      FilterBar.tsx                 ← Name search + completion toggle (generic)
-      jokers/
-        JokerFilterBar.tsx          ← Extends FilterBar with rarity + sticker level filters
-        JokerCard.tsx               ← Extends ItemCard with sticker level indicator
-  config/
-    types.ts                        ← Shared types: CollectibleItem, Joker, StickerLevel, etc.
-    jokers.ts                       ← Joker definitions
-    tarots.ts                       ← Future
-    vouchers.ts                     ← Future
-    planets.ts                      ← Future
-  lib/
-    auth.ts                         ← Auth.js config
-    db.ts                           ← Prisma client singleton
+app/
+  page.tsx                        ← Landing page: CTA + optional sign-in
+  verify/page.tsx                 ← "Check your email" screen
+  tracker/
+    page.tsx                      ← Redirect to /tracker/jokers (V1)
+    jokers/
+      page.tsx                    ← Server component: passes session to TrackerClient
+      actions.ts                  ← Server Actions: set/update joker sticker level (auth-gated)
+    tarots/                       ← Future
+    vouchers/                     ← Future
+    planets/                      ← Future
+components/
+  tracker/
+    TrackerClient.tsx             ← Client component: owns localStorage state + filter state
+    ItemGrid.tsx                  ← Renders filtered list of ItemCard (generic)
+    ItemCard.tsx                  ← Single item: sprite + name + completion state (generic)
+    ItemSprite.tsx                ← CSS sprite positioning (generic — takes spriteX/Y + sheetUrl)
+    ProgressBar.tsx               ← Progress bar + fraction display
+    FilterBar.tsx                 ← Name search + completion toggle (generic)
+    jokers/
+      JokerFilterBar.tsx          ← Extends FilterBar with rarity + sticker level filters
+      JokerCard.tsx               ← Extends ItemCard with sticker level indicator
+  ui/
+    PokerChip.tsx                 ← Variant wrapper: accepts StickerLevel, maps to PokerChipBase
+    PokerChipBase.tsx             ← Raw color props, full control — used by PokerChip
+config/
+  types.ts                        ← Shared types + STICKER_COLORS + STICKER_LEVELS
+  jokers.ts                       ← Joker definitions
+  tarots.ts                       ← Future
+  vouchers.ts                     ← Future
+  planets.ts                      ← Future
+lib/
+  auth.ts                         ← Auth.js config
+  db.ts                           ← Prisma client singleton
 ```
 
 ---
 
 ## Auth Flow
 
-1. User lands on `/`, enters their email address
-2. Auth.js sends a magic link email via Resend
-3. User is redirected to `/verify` ("Check your email")
-4. User clicks the link in their email
-5. Auth.js validates the token, creates a session, redirects to `/tracker`
-6. Subsequent visits: session cookie keeps them logged in
-7. Sign out clears the session cookie
+Auth is **optional** — the app is fully usable without it.
+
+1. User visits `/tracker/jokers` directly, progress stored in localStorage
+2. If user wants cross-device sync: clicks "Sign in to sync" in the nav
+3. User is sent to `/` (sign-in page), enters their email
+4. Auth.js sends a magic link via Resend
+5. User is redirected to `/verify` ("Check your email")
+6. User clicks the link → session created → redirected back to `/tracker/jokers`
+7. On return: if localStorage has progress and DB is empty, offer to import it
+8. Subsequent visits: session cookie keeps them logged in; "Sign in to sync" becomes user email + sign out
 
 ---
 
@@ -356,50 +324,53 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 
 ## Build Phases
 
-### Phase 1 — Foundation
+### Phase 1 — Foundation ✅
 *Checkpoint: app loads at localhost, DB tables exist in Neon dashboard*
 
-- [ ] `npx create-next-app@latest` with TypeScript, Tailwind, App Router
-- [ ] Install shadcn/ui
-- [ ] Install Prisma, write full schema (all 4 progress tables + Auth.js tables), connect to Neon
-- [ ] Run initial migration
-- [ ] Install Auth.js v5 + Prisma adapter + Resend provider (config only, no UI yet)
-- [ ] Set up `src/lib/db.ts` Prisma singleton and `src/lib/auth.ts`
-- [ ] Populate `.env.local` with all required variables
+- [x] `npx create-next-app@latest` with TypeScript, Tailwind, App Router
+- [x] Install shadcn/ui
+- [x] Install Prisma, write full schema (all 4 progress tables + Auth.js tables), connect to Neon
+- [x] Run initial migration
+- [x] Install Auth.js v5 + Prisma adapter + Resend provider
+- [x] Set up `lib/db.ts` Prisma singleton and `lib/auth.ts`
+- [x] Populate `.env` with all required variables
 
-### Phase 2 — Auth
-*Checkpoint: enter email → receive magic link → land on placeholder `/tracker` page*
+### Phase 2 — Auth ✅
+*Checkpoint: enter email → receive magic link → land on `/tracker`*
 
-- [ ] Build `/` login page (email input form)
-- [ ] Build `/verify` confirmation screen
-- [ ] Wire Auth.js to Resend, test magic link email end-to-end
-- [ ] Add session guard to `/tracker` (redirect to `/` if not authed)
-- [ ] Add sign out button to placeholder `/tracker` page
+- [x] Build `/` sign-in page (email input form + redirect to tracker if already signed in)
+- [x] Build `/verify` confirmation screen
+- [x] Wire Auth.js to Resend, test magic link email end-to-end
+- [x] Remove auth guard from `/tracker` — all tracker routes are public
+- [x] Update `/` landing page: show "Start Tracking" CTA prominently, sign-in as secondary action
+- [x] Nav: show "Sign in to sync" when anonymous, user email + sign out when authenticated
 
 ### Phase 3 — Static UI
 *Checkpoint: full tracker UI visible with mock data, filters and progress bar work client-side*
 
-- [ ] Build `PokerChip` component — render all 8 sticker levels side by side to review colors
+- [x] Build `PokerChipBase` component — raw color props
+- [x] Build `PokerChip` component — variant wrapper (StickerLevel → colors)
 - [ ] Build `ItemSprite` component — verify sprite sheet offsets render correctly
 - [ ] Build `JokerCard` combining sprite + name + rarity + sticker badge
 - [ ] Build `ProgressBar` component
 - [ ] Build `FilterBar` and `JokerFilterBar` (name search, rarity, sticker level, completion toggle)
-- [ ] Build `ItemGrid` and `TrackerClient` wired to hardcoded mock joker data
-- [ ] Populate `src/config/jokers.ts` with full joker list and confirmed sprite offsets
+- [ ] Build `ItemGrid` and `TrackerClient` wired to hardcoded mock joker data + localStorage
+- [ ] Populate `config/jokers.ts` with full joker list and confirmed sprite offsets
 
 ### Phase 4 — Live Data
-*Checkpoint: toggle a joker sticker level, refresh, change persists*
+*Checkpoint: toggle a joker, refresh — localStorage persists; sign in — DB persists across devices*
 
-- [ ] Swap mock data for real DB fetch in `/tracker/jokers/page.tsx` (server component)
-- [ ] Implement Server Actions in `actions.ts` for setting/updating sticker level
-- [ ] Add optimistic UI to `TrackerClient` so toggles feel instant
+- [ ] `TrackerClient` reads/writes localStorage for anonymous users
+- [ ] When signed in, server component passes DB progress; client merges with localStorage
+- [ ] Server Actions in `actions.ts` write to DB (only called when session exists)
+- [ ] Import prompt: when signed-in user has localStorage data but empty DB, offer one-click import
 
 ### Phase 5 — Deploy
 *Checkpoint: app live on Vercel, auth works in production*
 
 - [ ] Deploy to Vercel, configure all environment variables
 - [ ] **Set Vercel spending limit**
-- [ ] Smoke test: sign in, toggle a joker, verify persistence
+- [ ] Smoke test: use tracker anonymously, sign in, verify data persists
 
 ---
 
@@ -410,7 +381,7 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 - Joker grid with sticker level tracking
 - Filter by name, rarity, sticker level, completion status
 - Progress bar (updates with filters)
-- Magic link auth
+- localStorage-first with optional magic link auth for cross-device sync
 
 **V2 — Additional categories**
 

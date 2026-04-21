@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+.playwright-mcp/
 
 # debug
 npm-debug.log*
@@ -36,8 +37,15 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude
+.claude/settings.local.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
 /app/generated/prisma
+
+*storybook.log
+storybook-static
+.env*.local
