@@ -1,5 +1,7 @@
 # Balatro Tracker
 
+**[balatro-tracker.vercel.app](https://balatro-tracker.vercel.app/)**
+
 A full-stack web app for tracking gold sticker progress across every joker in [Balatro](https://www.playbalatro.com/). Sign in to sync your collection across devices — no password required.
 
 ![Gold poker chip favicon](app/icon.svg)
