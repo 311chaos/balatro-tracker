@@ -50,8 +50,9 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-          AUTH_URL: ${{ secrets.AUTH_URL }}
           AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
+          # AUTH_URL intentionally omitted — Auth.js v5 auto-detects from
+          # VERCEL_URL on Vercel, so preview deployments get the correct URL.
           DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
           DATABASE_URL_UNPOOLED: ${{ steps.neon.outputs.db_url }}
 
