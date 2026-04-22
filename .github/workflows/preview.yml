@@ -41,19 +41,19 @@ jobs:
       # Build locally so we can inject the branch DATABASE_URL as a
       # runtime env var in the deploy step. Using --prebuilt avoids a
       # second remote build that would use the production DB URL.
-      - name: Pull Vercel project settings
-        run: npx vercel pull --yes --environment=preview
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
+      # vercel pull --environment=preview requires a Pro plan, so we skip
+      # it and inject all required env vars directly into vercel build.
       - name: Build
         run: npx vercel build
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_URL: ${{ secrets.AUTH_URL }}
+          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
+          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
+          DATABASE_URL_UNPOOLED: ${{ steps.neon.outputs.db_url }}
 
       - name: Deploy preview to Vercel
         id: deploy
