@@ -44,10 +44,15 @@ jobs:
       # preview hits the isolated Neon branch, not production.
       # Auth.js v5 auto-detects AUTH_URL from VERCEL_URL so no explicit
       # AUTH_URL override is needed.
+      # Pass all env vars explicitly via --env since the hobby plan has no
+      # Preview environment — only Production and Development exist, so
+      # vars added to Vercel are unavailable to preview remote builds.
       - name: Deploy preview to Vercel
         id: deploy
         run: |
           url=$(npx vercel --yes \
+            --env AUTH_SECRET="${{ secrets.AUTH_SECRET }}" \
+            --env AUTH_RESEND_KEY="${{ secrets.AUTH_RESEND_KEY }}" \
             --env DATABASE_URL="${{ steps.neon.outputs.db_url_with_pooler }}" \
             --env DATABASE_URL_UNPOOLED="${{ steps.neon.outputs.db_url }}")
           echo "url=$url" >> $GITHUB_OUTPUT
