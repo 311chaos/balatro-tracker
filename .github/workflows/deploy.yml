@@ -1,0 +1,45 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  migrate-and-deploy:
+    name: Migrate → Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Uses the direct (unpooled) connection — required for migrations
+      - name: Run database migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_UNPOOLED }}
+
+      # Triggers a remote build + deploy on Vercel's infrastructure.
+      # Requires the native Vercel GitHub integration to be disabled in
+      # the Vercel project settings, otherwise both will fire on push.
+      - name: Deploy to Vercel
+        run: npx vercel --prod --yes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      # GitHub will email the committer automatically on job failure.
+      # To add Slack or another alert channel, replace this step with
+      # slackapi/slack-github-action (add SLACK_WEBHOOK_URL to secrets).
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Production deploy failed on commit ${{ github.sha }}. Check the run at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

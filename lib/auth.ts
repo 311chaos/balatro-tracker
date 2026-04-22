@@ -5,8 +5,6 @@ import { Resend as ResendClient } from "resend";
 import { db } from "@/lib/db";
 import { MagicLinkEmail } from "@/emails/MagicLinkEmail";
 
-const resend = new ResendClient(process.env.AUTH_RESEND_KEY);
-
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
   adapter: PrismaAdapter(db),
@@ -14,6 +12,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Resend({
       from: "onboarding@resend.dev", // update once Resend domain is configured
       sendVerificationRequest: async ({ identifier: email, url }) => {
+        const resend = new ResendClient(process.env.AUTH_RESEND_KEY);
         await resend.emails.send({
           from: "onboarding@resend.dev", // update once Resend domain is configured
           to: email,
