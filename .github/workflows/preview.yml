@@ -34,6 +34,11 @@ jobs:
           branch_name: preview/pr-${{ github.event.pull_request.number }}
           api_key: ${{ secrets.NEON_API_KEY }}
 
+      - name: Debug Neon outputs
+        run: |
+          echo "db_url is set: ${{ steps.neon.outputs.db_url != '' }}"
+          echo "db_url_with_pooler is set: ${{ steps.neon.outputs.db_url_with_pooler != '' }}"
+
       # Run migrations against the branch using the direct connection
       - name: Run migrations on branch
         run: npx prisma migrate deploy
