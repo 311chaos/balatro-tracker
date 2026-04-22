@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/DropdownMenu";
 type Props = {
   email: string;
   onSignOut: () => void | Promise<void>;
@@ -20,25 +20,18 @@ export const UserMenu = ({ email, onSignOut }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="lg"
-            className="gap-1.5 text-zinc-100 hover:text-black hover:bg-stake-gold active:bg-stake-gold data-popup-open:bg-stake-gold data-popup-open:text-black text-base"
-          />
-        }
+        render={<Button variant="outline" size="lg" color="stake-gold" />}
       >
         {email}
         <ChevronDownIcon className="size-3.5" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" color="stake-gold">
         <DropdownMenuItem
           onClick={() =>
             startTransition(() => {
               onSignOut();
             })
           }
-          className="focus:bg-stake-gold focus:text-black"
         >
           Sign out
         </DropdownMenuItem>

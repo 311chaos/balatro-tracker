@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/Input";
 
 type Props = {
@@ -21,7 +21,7 @@ export const SignInModal = ({ action }: Props) => (
       render={
         <Button
           variant="outline"
-          size="sm"
+          size="lg"
           className="gap-1.5 bg-black border-stake-gold text-stake-gold hover:text-black hover:bg-stake-gold active:bg-stake-gold data-popup-open:bg-stake-gold data-popup-open:text-black"
         />
       }
@@ -30,7 +30,9 @@ export const SignInModal = ({ action }: Props) => (
     </DialogTrigger>
     <DialogContent className="bg-zinc-800">
       <DialogHeader>
-        <DialogTitle className="text-zinc-50">Sync your progress</DialogTitle>
+        <DialogTitle className="text-zinc-50 text-2xl">
+          Sync your progress
+        </DialogTitle>
         <DialogDescription className="text-zinc-50">
           Sign in to track your gold sticker collection across every device.
           Your progress is saved automatically every time you update a joker.

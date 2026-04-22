@@ -1,0 +1,21 @@
+/* Item focus — uses --menu-color if set on container, else accent */
+.item:focus:not([data-variant="destructive"]) {
+  background-color: var(--menu-color, var(--color-accent));
+  color: var(--menu-text, var(--color-accent-foreground));
+}
+
+.item:focus:not([data-variant="destructive"]) * {
+  color: var(--menu-text, var(--color-accent-foreground));
+}
+
+/* Shortcut text tracks focused item color */
+.item:focus:not([data-variant="destructive"]) .shortcut {
+  color: var(--menu-text, var(--color-accent-foreground));
+}
+
+/* Sub-trigger when its submenu is open */
+.subTrigger[data-popup-open],
+.subTrigger[data-open] {
+  background-color: var(--menu-color, var(--color-accent));
+  color: var(--menu-text, var(--color-accent-foreground));
+}

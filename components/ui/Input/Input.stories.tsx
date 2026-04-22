@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
 
 const meta: Meta<typeof Input> = {
@@ -84,4 +84,89 @@ export const Disabled: Story = {
       </div>
     ),
   ],
+};
+
+const SIZES = ["sm", "md", "lg"] as const;
+
+const STATE_COLS: {
+  label: string;
+  props: React.ComponentProps<typeof Input>;
+  className?: string;
+}[] = [
+  { label: "Default", props: { placeholder: "Placeholder" } },
+  { label: "With value", props: { value: "Unstoppable", readOnly: true } },
+  { label: "Focus", props: { placeholder: "Placeholder" }, className: "pseudo-focus" },
+  { label: "Error", props: { "aria-invalid": true, value: "bad@", readOnly: true } },
+  { label: "Disabled", props: { placeholder: "Placeholder", disabled: true } },
+  { label: "Readonly", props: { value: "Read only", readOnly: true } },
+];
+
+export const States: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 p-2">
+      <div className="flex items-center gap-4">
+        <span className="w-12 shrink-0" />
+        {STATE_COLS.map(({ label }) => (
+          <span
+            key={label}
+            className="w-36 text-center text-[10px] font-medium uppercase tracking-widest text-zinc-500"
+          >
+            {label}
+          </span>
+        ))}
+      </div>
+      {SIZES.map((size) => (
+        <div key={size} className="flex items-center gap-4">
+          <span className="w-12 shrink-0 text-[10px] font-mono text-zinc-600">
+            {size}
+          </span>
+          {STATE_COLS.map(({ label, props, className }) => (
+            <div key={label} className="w-36">
+              <Input size={size} className={className} {...props} />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const Error: Story = {
+  render: () => (
+    <div className="flex flex-col gap-1.5 w-72">
+      <Input
+        size="md"
+        aria-invalid
+        value="bad@email"
+        readOnly
+        placeholder="Email address"
+      />
+      <p className="text-xs text-destructive">Enter a valid email address.</p>
+    </div>
+  ),
+};
+
+export const ClearableEmpty: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 w-72">
+      <div className="flex flex-col gap-1">
+        <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+          With value — clear button visible
+        </span>
+        <Input
+          size="md"
+          clearable
+          value="Joker"
+          readOnly
+          placeholder="Search jokers…"
+        />
+      </div>
+      <div className="flex flex-col gap-1">
+        <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+          Empty — clear button hidden
+        </span>
+        <Input size="md" clearable value="" placeholder="Search jokers…" />
+      </div>
+    </div>
+  ),
 };

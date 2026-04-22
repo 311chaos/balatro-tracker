@@ -1,0 +1,75 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as DialogStories from './Dialog.stories';
+
+<Meta of={DialogStories} />
+
+# Dialog
+
+Modal overlay built on Base UI's `Dialog` primitive. Renders into a portal with a backdrop blur and entrance/exit animations. The close button in the top-right corner is opt-out via `showCloseButton={false}` on `DialogContent`.
+
+---
+
+## Playground
+
+<Canvas of={DialogStories.Playground} />
+
+---
+
+## With footer
+
+Use `DialogFooter` for action buttons at the bottom. Pass `showCloseButton` to get a free "Close" dismiss button alongside your custom actions.
+
+<Canvas of={DialogStories.WithFooter} />
+
+---
+
+## With form
+
+The `WithForm` story mirrors the real sign-in flow — `DialogContent` accepts a custom `className` to retheme the panel background.
+
+<Canvas of={DialogStories.WithForm} />
+
+---
+
+## No close button
+
+Pass `showCloseButton={false}` to `DialogContent` to remove the X icon when the dialog must be dismissed through an explicit action only.
+
+<Canvas of={DialogStories.NoCloseButton} />
+
+---
+
+## Anatomy
+
+```tsx
+<Dialog>
+  <DialogTrigger render={<Button />}>Open</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Title</DialogTitle>
+      <DialogDescription>Description</DialogDescription>
+    </DialogHeader>
+
+    {/* body content */}
+
+    <DialogFooter showCloseButton>
+      <Button>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## Props
+
+### DialogContent
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `showCloseButton` | `boolean` | `true` | Show the X button in the top-right corner |
+| `className` | `string` | — | Forwarded to the popup panel for custom theming |
+
+### DialogFooter
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `showCloseButton` | `boolean` | `false` | Append a "Close" dismiss button after children |
