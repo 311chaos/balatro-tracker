@@ -36,9 +36,16 @@ A web app for tracking which Balatro collectibles the user has earned a **gold s
 |---|---|
 | Foundation — Next.js scaffold, DB schema, Auth.js wiring | ✅ Done |
 | Auth — magic link flow, sign-in modal, user menu | ✅ Done |
-| Static UI — Button, Navbar, PokerChip, FilterBar, ProgressBar | 🔄 In progress |
-| Live data — localStorage + DB sync, Server Actions | ⬜ Not started |
+| Static UI — all tracker components, joker config | ✅ Done |
+| Component system — Button, design tokens, Storybook | ✅ Done |
+| Live data — localStorage + DB sync, Server Actions | ✅ Done (import prompt outstanding) |
 | Deploy | ⬜ Not started |
+
+**Outstanding before deploy:**
+- Progress bar should reflect filtered joker count, not global total
+- Sticker level filter (by stake tier) not yet in FilterBar
+- Import prompt: offer to sync localStorage → DB on first sign-in
+- Landing page CTA (currently redirects straight to tracker — deferred)
 
 ---
 

@@ -236,10 +236,11 @@ This is the core of the app. The page is fully client-rendered for interactive f
 
 ### Filter behavior
 
-- Progress bar numerator/denominator reflects **currently visible jokers** only
-- Rarity filter: multi-select or single dropdown (COMMON / UNCOMMON / RARE / LEGENDARY)
-- Completion toggle: All / Collected / Missing
-- Name search: client-side substring match against joker name
+- Rarity filter: multi-select pill buttons (COMMON / UNCOMMON / RARE / LEGENDARY) ✅
+- Completion toggle: All / Collected / Missing ✅
+- Name search: debounced client-side substring match ✅
+- Sticker level filter (by stake tier) — **not yet implemented**
+- Progress bar — currently shows global totals; spec calls for reflecting visible jokers only — **not yet implemented**
 
 ### Toggling a joker
 
@@ -345,24 +346,40 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 - [x] Update `/` landing page: show "Start Tracking" CTA prominently, sign-in as secondary action
 - [x] Nav: show "Sign in to sync" when anonymous, user email + sign out when authenticated
 
-### Phase 3 — Static UI
+### Phase 3 — Static UI ✅
 *Checkpoint: full tracker UI visible with mock data, filters and progress bar work client-side*
 
 - [x] Build `PokerChipBase` component — raw color props
 - [x] Build `PokerChip` component — variant wrapper (StickerLevel → colors)
-- [ ] Build `ItemSprite` component — verify sprite sheet offsets render correctly
-- [ ] Build `JokerCard` combining sprite + name + rarity + sticker badge
-- [ ] Build `ProgressBar` component
-- [ ] Build `FilterBar` and `JokerFilterBar` (name search, rarity, sticker level, completion toggle)
-- [ ] Build `ItemGrid` and `TrackerClient` wired to hardcoded mock joker data + localStorage
-- [ ] Populate `config/jokers.ts` with full joker list and confirmed sprite offsets
+- [x] Build `ItemSprite` component — sprite sheet offsets verified and rendering correctly
+- [x] Build `JokerCard` combining sprite + name + rarity + sticker badge
+- [x] Build `ProgressBar` component
+- [x] Build `FilterBar` (name search, rarity multi-select, completion toggle) — `JokerFilterBar` merged into `FilterBar`
+- [x] Build `JokerList` (combines `ItemGrid` + `TrackerClient`) wired to live joker config + localStorage
+- [x] Populate `config/jokers.ts` with full joker list and confirmed sprite offsets
 
-### Phase 4 — Live Data
+> **Known gaps vs. spec:**
+> - Progress bar currently shows global progress (all jokers), not filtered progress. Spec says it should reflect currently visible jokers.
+> - Sticker level filter (by stake tier) not yet implemented in `FilterBar`. Only name, rarity, and completion status are filterable.
+> - Landing page (`/`) currently redirects directly to `/tracker/jokers`. The planned CTA landing page is deferred.
+
+### Phase 3b — Component System (not in original plan)
+*Added: Button component, design tokens, Storybook*
+
+- [x] Custom `Button` built on Base UI + CVA — full variant/size/color prop system
+- [x] Game colour tokens (`config/colors.ts`, `config/buttonColors.ts`) — rarity + stake colours as Tailwind theme vars
+- [x] `Button` color prop: rarity and stake colours with automatic `color-mix()` interaction states
+- [x] Color + variant compatibility — ghost, outline, secondary, link variants work alongside the color prop
+- [x] Storybook configured — picks up component-level stories and MDX from `components/**`
+- [x] Stories + MDX docs for: `Button`, `Input`, `ItemSprite`, `JokerCard`, `PokerChip`, `PokerChipBase`, `ProgressBar`
+- [x] `@custom-variant` pseudo-states — `pseudo-hover/active/focus-visible` defined once, cover both real browser states and Storybook simulation
+
+### Phase 4 — Live Data ✅ (except import prompt)
 *Checkpoint: toggle a joker, refresh — localStorage persists; sign in — DB persists across devices*
 
-- [ ] `TrackerClient` reads/writes localStorage for anonymous users
-- [ ] When signed in, server component passes DB progress; client merges with localStorage
-- [ ] Server Actions in `actions.ts` write to DB (only called when session exists)
+- [x] `JokerList` reads/writes localStorage for anonymous users
+- [x] When signed in, server component fetches DB progress via `getJokerProgress()` and passes as `initialProgress`
+- [x] Server Actions (`upsertJokerProgress`, `deleteJokerProgress`) write to DB when session exists
 - [ ] Import prompt: when signed-in user has localStorage data but empty DB, offer one-click import
 
 ### Phase 5 — Deploy
