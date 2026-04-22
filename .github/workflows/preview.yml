@@ -38,31 +38,16 @@ jobs:
         env:
           DATABASE_URL: ${{ steps.neon.outputs.db_url }}
 
-      # vercel build requires .vercel/project.json. Rather than running
-      # vercel pull (which needs a Preview env on Pro), write it directly
-      # from secrets we already have.
-      - name: Write Vercel project settings
-        run: |
-          mkdir -p .vercel
-          echo '{"projectId":"${{ secrets.VERCEL_PROJECT_ID }}","orgId":"${{ secrets.VERCEL_ORG_ID }}"}' > .vercel/project.json
-
-      - name: Build
-        run: npx vercel build
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-          AUTH_RESEND_KEY: ${{ secrets.AUTH_RESEND_KEY }}
-          # AUTH_URL intentionally omitted — Auth.js v5 auto-detects from
-          # VERCEL_URL on Vercel, so preview deployments get the correct URL.
-          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
-          DATABASE_URL_UNPOOLED: ${{ steps.neon.outputs.db_url }}
-
+      # Trigger a remote build on Vercel's infrastructure. Auth env vars
+      # come from the project's Vercel settings (production). DATABASE_URL
+      # is overridden at runtime for this deployment via --env so the
+      # preview hits the isolated Neon branch, not production.
+      # Auth.js v5 auto-detects AUTH_URL from VERCEL_URL so no explicit
+      # AUTH_URL override is needed.
       - name: Deploy preview to Vercel
         id: deploy
         run: |
-          url=$(npx vercel deploy --prebuilt \
+          url=$(npx vercel --yes \
             --env DATABASE_URL="${{ steps.neon.outputs.db_url_with_pooler }}" \
             --env DATABASE_URL_UNPOOLED="${{ steps.neon.outputs.db_url }}")
           echo "url=$url" >> $GITHUB_OUTPUT
