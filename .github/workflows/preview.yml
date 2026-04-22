@@ -38,11 +38,14 @@ jobs:
         env:
           DATABASE_URL: ${{ steps.neon.outputs.db_url }}
 
-      # Build locally so we can inject the branch DATABASE_URL as a
-      # runtime env var in the deploy step. Using --prebuilt avoids a
-      # second remote build that would use the production DB URL.
-      # vercel pull --environment=preview requires a Pro plan, so we skip
-      # it and inject all required env vars directly into vercel build.
+      # vercel build requires .vercel/project.json. Rather than running
+      # vercel pull (which needs a Preview env on Pro), write it directly
+      # from secrets we already have.
+      - name: Write Vercel project settings
+        run: |
+          mkdir -p .vercel
+          echo '{"projectId":"${{ secrets.VERCEL_PROJECT_ID }}","orgId":"${{ secrets.VERCEL_ORG_ID }}"}' > .vercel/project.json
+
       - name: Build
         run: npx vercel build
         env:
