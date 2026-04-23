@@ -34,6 +34,7 @@ type ProgressBarProps = {
   total: number;
   fillColor?: string;
   height?: number;
+  "aria-label"?: string;
 };
 
 export const ProgressBar = ({
@@ -41,6 +42,7 @@ export const ProgressBar = ({
   total,
   fillColor = "var(--stake-gold)",
   height = 8,
+  "aria-label": ariaLabel = `${current} of ${total}`,
 }: ProgressBarProps) => {
   const pct = total === 0 ? 0 : Math.round((current / total) * 100);
 
@@ -52,7 +54,7 @@ export const ProgressBar = ({
         </span>
         <span className="text-base font-semibold text-zinc-400">{pct}%</span>
       </div>
-      <ProgressRoot value={pct} className="w-full" aria-label={`${current} of ${total}`}>
+      <ProgressRoot value={pct} className="w-full" aria-label={ariaLabel}>
         <ProgressTrack height={height}>
           <ProgressIndicator color={fillColor} />
         </ProgressTrack>

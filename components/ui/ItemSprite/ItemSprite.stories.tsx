@@ -3,7 +3,10 @@ import { ItemSprite } from "@/components/ui/ItemSprite";
 import { JOKERS, JOKER_SHEET_URL, type JokerId } from "@/config/jokers";
 
 const JOKER_IDS = JOKERS.map((j) => j.id) as JokerId[];
-const JOKER_BY_ID = Object.fromEntries(JOKERS.map((j) => [j.id, j])) as Record<JokerId, (typeof JOKERS)[number]>;
+const JOKER_BY_ID = Object.fromEntries(JOKERS.map((j) => [j.id, j])) as Record<
+  JokerId,
+  (typeof JOKERS)[number]
+>;
 
 const meta: Meta<{ jokerId: JokerId; size: number }> = {
   title: "UI/ItemSprite",
@@ -32,7 +35,9 @@ export const Playground: Story = {
       <ItemSprite
         spriteX={joker.spriteX}
         spriteY={joker.spriteY}
-        additionalLayers={"additionalLayers" in joker ? joker.additionalLayers : undefined}
+        additionalLayers={
+          "additionalLayers" in joker ? joker.additionalLayers : undefined
+        }
         sheetUrl={JOKER_SHEET_URL}
         name={joker.id}
         size={size}
@@ -68,14 +73,16 @@ export const AllJokers: Story = {
           <ItemSprite
             spriteX={joker.spriteX}
             spriteY={joker.spriteY}
-            additionalLayers={"additionalLayers" in joker ? joker.additionalLayers : undefined}
+            additionalLayers={
+              "additionalLayers" in joker ? joker.additionalLayers : undefined
+            }
             sheetUrl={JOKER_SHEET_URL}
             name={joker.id}
             size={48}
           />
           <span
             style={{
-              color: "#52525b",
+              color: "#fff",
               fontSize: 9,
               fontFamily: "monospace",
               maxWidth: 48,
@@ -122,7 +129,7 @@ export const Sizes: Story = {
             name="JOKER"
             size={size}
           />
-          <span style={{ color: "#71717a", fontSize: 10 }}>{size}px</span>
+          <span style={{ color: "#fff", fontSize: 10 }}>{size}px</span>
         </div>
       ))}
     </div>

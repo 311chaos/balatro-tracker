@@ -92,6 +92,7 @@ const JokerListInner = ({ initialProgress, isAuthenticated }: Props) => {
         current={stickered.length}
         total={trackable.length}
         height={18}
+        aria-label="Gold stickers earned"
       />
       <FilterBar />
       <div className="felt-bg rounded-xl p-4">

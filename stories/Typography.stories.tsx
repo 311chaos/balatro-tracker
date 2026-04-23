@@ -29,12 +29,12 @@ export const BalatroFont: Story = {
   render: () => (
     <div className="flex flex-col gap-8 p-6 bg-black/80">
       <div className="flex flex-col gap-4">
-        <p className="text-xs font-medium uppercase tracking-widest text-zinc-500">
+        <p className="text-xs font-medium uppercase tracking-widest text-zinc-100">
           m6x11 — Sizes
         </p>
         {SIZES.map(({ label, className }) => (
           <div key={label} className="flex items-baseline gap-4">
-            <span className="w-20 shrink-0 text-[10px] font-mono text-zinc-600">
+            <span className="w-20 shrink-0 text-[10px] font-mono text-zinc-100">
               {label}
             </span>
             <span className={`font-balatro text-zinc-100 ${className}`}>
@@ -45,7 +45,7 @@ export const BalatroFont: Story = {
       </div>
 
       <div className="flex flex-col gap-4">
-        <p className="text-xs font-medium uppercase tracking-widest text-zinc-500">
+        <p className="text-xs font-medium uppercase tracking-widest text-zinc-100">
           m6x11 — Tracking
         </p>
         {(
@@ -57,7 +57,7 @@ export const BalatroFont: Story = {
           ] as const
         ).map((t) => (
           <div key={t} className="flex items-baseline gap-4">
-            <span className="w-32 shrink-0 text-[10px] font-mono text-zinc-600">
+            <span className="w-32 shrink-0 text-[10px] font-mono text-zinc-100">
               {t}
             </span>
             <span className={`font-balatro text-xl text-zinc-100 ${t}`}>
@@ -68,7 +68,7 @@ export const BalatroFont: Story = {
       </div>
 
       <div className="flex flex-col gap-3">
-        <p className="text-xs font-medium uppercase tracking-widest text-zinc-500">
+        <p className="text-xs font-medium uppercase tracking-widest text-zinc-100">
           m6x11 — In context
         </p>
         <div className="rounded-xl bg-zinc-900 p-6 flex flex-col gap-2">
@@ -82,7 +82,7 @@ export const BalatroFont: Story = {
       </div>
 
       <div className="flex flex-col gap-3">
-        <p className="text-xs font-medium uppercase tracking-widest text-zinc-500">
+        <p className="text-xs font-medium uppercase tracking-widest text-zinc-100">
           m6x11 — Rarity labels
         </p>
         <div className="flex gap-4 flex-wrap">

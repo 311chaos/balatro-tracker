@@ -94,11 +94,11 @@ const STATE_COLS: {
   className?: string;
 }[] = [
   { label: "Default", props: { placeholder: "Placeholder" } },
-  { label: "With value", props: { value: "Unstoppable", readOnly: true } },
+  { label: "With value", props: { value: "Unstoppable", readOnly: true, "aria-label": "With value" } },
   { label: "Focus", props: { placeholder: "Placeholder" }, className: "pseudo-focus" },
-  { label: "Error", props: { "aria-invalid": true, value: "bad@", readOnly: true } },
+  { label: "Error", props: { "aria-invalid": true, value: "bad@", readOnly: true, "aria-label": "Error state" } },
   { label: "Disabled", props: { placeholder: "Placeholder", disabled: true } },
-  { label: "Readonly", props: { value: "Read only", readOnly: true } },
+  { label: "Readonly", props: { value: "Read only", readOnly: true, "aria-label": "Readonly" } },
 ];
 
 export const States: Story = {

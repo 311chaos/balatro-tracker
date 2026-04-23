@@ -45,15 +45,15 @@ export default meta;
 type Story = StoryObj<typeof ProgressBar>;
 
 export const Playground: Story = {
-  args: { current: 47, total: 150 },
+  args: { current: 47, total: 150, "aria-label": "Gold stickers earned" },
 };
 
 export const Empty: Story = {
-  args: { current: 0, total: 150 },
+  args: { current: 0, total: 150, "aria-label": "Gold stickers earned" },
 };
 
 export const Complete: Story = {
-  args: { current: 150, total: 150 },
+  args: { current: 150, total: 150, "aria-label": "Gold stickers earned" },
 };
 
 export const ComposableExample: Story = {
@@ -68,7 +68,7 @@ export const ComposableExample: Story = {
 
     return (
       <div className="w-96 rounded-xl bg-zinc-900 p-6 flex flex-col gap-3">
-        <p className="text-xs font-medium uppercase tracking-wide text-zinc-500 mb-1">
+        <p className="text-xs font-medium uppercase tracking-wide text-zinc-100 mb-1">
           Jokers collected by rarity
         </p>
         {RARITIES.map((rarity, i) => {
@@ -82,7 +82,7 @@ export const ComposableExample: Story = {
               >
                 {label}
               </span>
-              <ProgressRoot value={pct} className="flex-1">
+              <ProgressRoot value={pct} className="flex-1" aria-label={`${label} jokers collected`}>
                 <ProgressTrack height={12}>
                   <ProgressIndicator color={fill} />
                 </ProgressTrack>
@@ -111,6 +111,7 @@ export const AllStakeColors: Story = {
             current={Math.round(150 * ((i + 1) / STICKER_LEVELS.length))}
             total={150}
             fillColor={`var(--stake-${level.toLowerCase()})`}
+            aria-label={`${STICKER_COLORS[level].label} stickers earned`}
           />
         </div>
       ))}

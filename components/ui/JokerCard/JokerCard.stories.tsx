@@ -17,6 +17,13 @@ const meta: Meta<typeof JokerCard> = {
       values: [{ name: "dark", value: "#09090b" }],
     },
   },
+  decorators: [
+    (Story) => (
+      <div className="flex gap-4 p-6 bg-zinc-950 rounded-xl">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     joker: {
       control: "select",
@@ -81,7 +88,7 @@ export const AllRarities: Story = {
       "GOLD",
     ]);
     return (
-      <div className="flex gap-4 p-6 bg-zinc-950 rounded-xl">
+      <div className="flex gap-4">
         {samples.map((joker, i) => (
           <JokerCard
             key={joker.id}
