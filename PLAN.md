@@ -162,7 +162,13 @@ export type PlanetCard = CollectibleItem;
 // config/jokers.ts
 export const JOKERS: Joker[] = [
   { id: "joker", name: "Joker", rarity: "COMMON", spriteX: 0, spriteY: 0 },
-  { id: "greedy", name: "Greedy Joker", rarity: "COMMON", spriteX: 71, spriteY: 0 },
+  {
+    id: "greedy",
+    name: "Greedy Joker",
+    rarity: "COMMON",
+    spriteX: 71,
+    spriteY: 0,
+  },
   // ... all ~150 jokers
 ];
 ```
@@ -179,6 +185,7 @@ Planets:  https://cdn.jsdelivr.net/gh/Signez/balatro-sprites-i18n@main/dist/en/2
 **Sticker/stake badge component:**
 
 `PokerChip` / `PokerChipBase` — pure CSS poker chips, no image assets needed.
+
 - `PokerChipBase` — low-level: accepts raw `chipColor`, `ringColor`, `notch1Color`, `notch2Color`, `size` props
 - `PokerChip` — convenience wrapper: accepts `variant: StickerLevel` + `size`, maps to colors automatically
 
@@ -326,7 +333,8 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 ## Build Phases
 
 ### Phase 1 — Foundation ✅
-*Checkpoint: app loads at localhost, DB tables exist in Neon dashboard*
+
+_Checkpoint: app loads at localhost, DB tables exist in Neon dashboard_
 
 - [x] `npx create-next-app@latest` with TypeScript, Tailwind, App Router
 - [x] Install shadcn/ui
@@ -337,7 +345,8 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 - [x] Populate `.env` with all required variables
 
 ### Phase 2 — Auth ✅
-*Checkpoint: enter email → receive magic link → land on `/tracker`*
+
+_Checkpoint: enter email → receive magic link → land on `/tracker`_
 
 - [x] Build `/` sign-in page (email input form + redirect to tracker if already signed in)
 - [x] Build `/verify` confirmation screen
@@ -347,7 +356,8 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 - [x] Nav: show "Sign in to sync" when anonymous, user email + sign out when authenticated
 
 ### Phase 3 — Static UI ✅
-*Checkpoint: full tracker UI visible with mock data, filters and progress bar work client-side*
+
+_Checkpoint: full tracker UI visible with mock data, filters and progress bar work client-side_
 
 - [x] Build `PokerChipBase` component — raw color props
 - [x] Build `PokerChip` component — variant wrapper (StickerLevel → colors)
@@ -359,12 +369,14 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 - [x] Populate `config/jokers.ts` with full joker list and confirmed sprite offsets
 
 > **Known gaps vs. spec:**
+>
 > - Progress bar currently shows global progress (all jokers), not filtered progress. Spec says it should reflect currently visible jokers.
 > - Sticker level filter (by stake tier) not yet implemented in `FilterBar`. Only name, rarity, and completion status are filterable.
 > - Landing page (`/`) currently redirects directly to `/tracker/jokers`. The planned CTA landing page is deferred.
 
 ### Phase 3b — Component System (not in original plan)
-*Added: Button component, design tokens, Storybook*
+
+_Added: Button component, design tokens, Storybook_
 
 - [x] Custom `Button` built on Base UI + CVA — full variant/size/color prop system
 - [x] Game colour tokens (`config/colors.ts`, `config/buttonColors.ts`) — rarity + stake colours as Tailwind theme vars
@@ -375,7 +387,8 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 - [x] `@custom-variant` pseudo-states — `pseudo-hover/active/focus-visible` defined once, cover both real browser states and Storybook simulation
 
 ### Phase 4 — Live Data ✅ (except import prompt)
-*Checkpoint: toggle a joker, refresh — localStorage persists; sign in — DB persists across devices*
+
+_Checkpoint: toggle a joker, refresh — localStorage persists; sign in — DB persists across devices_
 
 - [x] `JokerList` reads/writes localStorage for anonymous users
 - [x] When signed in, server component fetches DB progress via `getJokerProgress()` and passes as `initialProgress`
@@ -383,11 +396,12 @@ DATABASE_URL_UNPOOLED=        # Neon direct connection string (for migrations)
 - [ ] Import prompt: when signed-in user has localStorage data but empty DB, offer one-click import
 
 ### Phase 5 — Deploy
-*Checkpoint: app live on Vercel, auth works in production*
 
-- [ ] Deploy to Vercel, configure all environment variables
+_Checkpoint: app live on Vercel, auth works in production_
+
+- [x] Deploy to Vercel, configure all environment variables
 - [ ] **Set Vercel spending limit**
-- [ ] Smoke test: use tracker anonymously, sign in, verify data persists
+- [x] Smoke test: use tracker anonymously, sign in, verify data persists
 
 ---
 
