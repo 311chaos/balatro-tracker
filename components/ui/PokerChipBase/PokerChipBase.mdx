@@ -1,0 +1,77 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as PokerChipBaseStories from './PokerChipBase.stories';
+
+<Meta of={PokerChipBaseStories} />
+
+# PokerChipBase
+
+Low-level chip renderer. Accepts four explicit colour values and a size — no game knowledge. This is the component to use when you need a chip with colours that don't correspond to a stake tier.
+
+For stake-accurate chips, use `PokerChip` instead — it looks up the correct colours automatically from `STICKER_COLORS` in `config/types.ts`.
+
+---
+
+## Playground
+
+Use the colour pickers to explore how the four colour channels interact.
+
+<Canvas of={PokerChipBaseStories.Playground} />
+<Controls of={PokerChipBaseStories.Playground} />
+
+---
+
+## All stakes
+
+Shows every stake tier rendered via `PokerChipBase` with the colour values from `STICKER_COLORS`. The raw hex values are shown alongside each chip so you can see exactly what each channel maps to.
+
+<Canvas of={PokerChipBaseStories.AllStakes} />
+
+---
+
+## Colour anatomy
+
+A chip is composed of four independently controllable colour channels:
+
+```
+chipColor   — main body fill and the inner circle background
+ringColor   — the dark rim band, inner ring border, and radial gradient bands
+notch1Color — the four cardinal notch marks (N, E, S, W)
+notch2Color — the four diagonal notch marks (NE, SE, SW, NW)
+```
+
+The body is drawn as a `radial-gradient` using pixel stops calculated from the 200×200 base size:
+
+```
+center (0 → 58px)    chipColor
+inner ring (58–66px) ringColor
+rim band (66–88px)   chipColor
+outer rim (88–100px) ringColor
+```
+
+Eight rectangular notch marks are positioned in the rim band using trigonometry — alternating between `notch1Color` (cardinal) and `notch2Color` (diagonal). A gloss overlay is composited on top for depth.
+
+The whole chip is rendered at 200×200 internally and scaled to `size` via `transform: scale()`, so the geometry stays sharp at any pixel size.
+
+---
+
+## Anatomy
+
+```tsx
+<PokerChipBase
+  chipColor="#FA9108"    // main body
+  ringColor="#996600"    // rim, inner ring
+  notch1Color="#111111"  // N/E/S/W notches
+  notch2Color="#FFFFFF"  // NE/SE/SW/NW notches
+  size={40}              // px, default 40
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `chipColor` | `string` | required | Main body and inner circle fill |
+| `ringColor` | `string` | required | Rim band, inner ring border, gradient bands |
+| `notch1Color` | `string` | required | Cardinal notch marks (N, E, S, W) |
+| `notch2Color` | `string` | required | Diagonal notch marks (NE, SE, SW, NW) |
+| `size` | `number` | `40` | Rendered size in pixels |

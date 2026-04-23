@@ -9,7 +9,6 @@ import {
 const meta: Meta<typeof PokerChipBase> = {
   title: "UI/PokerChipBase",
   component: PokerChipBase,
-  tags: ["autodocs"],
   parameters: {
     layout: "centered",
     backgrounds: {
@@ -70,7 +69,7 @@ export const AllStakes: Story = {
             </span>
             <span
               style={{
-                color: "#71717a",
+                color: "#fff",
                 fontSize: 11,
                 fontFamily: "monospace",
               }}

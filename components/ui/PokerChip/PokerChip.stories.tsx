@@ -5,7 +5,6 @@ import { STICKER_LEVELS, type StickerLevel } from "@/config/types";
 const meta: Meta<typeof PokerChip> = {
   title: "UI/PokerChip",
   component: PokerChip,
-  tags: ["autodocs"],
   parameters: {
     layout: "centered",
     backgrounds: {
@@ -86,7 +85,7 @@ export const Sizes: Story = {
           }}
         >
           <PokerChip variant="GOLD" size={size} />
-          <span style={{ color: "#71717a", fontSize: 11 }}>{size}px</span>
+          <span style={{ color: "#fff", fontSize: 11 }}>{size}px</span>
         </div>
       ))}
     </div>

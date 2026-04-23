@@ -1,0 +1,51 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as PokerChipStories from './PokerChip.stories';
+
+<Meta of={PokerChipStories} />
+
+# PokerChip
+
+Game-themed chip representing a stake difficulty tier. Accepts a `variant` drawn directly from the `StickerLevel` type — no raw colour values needed.
+
+`PokerChip` is a thin wrapper over `PokerChipBase` that looks up the four colour values for each stake level from `config/types.ts` (`STICKER_COLORS`) and forwards them. Use `PokerChip` whenever you want a stake-accurate chip. Use `PokerChipBase` directly only when you need fully custom colours.
+
+---
+
+## Playground
+
+<Canvas of={PokerChipStories.Playground} />
+<Controls of={PokerChipStories.Playground} />
+
+---
+
+## All stakes
+
+The eight stake tiers in order from highest (Gold) to lowest (White), matching the order used in the tracker UI.
+
+<Canvas of={PokerChipStories.AllStakes} />
+
+---
+
+## Sizes
+
+The `size` prop is a pixel number that scales the chip uniformly. The internal geometry is drawn at 200×200 and scaled down via `transform: scale()`, so the chip looks sharp at any size.
+
+<Canvas of={PokerChipStories.Sizes} />
+
+---
+
+## Anatomy
+
+```tsx
+<PokerChip
+  variant="GOLD"   // StickerLevel — WHITE | RED | GREEN | BLACK | BLUE | PURPLE | ORANGE | GOLD
+  size={40}        // px, default 40
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `StickerLevel` | required | Stake tier — drives all four chip colours |
+| `size` | `number` | `40` | Rendered size in pixels |
