@@ -4,7 +4,7 @@
 
 A full-stack web app for tracking gold sticker progress across every joker in [Balatro](https://www.playbalatro.com/). Sign in to sync your collection across devices — no password required.
 
-![Gold poker chip favicon](app/icon.svg)
+<img src="https://raw.githubusercontent.com/311chaos/balatro-tracker/main/public/icons/icon-prod.svg" width="48" height="48" alt="Gold poker chip favicon" />
 
 ---
 
@@ -19,19 +19,19 @@ A full-stack web app for tracking gold sticker progress across every joker in [B
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Framework** | [Next.js 15](https://nextjs.org) — App Router, Server Components, Server Actions |
-| **Language** | TypeScript |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com) with CSS custom properties for theming |
-| **UI Components** | [shadcn/ui](https://ui.shadcn.com) built on [Base UI](https://base-ui.com) primitives |
-| **Authentication** | [Auth.js v5](https://authjs.dev) (NextAuth) with magic link via [Resend](https://resend.com) |
-| **Email** | [Resend](https://resend.com) + [React Email](https://react.email) for transactional templates |
-| **Database** | [Neon](https://neon.tech) — serverless Postgres |
-| **ORM** | [Prisma](https://www.prisma.io) |
-| **Deployment** | [Vercel](https://vercel.com) |
-| **Component Explorer** | [Storybook 8](https://storybook.js.org) with Next.js Vite adapter |
-| **Testing** | [Vitest](https://vitest.dev) |
+| Layer                  | Technology                                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------------------- |
+| **Framework**          | [Next.js 15](https://nextjs.org) — App Router, Server Components, Server Actions              |
+| **Language**           | TypeScript                                                                                    |
+| **Styling**            | [Tailwind CSS v4](https://tailwindcss.com) with CSS custom properties for theming             |
+| **UI Components**      | [shadcn/ui](https://ui.shadcn.com) built on [Base UI](https://base-ui.com) primitives         |
+| **Authentication**     | [Auth.js v5](https://authjs.dev) (NextAuth) with magic link via [Resend](https://resend.com)  |
+| **Email**              | [Resend](https://resend.com) + [React Email](https://react.email) for transactional templates |
+| **Database**           | [Neon](https://neon.tech) — serverless Postgres                                               |
+| **ORM**                | [Prisma](https://www.prisma.io)                                                               |
+| **Deployment**         | [Vercel](https://vercel.com)                                                                  |
+| **Component Explorer** | [Storybook 8](https://storybook.js.org) with Next.js Vite adapter                             |
+| **Testing**            | [Vitest](https://vitest.dev)                                                                  |
 
 ## Architecture Highlights
 
