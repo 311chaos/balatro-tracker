@@ -40,6 +40,9 @@ yarn-error.log*
 # claude
 .claude/settings.local.json
 
+# local notes
+integrations.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
