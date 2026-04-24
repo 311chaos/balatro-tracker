@@ -1,147 +1,213 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
 
-<Meta title="Design Tokens/Colors" />
+<Meta title="Design Tokens/Colors/Base" />
 
 # Colors
 
-Design tokens defined in `app/globals.css`. All values are CSS custom properties resolved at runtime.
+CSS custom properties defined in `app/globals.css`. Full 11-step scales are in the **Colors/Scales** story.
 
-## Rarity
+## Palette
 
-Used to tint joker names and card borders by collection rarity.
-
-<ColorPalette>
-  <ColorItem
-    title="Common"
-    subtitle="--rarity-common"
-    colors={{ Common: "var(--rarity-common)" }}
-  />
-  <ColorItem
-    title="Uncommon"
-    subtitle="--rarity-uncommon"
-    colors={{ Uncommon: "var(--rarity-uncommon)" }}
-  />
-  <ColorItem
-    title="Rare"
-    subtitle="--rarity-rare"
-    colors={{ Rare: "var(--rarity-rare)" }}
-  />
-  <ColorItem
-    title="Legendary"
-    subtitle="--rarity-legendary"
-    colors={{ Legendary: "var(--rarity-legendary)" }}
-  />
-</ColorPalette>
-
-## Stakes
-
-Stake colours match Balatro's in-game chip colours, used on `PokerChip` components.
+Canonical step (500) for each scale.
 
 <ColorPalette>
   <ColorItem
-    title="White"
-    subtitle="--stake-white"
-    colors={{ White: "var(--stake-white)" }}
+    title="zinc-500"
+    subtitle="--zinc-500"
+    colors={{ Zinc: "var(--zinc-500)" }}
   />
   <ColorItem
-    title="Red"
-    subtitle="--stake-red"
-    colors={{ Red: "var(--stake-red)" }}
+    title="red-500"
+    subtitle="--red-500"
+    colors={{ Red: "var(--red-500)" }}
   />
   <ColorItem
-    title="Green"
-    subtitle="--stake-green"
-    colors={{ Green: "var(--stake-green)" }}
+    title="orange-500"
+    subtitle="--orange-500"
+    colors={{ Orange: "var(--orange-500)" }}
   />
   <ColorItem
-    title="Black"
-    subtitle="--stake-black"
-    colors={{ Black: "var(--stake-black)" }}
+    title="yellow-500"
+    subtitle="--yellow-500"
+    colors={{ Yellow: "var(--yellow-500)" }}
   />
   <ColorItem
-    title="Blue"
-    subtitle="--stake-blue"
-    colors={{ Blue: "var(--stake-blue)" }}
+    title="green-500"
+    subtitle="--green-500"
+    colors={{ Green: "var(--green-500)" }}
   />
   <ColorItem
-    title="Purple"
-    subtitle="--stake-purple"
-    colors={{ Purple: "var(--stake-purple)" }}
+    title="blue-500"
+    subtitle="--blue-500"
+    colors={{ Blue: "var(--blue-500)" }}
   />
   <ColorItem
-    title="Orange"
-    subtitle="--stake-orange"
-    colors={{ Orange: "var(--stake-orange)" }}
-  />
-  <ColorItem
-    title="Gold"
-    subtitle="--stake-gold"
-    colors={{ Gold: "var(--stake-gold)" }}
+    title="purple-500"
+    subtitle="--purple-500"
+    colors={{ Purple: "var(--purple-500)" }}
   />
 </ColorPalette>
 
 ## Semantic
 
-Surface and text tokens from shadcn/ui, resolved differently in light and dark mode.
+Tokens that change between light and dark mode. Toggle the Storybook theme to see each variant.
 
 <ColorPalette>
   <ColorItem
-    title="Background"
+    title="background"
     subtitle="--background"
     colors={{ Background: "var(--background)" }}
   />
   <ColorItem
-    title="Foreground"
+    title="foreground"
     subtitle="--foreground"
     colors={{ Foreground: "var(--foreground)" }}
   />
+  <ColorItem title="card" subtitle="--card" colors={{ Card: "var(--card)" }} />
   <ColorItem
-    title="Muted"
-    subtitle="--muted"
-    colors={{ Muted: "var(--muted)" }}
+    title="card-foreground"
+    subtitle="--card-foreground"
+    colors={{ "Card fg": "var(--card-foreground)" }}
   />
   <ColorItem
-    title="Muted fg"
-    subtitle="--muted-foreground"
-    colors={{ "Muted fg": "var(--muted-foreground)" }}
+    title="popover"
+    subtitle="--popover"
+    colors={{ Popover: "var(--popover)" }}
   />
   <ColorItem
-    title="Border"
-    subtitle="--border"
-    colors={{ Border: "var(--border)" }}
+    title="popover-foreground"
+    subtitle="--popover-foreground"
+    colors={{ "Popover fg": "var(--popover-foreground)" }}
   />
   <ColorItem
-    title="Input"
-    subtitle="--input"
-    colors={{ Input: "var(--input)" }}
-  />
-  <ColorItem title="Ring" subtitle="--ring" colors={{ Ring: "var(--ring)" }} />
-  <ColorItem
-    title="Primary"
+    title="primary"
     subtitle="--primary"
     colors={{ Primary: "var(--primary)" }}
   />
   <ColorItem
-    title="Destructive"
+    title="primary-foreground"
+    subtitle="--primary-foreground"
+    colors={{ "Primary fg": "var(--primary-foreground)" }}
+  />
+  <ColorItem
+    title="secondary"
+    subtitle="--secondary"
+    colors={{ Secondary: "var(--secondary)" }}
+  />
+  <ColorItem
+    title="secondary-foreground"
+    subtitle="--secondary-foreground"
+    colors={{ "Secondary fg": "var(--secondary-foreground)" }}
+  />
+  <ColorItem
+    title="muted"
+    subtitle="--muted"
+    colors={{ Muted: "var(--muted)" }}
+  />
+  <ColorItem
+    title="muted-foreground"
+    subtitle="--muted-foreground"
+    colors={{ "Muted fg": "var(--muted-foreground)" }}
+  />
+  <ColorItem
+    title="accent"
+    subtitle="--accent"
+    colors={{ Accent: "var(--accent)" }}
+  />
+  <ColorItem
+    title="accent-foreground"
+    subtitle="--accent-foreground"
+    colors={{ "Accent fg": "var(--accent-foreground)" }}
+  />
+  <ColorItem
+    title="destructive"
     subtitle="--destructive"
     colors={{ Destructive: "var(--destructive)" }}
   />
+  <ColorItem
+    title="border"
+    subtitle="--border"
+    colors={{ Border: "var(--border)" }}
+  />
+  <ColorItem
+    title="input"
+    subtitle="--input"
+    colors={{ Input: "var(--input)" }}
+  />
+  <ColorItem title="ring" subtitle="--ring" colors={{ Ring: "var(--ring)" }} />
 </ColorPalette>
 
-## Zinc scale
-
-Tailwind's zinc grey ramp, used throughout the UI for text hierarchy and surfaces.
+### Charts
 
 <ColorPalette>
-  <ColorItem title="zinc-50" colors={{ "zinc-50": "#fafafa" }} />
-  <ColorItem title="zinc-100" colors={{ "zinc-100": "#f4f4f5" }} />
-  <ColorItem title="zinc-200" colors={{ "zinc-200": "#e4e4e7" }} />
-  <ColorItem title="zinc-300" colors={{ "zinc-300": "#d4d4d8" }} />
-  <ColorItem title="zinc-400" colors={{ "zinc-400": "#a1a1aa" }} />
-  <ColorItem title="zinc-500" colors={{ "zinc-500": "#71717a" }} />
-  <ColorItem title="zinc-600" colors={{ "zinc-600": "#52525b" }} />
-  <ColorItem title="zinc-700" colors={{ "zinc-700": "#3f3f46" }} />
-  <ColorItem title="zinc-800" colors={{ "zinc-800": "#27272a" }} />
-  <ColorItem title="zinc-900" colors={{ "zinc-900": "#18181b" }} />
-  <ColorItem title="zinc-950" colors={{ "zinc-950": "#09090b" }} />
+  <ColorItem
+    title="chart-1"
+    subtitle="--chart-1"
+    colors={{ "Chart 1": "var(--chart-1)" }}
+  />
+  <ColorItem
+    title="chart-2"
+    subtitle="--chart-2"
+    colors={{ "Chart 2": "var(--chart-2)" }}
+  />
+  <ColorItem
+    title="chart-3"
+    subtitle="--chart-3"
+    colors={{ "Chart 3": "var(--chart-3)" }}
+  />
+  <ColorItem
+    title="chart-4"
+    subtitle="--chart-4"
+    colors={{ "Chart 4": "var(--chart-4)" }}
+  />
+  <ColorItem
+    title="chart-5"
+    subtitle="--chart-5"
+    colors={{ "Chart 5": "var(--chart-5)" }}
+  />
+</ColorPalette>
+
+### Sidebar
+
+<ColorPalette>
+  <ColorItem
+    title="sidebar"
+    subtitle="--sidebar"
+    colors={{ Sidebar: "var(--sidebar)" }}
+  />
+  <ColorItem
+    title="sidebar-foreground"
+    subtitle="--sidebar-foreground"
+    colors={{ "Sidebar fg": "var(--sidebar-foreground)" }}
+  />
+  <ColorItem
+    title="sidebar-primary"
+    subtitle="--sidebar-primary"
+    colors={{ "Sidebar primary": "var(--sidebar-primary)" }}
+  />
+  <ColorItem
+    title="sidebar-primary-foreground"
+    subtitle="--sidebar-primary-foreground"
+    colors={{ "Sidebar primary fg": "var(--sidebar-primary-foreground)" }}
+  />
+  <ColorItem
+    title="sidebar-accent"
+    subtitle="--sidebar-accent"
+    colors={{ "Sidebar accent": "var(--sidebar-accent)" }}
+  />
+  <ColorItem
+    title="sidebar-accent-foreground"
+    subtitle="--sidebar-accent-foreground"
+    colors={{ "Sidebar accent fg": "var(--sidebar-accent-foreground)" }}
+  />
+  <ColorItem
+    title="sidebar-border"
+    subtitle="--sidebar-border"
+    colors={{ "Sidebar border": "var(--sidebar-border)" }}
+  />
+  <ColorItem
+    title="sidebar-ring"
+    subtitle="--sidebar-ring"
+    colors={{ "Sidebar ring": "var(--sidebar-ring)" }}
+  />
 </ColorPalette>

@@ -39,7 +39,7 @@ export const AllStakes: Story = {
         flexDirection: "column",
         gap: 24,
         padding: 32,
-        background: "#09090b",
+        background: "var(--zinc-950)",
         borderRadius: 12,
       }}
     >
@@ -70,7 +70,7 @@ export const Sizes: Story = {
         alignItems: "center",
         gap: 24,
         padding: 32,
-        background: "#09090b",
+        background: "var(--zinc-950)",
         borderRadius: 12,
       }}
     >

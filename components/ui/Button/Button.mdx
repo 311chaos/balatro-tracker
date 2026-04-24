@@ -5,38 +5,14 @@ import * as ButtonStories from "./Button.stories";
 
 # Button
 
-Built on the shadcn/Base UI button primitive. Supports all standard shadcn `variant` and `size` options, plus a `color` prop that applies any rarity or stake colour with fully automatic interaction states.
+Built on the Base UI button primitive. Supports `variant` and `size` props with full light/dark mode interaction states.
 
 ---
 
 ## Playground
 
-Use the controls panel below to explore every combination of props interactively.
-
 <Canvas of={ButtonStories.Playground} />
 <Controls of={ButtonStories.Playground} />
-
----
-
-## Color palette
-
-When `color` is set, the button ignores `variant` and derives its hover, active,
-and focus states automatically using CSS `color-mix()` — no pre-computed
-interaction colours needed.
-
-**Text colour** is pre-assigned per colour based on luminance contrast:
-dark text for light backgrounds (legendary, gold, white), white text for
-dark backgrounds (red, green, blue, purple, orange, black).
-
-<Canvas of={ButtonStories.ColorPalette} />
-
----
-
-## Color + variant
-
-`color` and `variant` are orthogonal — the variant controls the *structure* (solid, ghost, outline, etc.) while `color` controls *what* colour fills that structure. Every non-`default` variant gets a transparent background with the colour applied to text and border instead.
-
-<Canvas of={ButtonStories.ColorVariants} />
 
 ---
 
@@ -48,27 +24,21 @@ dark backgrounds (red, green, blue, purple, orange, black).
 
 ## Variants
 
-Standard shadcn variants — used when no `color` prop is provided.
-
 <Canvas of={ButtonStories.Variants} />
 
 ---
 
-## States
+## Variant States
 
-Every colour shown in default, hover, active, focus, and disabled states.
-
-<Canvas of={ButtonStories.States} />
-
-### Variants
-
-Standard variants shown in all states.
+All variants shown across default, hover, active, focus, and disabled states.
 
 <Canvas of={ButtonStories.VariantStates} />
 
-### As anchor
+---
 
-`default` dims its background on hover only when rendered as an `<a>` — it has no hover style on a plain `<button>` by design. Use `render={<a href="..." />}` to render the button as a link.
+## As Anchor
+
+Use `render={<a href="..." />}` to render the button as a link.
 
 <Canvas of={ButtonStories.AsAnchor} />
 
@@ -76,30 +46,20 @@ Standard variants shown in all states.
 
 ## Props
 
-| Prop       | Type                                                                               | Default   | Description                                                      |
-| ---------- | ---------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------- |
-| `variant`  | `default` \| `outline` \| `secondary` \| `ghost` \| `destructive` \| `link`        | `default` | shadcn variant — ignored when `color` is set                     |
-| `size`     | `xs` \| `sm` \| `default` \| `lg` \| `icon` \| `icon-sm` \| `icon-lg` \| `icon-xs` | `default` | Controls height and padding                                      |
-| `color`    | `ButtonColor`                                                                      | —         | Rarity or stake colour. Works alongside `variant` — variant controls structure, colour fills it. |
-| `disabled` | `boolean`                                                                          | `false`   | Disables interaction and reduces opacity                         |
+| Prop       | Type                                                                               | Default   | Description                          |
+| ---------- | ---------------------------------------------------------------------------------- | --------- | ------------------------------------ |
+| `variant`  | `default` \| `outline` \| `secondary` \| `ghost` \| `destructive` \| `link`        | `default` | Controls visual style                |
+| `size`     | `xs` \| `sm` \| `default` \| `lg` \| `icon` \| `icon-sm` \| `icon-lg` \| `icon-xs` | `default` | Controls height and padding          |
+| `disabled` | `boolean`                                                                          | `false`   | Disables interaction, reduces opacity |
 
 ## Usage
 
 ```tsx
 import { Button } from '@/components/ui/Button';
 
-// Standard shadcn variants
+<Button>Save</Button>
 <Button variant="outline">Cancel</Button>
 <Button variant="destructive">Delete</Button>
-
-// Coloured — rarity
-<Button color="rarity-legendary">Legendary</Button>
-
-// Coloured — stake
-<Button color="stake-gold">Gold Stake</Button>
-<Button color="stake-gold" size="lg">Large</Button>
-<Button color="stake-gold" disabled>Disabled</Button>
-
-// Rendered as an anchor (enables hover style on default variant)
+<Button variant="secondary" size="sm">Secondary</Button>
 <Button render={<a href="/jokers" />}>Browse jokers</Button>
 ```

@@ -54,7 +54,7 @@ export const AllJokers: Story = {
         flexWrap: "wrap",
         gap: 8,
         padding: 24,
-        background: "#09090b",
+        background: "var(--zinc-950)",
         borderRadius: 12,
         maxWidth: 900,
       }}
@@ -108,7 +108,7 @@ export const Sizes: Story = {
         alignItems: "flex-end",
         gap: 24,
         padding: 24,
-        background: "#09090b",
+        background: "var(--zinc-950)",
         borderRadius: 12,
       }}
     >

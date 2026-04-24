@@ -11,20 +11,17 @@
 import { formatHex, parse, oklch as toOklch } from "culori";
 
 const CANONICAL: Record<string, string> = {
-  // Rarity
-  common:    "#a1a1aa",
-  uncommon:  "#60a5fa",
-  rare:      "#f87171",
-  legendary: "#facc15",
-  // Stake
-  "stake-white":  "#E8E8E8",
-  "stake-red":    "#CC2222",
-  "stake-green":  "#339944",
-  "stake-black":  "#606060",
-  "stake-blue":   "#2288DD",
-  "stake-purple": "#7744BB",
-  "stake-orange": "#DB663C",
-  "stake-gold":   "#FA9108",
+  // Rarity — adjusted to L≈0.640 (step 500) while preserving hue
+  // common removed — use zinc-400 (#a1a1aa) instead
+  // uncommon removed — use stake-blue (#3991e0) instead
+  rare:      "#df5a5c",  // was #f87171 (L=0.711, step 400)
+  legendary: "#ffd500",  // custom yellow scale, canonical at step 500
+  // Stake — white/black removed (use zinc scale instead)
+  "stake-red":    "#df5a5c",  // finalized red ✓
+  "stake-green":  "#4ba256",  // was #339944 ✓ finalized
+  "stake-blue":   "#3991e0",  // was #2288DD ✓ finalized
+  "stake-purple": "#9e6de7",  // was #7744BB (L=0.508, step 600)
+  "stake-orange": "#f28f0d",  // custom carrot orange scale
 };
 
 // Lightness targets for each scale step (OKLCH scale, 0–1)

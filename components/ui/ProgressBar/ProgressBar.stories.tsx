@@ -5,7 +5,6 @@ import {
   ProgressTrack,
   ProgressIndicator,
 } from "@/components/ui/ProgressBar";
-import { STICKER_COLORS, STICKER_LEVELS, RARITIES } from "@/config/types";
 
 const meta: Meta<typeof ProgressBar> = {
   title: "UI/ProgressBar",
@@ -31,11 +30,13 @@ const meta: Meta<typeof ProgressBar> = {
     fillColor: {
       control: "select",
       options: [
-        ...STICKER_LEVELS.map((l) => `var(--stake-${l.toLowerCase()})`),
-        "var(--rarity-common)",
-        "var(--rarity-uncommon)",
-        "var(--rarity-rare)",
-        "var(--rarity-legendary)",
+        "var(--red-500)",
+        "var(--orange-500)",
+        "var(--yellow-500)",
+        "var(--green-500)",
+        "var(--blue-500)",
+        "var(--purple-500)",
+        "var(--zinc-400)",
       ],
     },
   },
@@ -58,12 +59,12 @@ export const Complete: Story = {
 
 export const ComposableExample: Story = {
   render: () => {
-    const rarityColors = {
-      COMMON: { fill: "var(--rarity-common)", label: "Common" },
-      UNCOMMON: { fill: "var(--rarity-uncommon)", label: "Uncommon" },
-      RARE: { fill: "var(--rarity-rare)", label: "Rare" },
-      LEGENDARY: { fill: "var(--rarity-legendary)", label: "Legendary" },
-    };
+    const rarityColors = [
+      { fill: "var(--zinc-400)", label: "Common" },
+      { fill: "var(--blue-500)", label: "Uncommon" },
+      { fill: "var(--red-500)", label: "Rare" },
+      { fill: "var(--yellow-500)", label: "Legendary" },
+    ];
     const values = [82, 41, 12, 3];
 
     return (
@@ -71,18 +72,21 @@ export const ComposableExample: Story = {
         <p className="text-xs font-medium uppercase tracking-wide text-zinc-100 mb-1">
           Jokers collected by rarity
         </p>
-        {RARITIES.map((rarity, i) => {
-          const { fill, label } = rarityColors[rarity];
+        {rarityColors.map(({ fill, label }, i) => {
           const pct = values[i];
           return (
-            <div key={rarity} className="flex items-center gap-3">
+            <div key={label} className="flex items-center gap-3">
               <span
                 className="w-20 text-xs font-medium shrink-0"
                 style={{ color: fill }}
               >
                 {label}
               </span>
-              <ProgressRoot value={pct} className="flex-1" aria-label={`${label} jokers collected`}>
+              <ProgressRoot
+                value={pct}
+                className="flex-1"
+                aria-label={`${label} jokers collected`}
+              >
                 <ProgressTrack height={12}>
                   <ProgressIndicator color={fill} />
                 </ProgressTrack>
@@ -99,19 +103,28 @@ export const ComposableExample: Story = {
   decorators: [],
 };
 
-export const AllStakeColors: Story = {
+const PALETTE_COLORS = [
+  { label: "Red", fill: "var(--red-500)" },
+  { label: "Orange", fill: "var(--orange-500)" },
+  { label: "Yellow", fill: "var(--yellow-500)" },
+  { label: "Green", fill: "var(--green-500)" },
+  { label: "Blue", fill: "var(--blue-500)" },
+  { label: "Purple", fill: "var(--purple-500)" },
+];
+
+export const AllPaletteColors: Story = {
   render: () => (
     <div className="w-80 rounded-xl bg-zinc-900 p-6 flex flex-col gap-5">
-      {STICKER_LEVELS.map((level, i) => (
-        <div key={level} className="flex flex-col gap-1">
+      {PALETTE_COLORS.map(({ label, fill }, i) => (
+        <div key={label} className="flex flex-col gap-1">
           <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-400">
-            {STICKER_COLORS[level].label}
+            {label}
           </span>
           <ProgressBar
-            current={Math.round(150 * ((i + 1) / STICKER_LEVELS.length))}
+            current={Math.round(150 * ((i + 1) / PALETTE_COLORS.length))}
             total={150}
-            fillColor={`var(--stake-${level.toLowerCase()})`}
-            aria-label={`${STICKER_COLORS[level].label} stickers earned`}
+            fillColor={fill}
+            aria-label={`${label} progress`}
           />
         </div>
       ))}

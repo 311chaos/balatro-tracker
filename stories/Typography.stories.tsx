@@ -87,10 +87,10 @@ export const BalatroFont: Story = {
         </p>
         <div className="flex gap-4 flex-wrap">
           {[
-            { label: "Common", color: "var(--rarity-common)" },
-            { label: "Uncommon", color: "var(--rarity-uncommon)" },
-            { label: "Rare", color: "var(--rarity-rare)" },
-            { label: "Legendary", color: "var(--rarity-legendary)" },
+            { label: "Common",   color: "var(--zinc-400)"   },
+            { label: "Uncommon", color: "var(--blue-500)"   },
+            { label: "Rare",     color: "var(--red-500)"    },
+            { label: "Legendary",color: "var(--yellow-500)" },
           ].map(({ label, color }) => (
             <span
               key={label}

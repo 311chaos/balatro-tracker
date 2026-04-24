@@ -12,10 +12,10 @@ type Props = {
 };
 
 const RARITY_COLORS: Record<Joker["rarity"], string> = {
-  COMMON: "var(--rarity-common)",
-  UNCOMMON: "var(--rarity-uncommon)",
-  RARE: "var(--rarity-rare)",
-  LEGENDARY: "var(--rarity-legendary)",
+  COMMON: "var(--zinc-400)",
+  UNCOMMON: "var(--blue-500)",
+  RARE: "var(--red-500)",
+  LEGENDARY: "var(--yellow-500)",
 };
 
 const RARITY_LABELS: Record<Joker["rarity"], string> = {

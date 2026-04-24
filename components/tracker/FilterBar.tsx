@@ -12,10 +12,10 @@ const RARITY_LABELS: Record<RarityType, string> = {
   LEGENDARY: "Legendary",
 };
 const RARITY_COLORS: Record<RarityType, string> = {
-  COMMON: "var(--rarity-common)",
-  UNCOMMON: "var(--rarity-uncommon)",
-  RARE: "var(--rarity-rare)",
-  LEGENDARY: "var(--rarity-legendary)",
+  COMMON: "var(--zinc-400)",
+  UNCOMMON: "var(--blue-500)",
+  RARE: "var(--red-500)",
+  LEGENDARY: "var(--yellow-500)",
 };
 
 const STATUS_OPTIONS = [
@@ -95,7 +95,7 @@ export const FilterBar = () => {
   return (
     <div
       className="flex flex-col gap-4 rounded-xl bg-zinc-950 p-4"
-      style={{ border: "2px solid var(--stake-gold)" }}
+      style={{ border: "2px solid var(--orange-500)" }}
     >
       <Input
         type="search"
@@ -115,10 +115,10 @@ export const FilterBar = () => {
           className="rounded-full border px-3 py-1 text-sm font-medium transition-colors cursor-pointer font-balatro tracking-widest"
           style={{
             borderColor:
-              rarities.length === 0 ? "var(--stake-gold)" : "#52525b",
-            color: rarities.length === 0 ? "#09090b" : "#a1a1aa",
+              rarities.length === 0 ? "var(--orange-500)" : "var(--zinc-600)",
+            color: rarities.length === 0 ? "var(--zinc-950)" : "var(--zinc-400)",
             backgroundColor:
-              rarities.length === 0 ? "var(--stake-gold)" : "transparent",
+              rarities.length === 0 ? "var(--orange-500)" : "transparent",
           }}
         >
           All
@@ -132,7 +132,7 @@ export const FilterBar = () => {
               className="rounded-full border px-3 py-1 text-sm font-medium transition-colors cursor-pointer font-balatro tracking-widest"
               style={{
                 borderColor: RARITY_COLORS[rarity],
-                color: active ? "#09090b" : RARITY_COLORS[rarity],
+                color: active ? "var(--zinc-950)" : RARITY_COLORS[rarity],
                 backgroundColor: active ? RARITY_COLORS[rarity] : "transparent",
               }}
             >
@@ -152,10 +152,10 @@ export const FilterBar = () => {
             onClick={() => update("status", value === "all" ? null : value)}
             className="rounded-full border px-3 py-1 text-sm font-medium transition-colors cursor-pointer font-balatro tracking-widest"
             style={{
-              borderColor: status === value ? "var(--stake-gold)" : "#52525b",
-              color: status === value ? "#09090b" : "#a1a1aa",
+              borderColor: status === value ? "var(--orange-500)" : "var(--zinc-600)",
+              color: status === value ? "var(--zinc-950)" : "var(--zinc-400)",
               backgroundColor:
-                status === value ? "var(--stake-gold)" : "transparent",
+                status === value ? "var(--orange-500)" : "transparent",
             }}
             data-active={status === value}
           >

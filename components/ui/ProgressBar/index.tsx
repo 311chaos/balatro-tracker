@@ -19,7 +19,7 @@ export const ProgressTrack = ({
 
 export const ProgressIndicator = ({
   className,
-  color = "var(--stake-gold)",
+  color = "var(--orange-500)",
   ...props
 }: Progress.Indicator.Props & { color?: string }) => (
   <Progress.Indicator
@@ -40,7 +40,7 @@ type ProgressBarProps = {
 export const ProgressBar = ({
   current,
   total,
-  fillColor = "var(--stake-gold)",
+  fillColor = "var(--orange-500)",
   height = 8,
   "aria-label": ariaLabel = `${current} of ${total}`,
 }: ProgressBarProps) => {

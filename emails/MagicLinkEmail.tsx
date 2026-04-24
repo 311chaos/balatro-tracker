@@ -53,7 +53,7 @@ const container: React.CSSProperties = {
 };
 
 const heading: React.CSSProperties = {
-  color: colors.stake.white,
+  color: colors.zinc[100],
   fontSize: "24px",
   fontWeight: "700",
   margin: "0 0 16px",
@@ -71,8 +71,8 @@ const buttonSection: React.CSSProperties = {
 };
 
 const button: React.CSSProperties = {
-  backgroundColor: colors.stake.gold,
-  color: colors.zinc[950],
+  backgroundColor: colors.blue[500],
+  color: colors.zinc[50],
   borderRadius: "6px",
   padding: "12px 28px",
   fontSize: "14px",
