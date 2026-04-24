@@ -23,8 +23,8 @@ export const ProgressIndicator = ({
   ...props
 }: Progress.Indicator.Props & { color?: string }) => (
   <Progress.Indicator
-    className={cn("h-full transition-all duration-300", className)}
-    style={{ backgroundColor: color }}
+    className={cn("h-full", className)}
+    style={{ backgroundColor: color, transition: "var(--transition-progress)" }}
     {...props}
   />
 );

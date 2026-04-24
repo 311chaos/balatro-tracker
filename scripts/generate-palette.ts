@@ -1,0 +1,95 @@
+/**
+ * Generates an 11-step OKLCH color scale for each canonical game color.
+ * Run with:  npx tsx scripts/generate-palette.ts
+ *
+ * The canonical color anchors at its natural lightness. Chroma tapers
+ * toward a floor (CHROMA_FLOOR_PCT of canonical) at both extremes rather
+ * than to zero — this keeps step 50 a faint tint and step 950 a dark shade
+ * rather than collapsing to plain white / black.
+ */
+
+import { formatHex, parse, oklch as toOklch } from "culori";
+
+const CANONICAL: Record<string, string> = {
+  // Rarity
+  common:    "#a1a1aa",
+  uncommon:  "#60a5fa",
+  rare:      "#f87171",
+  legendary: "#facc15",
+  // Stake
+  "stake-white":  "#E8E8E8",
+  "stake-red":    "#CC2222",
+  "stake-green":  "#339944",
+  "stake-black":  "#606060",
+  "stake-blue":   "#2288DD",
+  "stake-purple": "#7744BB",
+  "stake-orange": "#DB663C",
+  "stake-gold":   "#FA9108",
+};
+
+// Lightness targets for each scale step (OKLCH scale, 0–1)
+const STEPS: [number, number][] = [
+  [50,  0.975],
+  [100, 0.940],
+  [200, 0.880],
+  [300, 0.820],
+  [400, 0.740],
+  [500, 0.640],
+  [600, 0.540],
+  [700, 0.440],
+  [800, 0.340],
+  [900, 0.240],
+  [950, 0.165],
+];
+
+const L_MIN = 0.165;
+const L_MAX = 0.975;
+// Chroma floors differ by side:
+// - Light side (above canonical): small floor — a faint tint is enough at high lightness.
+// - Dark side (below canonical): larger floor — low lightness needs more chroma before any
+//   hue is visible, so without a higher floor the dark steps collapse to near-black.
+const CHROMA_FLOOR_LIGHT = 0.18;
+const CHROMA_FLOOR_DARK  = 0.40;
+
+const generateScale = (hex: string): [number, string][] => {
+  const base = toOklch(parse(hex));
+  if (!base) throw new Error(`Cannot parse: ${hex}`);
+
+  const { l: L_base, c: C_base, h: H_base = 0 } = base;
+  const rangeAbove = L_MAX - L_base;
+  const rangeBelow = L_base - L_MIN;
+
+  return STEPS.map(([step, targetL]) => {
+    const aboveCanonical = targetL >= L_base;
+    const chromaFactor = aboveCanonical
+      ? 1 - (targetL - L_base) / rangeAbove
+      : 1 - (L_base - targetL) / rangeBelow;
+
+    const floor = aboveCanonical ? CHROMA_FLOOR_LIGHT : CHROMA_FLOOR_DARK;
+    const c = Math.max(C_base * floor, C_base * chromaFactor);
+
+    const hex = formatHex({ mode: "oklch", l: targetL, c, h: H_base });
+
+    return [step, hex];
+  });
+};
+
+// ── Output ────────────────────────────────────────────────────────────────────
+
+for (const [name, canonical] of Object.entries(CANONICAL)) {
+  const scale = generateScale(canonical);
+
+  // Find which step is closest to the canonical color
+  const base = toOklch(parse(canonical))!;
+  const anchor = STEPS.reduce((prev, [step, l]) =>
+    Math.abs(l - base.l) < Math.abs(STEPS.find(([s]) => s === prev)![1] - base.l)
+      ? step : prev,
+    STEPS[0][0]
+  );
+
+  console.log(`\n  // ${name}  (canonical ${canonical} ≈ ${anchor})`);
+  for (const [step, hex] of scale) {
+    const marker = step === anchor ? "  ← canonical" : "";
+    console.log(`  ${String(step).padEnd(4)}: "${hex}",${marker}`);
+  }
+}
