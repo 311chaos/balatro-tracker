@@ -1,6 +1,6 @@
 # Balatro Tracker
 
-**[balatro-tracker.vercel.app](https://balatro-tracker.vercel.app/)**
+**[balatro-tracker.vercel.app](https://balatro-tracker.vercel.app/)** · **[Storybook](https://311chaos.github.io/balatro-tracker/)**
 
 A full-stack web app for tracking gold sticker progress across every joker in [Balatro](https://www.playbalatro.com/). Sign in to sync your collection across devices — no password required.
 
