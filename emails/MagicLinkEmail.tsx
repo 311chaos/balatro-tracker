@@ -9,8 +9,8 @@ import {
   Preview,
   Section,
   Text,
-} from "react-email";
-import { colors } from "@/config/colors";
+} from 'react-email';
+import { colors } from '@/config/colors';
 
 type MagicLinkEmailProps = {
   url: string;
@@ -40,55 +40,55 @@ export const MagicLinkEmail = ({ url }: MagicLinkEmailProps) => (
 
 const body: React.CSSProperties = {
   backgroundColor: colors.zinc[950],
-  fontFamily: "sans-serif",
+  fontFamily: 'sans-serif',
 };
 
 const container: React.CSSProperties = {
-  margin: "40px auto",
-  padding: "32px",
-  maxWidth: "480px",
+  margin: '40px auto',
+  padding: '32px',
+  maxWidth: '480px',
   backgroundColor: colors.zinc[900],
-  borderRadius: "12px",
+  borderRadius: '12px',
   border: `1px solid ${colors.zinc[700]}`,
 };
 
 const heading: React.CSSProperties = {
   color: colors.zinc[100],
-  fontSize: "24px",
-  fontWeight: "700",
-  margin: "0 0 16px",
+  fontSize: '24px',
+  fontWeight: '700',
+  margin: '0 0 16px',
 };
 
 const text: React.CSSProperties = {
   color: colors.zinc[200],
-  fontSize: "14px",
-  lineHeight: "1.6",
-  margin: "0 0 24px",
+  fontSize: '14px',
+  lineHeight: '1.6',
+  margin: '0 0 24px',
 };
 
 const buttonSection: React.CSSProperties = {
-  textAlign: "center",
+  textAlign: 'center',
 };
 
 const button: React.CSSProperties = {
   backgroundColor: colors.blue[500],
   color: colors.zinc[50],
-  borderRadius: "6px",
-  padding: "12px 28px",
-  fontSize: "14px",
-  fontWeight: "600",
-  textDecoration: "none",
-  display: "inline-block",
+  borderRadius: '6px',
+  padding: '12px 28px',
+  fontSize: '14px',
+  fontWeight: '600',
+  textDecoration: 'none',
+  display: 'inline-block',
 };
 
 const hr: React.CSSProperties = {
   borderColor: colors.zinc[700],
-  margin: "24px 0 16px",
+  margin: '24px 0 16px',
 };
 
 const footer: React.CSSProperties = {
   color: colors.zinc[400],
-  fontSize: "12px",
-  lineHeight: "1.5",
-  margin: "0",
+  fontSize: '12px',
+  lineHeight: '1.5',
+  margin: '0',
 };

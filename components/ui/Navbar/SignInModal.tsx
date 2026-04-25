@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/Button";
+import { Button } from '@/components/ui/Button';
 import {
   Dialog,
   DialogContent,
@@ -8,8 +8,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/Dialog";
-import { Input } from "@/components/ui/Input";
+} from '@/components/ui/Dialog';
+import { Input } from '@/components/ui/Input';
 
 type Props = {
   action: (formData: FormData) => void | Promise<void>;
@@ -22,7 +22,7 @@ export const SignInModal = ({ action }: Props) => (
     </DialogTrigger>
     <DialogContent className="bg-zinc-800">
       <DialogHeader>
-        <DialogTitle className="text-zinc-50 text-2xl">
+        <DialogTitle className="text-2xl text-zinc-50">
           Sync your progress
         </DialogTitle>
         <DialogDescription className="text-zinc-50">

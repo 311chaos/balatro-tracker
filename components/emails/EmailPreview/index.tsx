@@ -1,5 +1,5 @@
-import { render } from "react-email";
-import { useEffect, useRef, useState } from "react";
+import { render } from 'react-email';
+import { useEffect, useRef, useState } from 'react';
 
 type EmailPreviewProps = {
   email: React.ReactElement;
@@ -7,7 +7,7 @@ type EmailPreviewProps = {
 };
 
 export const EmailPreview = ({ email, height = 600 }: EmailPreviewProps) => {
-  const [html, setHtml] = useState("");
+  const [html, setHtml] = useState('');
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const EmailPreview = ({ email, height = 600 }: EmailPreviewProps) => {
   return (
     <iframe
       ref={iframeRef}
-      style={{ width: "100%", height, border: "none", borderRadius: "8px" }}
+      style={{ width: '100%', height, border: 'none', borderRadius: '8px' }}
       title="Email preview"
     />
   );

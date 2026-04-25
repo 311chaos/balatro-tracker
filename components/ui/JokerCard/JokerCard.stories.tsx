@@ -1,40 +1,40 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { JokerCard } from "@/components/ui/JokerCard";
-import { JOKERS } from "@/config/jokers";
-import { STICKER_LEVELS, type StickerLevel } from "@/config/types";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { JokerCard } from '@/components/ui/JokerCard';
+import { JOKERS } from '@/config/jokers';
+import { STICKER_LEVELS, type StickerLevel } from '@/config/types';
 
 const jokerOptions = Object.fromEntries(JOKERS.map((j) => [j.name, j]));
 
 const meta: Meta<typeof JokerCard> = {
-  title: "UI/JokerCard",
+  title: 'UI/JokerCard',
   component: JokerCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     backgrounds: {
-      default: "dark",
-      values: [{ name: "dark", value: "#09090b" }],
+      default: 'dark',
+      values: [{ name: 'dark', value: '#09090b' }],
     },
   },
   decorators: [
     (Story) => (
-      <div className="flex gap-4 p-6 bg-zinc-950 rounded-xl">
+      <div className="flex gap-4 rounded-xl bg-zinc-950 p-6">
         <Story />
       </div>
     ),
   ],
   argTypes: {
     joker: {
-      control: "select",
+      control: 'select',
       options: Object.keys(jokerOptions),
       mapping: jokerOptions,
     },
     stickerLevel: {
-      control: "select",
+      control: 'select',
       options: [null, ...STICKER_LEVELS],
     },
-    onToggle: { action: "toggled" },
+    onToggle: { action: 'toggled' },
   },
 };
 
@@ -59,7 +59,7 @@ export const Unstickered: Story = {
 export const GoldSticker: Story = {
   args: {
     joker: JOKERS[0],
-    stickerLevel: "GOLD",
+    stickerLevel: 'GOLD',
     onToggle: () => {},
   },
 };
@@ -76,16 +76,16 @@ export const Interactive: Story = {
 export const AllRarities: Story = {
   render: () => {
     const samples = [
-      JOKERS.find((j) => j.rarity === "COMMON")!,
-      JOKERS.find((j) => j.rarity === "UNCOMMON")!,
-      JOKERS.find((j) => j.rarity === "RARE")!,
-      JOKERS.find((j) => j.rarity === "LEGENDARY")!,
+      JOKERS.find((j) => j.rarity === 'COMMON')!,
+      JOKERS.find((j) => j.rarity === 'UNCOMMON')!,
+      JOKERS.find((j) => j.rarity === 'RARE')!,
+      JOKERS.find((j) => j.rarity === 'LEGENDARY')!,
     ];
     const [levels, setLevels] = useState<(StickerLevel | null)[]>([
       null,
       null,
-      "GOLD",
-      "GOLD",
+      'GOLD',
+      'GOLD',
     ]);
     return (
       <div className="flex gap-4">

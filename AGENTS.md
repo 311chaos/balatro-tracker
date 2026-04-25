@@ -1,7 +1,9 @@
 <!-- BEGIN:nextjs-agent-rules -->
+
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+
 <!-- END:nextjs-agent-rules -->
 
 # Code Style
@@ -13,11 +15,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Folder conventions
 
-| Location | Purpose | Examples |
-|---|---|---|
-| `components/ui/ComponentName/` | Base-level UI primitives — no app/domain knowledge | `Button`, `Input`, `ProgressBar`, `PokerChip` |
-| `components/ui/*.tsx` (flat) | Thin shadcn re-exports with no local logic | `dialog.tsx`, `dropdown-menu.tsx` |
-| `components/{domain}/` | Compound or domain-specific components that compose primitives | `tracker/`, `emails/` |
+| Location                       | Purpose                                                        | Examples                                      |
+| ------------------------------ | -------------------------------------------------------------- | --------------------------------------------- |
+| `components/ui/ComponentName/` | Base-level UI primitives — no app/domain knowledge             | `Button`, `Input`, `ProgressBar`, `PokerChip` |
+| `components/ui/*.tsx` (flat)   | Thin shadcn re-exports with no local logic                     | `dialog.tsx`, `dropdown-menu.tsx`             |
+| `components/{domain}/`         | Compound or domain-specific components that compose primitives | `tracker/`, `emails/`                         |
 
 **When to use a folder vs a flat file:** if a component has stories, docs, a CSS module, or internal sub-components, it lives in its own folder with an `index.tsx` entry point. Flat files are only for simple shadcn wrappers.
 
@@ -57,6 +59,7 @@ npx vitest run --project storybook
 This runs `@storybook/addon-a11y` via `@storybook/addon-vitest` in headless Chromium against every story. The global `a11y: { test: "error" }` in `.storybook/preview.tsx` means any axe violation fails the suite.
 
 **Key rules that bite here:**
+
 - `color-contrast` (WCAG AA, 4.5:1 for normal text, 3:1 for large/bold) — the most common failure
 - Stories render in **light mode** by default (no dark CSS class in test env) — use solid dark backgrounds in story wrappers, not `bg-black/80` (semi-transparent composites to ~`#333333` over the white body)
 - Gold/yellow accents (e.g. the Sign In button) use `yellow-500` directly — not a custom token. Yellow on a light body background will fail contrast; always pair with a dark wrapper (`bg-black` / `bg-zinc-950`)
@@ -66,6 +69,7 @@ This runs `@storybook/addon-a11y` via `@storybook/addon-vitest` in headless Chro
 Game colours use the existing OKLCH palette scales defined in `config/colors.ts` and `app/globals.css`. There are **no** `rarity-*` or `stake-*` Tailwind tokens, and **no** `color` prop on Button or DropdownMenu — that system is not implemented.
 
 Use palette utilities directly:
+
 - Legendary / gold → `yellow-500` (`#ffd500`), always on a dark background
 - Rare → `red-400` on dark surfaces, `red-600` on light (contrast-safe steps)
 - Uncommon → `blue-500` / `blue-300` (light/dark respectively)

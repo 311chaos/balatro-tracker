@@ -129,15 +129,15 @@ All item definitions live in static TypeScript config files under `config/`. The
 
 // Ordered lowest → highest stake
 export type StickerLevel =
-  | "WHITE"
-  | "RED"
-  | "GREEN"
-  | "BLACK"
-  | "BLUE"
-  | "PURPLE"
-  | "ORANGE"
-  | "GOLD";
-export type Rarity = "COMMON" | "UNCOMMON" | "RARE" | "LEGENDARY";
+  | 'WHITE'
+  | 'RED'
+  | 'GREEN'
+  | 'BLACK'
+  | 'BLUE'
+  | 'PURPLE'
+  | 'ORANGE'
+  | 'GOLD';
+export type Rarity = 'COMMON' | 'UNCOMMON' | 'RARE' | 'LEGENDARY';
 
 // Shared by all item types — used by generic components
 export type CollectibleItem = {
@@ -161,11 +161,11 @@ export type PlanetCard = CollectibleItem;
 ```ts
 // config/jokers.ts
 export const JOKERS: Joker[] = [
-  { id: "joker", name: "Joker", rarity: "COMMON", spriteX: 0, spriteY: 0 },
+  { id: 'joker', name: 'Joker', rarity: 'COMMON', spriteX: 0, spriteY: 0 },
   {
-    id: "greedy",
-    name: "Greedy Joker",
-    rarity: "COMMON",
+    id: 'greedy',
+    name: 'Greedy Joker',
+    rarity: 'COMMON',
     spriteX: 71,
     spriteY: 0,
   },
@@ -378,13 +378,15 @@ _Checkpoint: full tracker UI visible with mock data, filters and progress bar wo
 
 _Added: Button component, design tokens, Storybook_
 
-- [x] Custom `Button` built on Base UI + CVA — full variant/size/color prop system
-- [x] Game colour tokens (`config/colors.ts`, `config/buttonColors.ts`) — rarity + stake colours as Tailwind theme vars
-- [x] `Button` color prop: rarity and stake colours with automatic `color-mix()` interaction states
-- [x] Color + variant compatibility — ghost, outline, secondary, link variants work alongside the color prop
-- [x] Storybook configured — picks up component-level stories and MDX from `components/**`
+- [x] Custom `Button` built on Base UI + CVA — variants-only (color prop removed)
+- [x] Game colour tokens (`config/colors.ts`) — rarity + stake colours as Tailwind theme vars; `buttonColors.ts` deleted
+- [x] Full light/dark interaction states on all Button variants (default, outline, secondary, ghost, destructive, link)
+- [x] `DropdownMenu` color prop removed; variants-only
+- [x] Blue primary + cinnabar red destructive tokens in `globals.css`
+- [x] Storybook configured with `storybook-dark-mode` — dark class synced via localStorage storage events
 - [x] Stories + MDX docs for: `Button`, `Input`, `ItemSprite`, `JokerCard`, `PokerChip`, `PokerChipBase`, `ProgressBar`
 - [x] `@custom-variant` pseudo-states — `pseudo-hover/active/focus-visible` defined once, cover both real browser states and Storybook simulation
+- [ ] **`app/layout.tsx` has `dark` hardcoded on `<html>`** — placeholder until `next-themes` is wired up for real light/dark switching in the app
 
 ### Phase 4 — Live Data ✅ (except import prompt)
 

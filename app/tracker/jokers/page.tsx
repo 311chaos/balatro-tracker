@@ -1,8 +1,8 @@
-import { auth } from "@/lib/auth";
-import { JokerList } from "@/components/tracker/JokerList";
-import { Navbar } from "@/components/ui/Navbar";
-import { getJokerProgress } from "@/lib/actions/jokerProgress";
-import type { StickerLevel } from "@/config/types";
+import { auth } from '@/lib/auth';
+import { JokerList } from '@/components/tracker/JokerList';
+import { Navbar } from '@/components/ui/Navbar';
+import { getJokerProgress } from '@/lib/actions/jokerProgress';
+import type { StickerLevel } from '@/config/types';
 
 const JokersPage = async () => {
   const session = await auth();

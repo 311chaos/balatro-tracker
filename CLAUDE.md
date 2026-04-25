@@ -19,29 +19,30 @@ A web app for tracking which Balatro collectibles the user has earned a **gold s
 
 ## Tech stack
 
-| Concern | Choice | Notes |
-|---|---|---|
-| Framework | Next.js App Router | |
-| Styling | Tailwind v4 + shadcn/ui | Base UI primitives, CVA for variants |
-| Auth | Auth.js v5 | Magic link via Resend — **optional for users** |
-| Database | Neon (Postgres) + Prisma ORM | |
-| Hosting | Vercel | **Set spending limit before production** |
-| Item images | CSS sprite sheet via jsDelivr | Always use `2x` version |
+| Concern     | Choice                        | Notes                                          |
+| ----------- | ----------------------------- | ---------------------------------------------- |
+| Framework   | Next.js App Router            |                                                |
+| Styling     | Tailwind v4 + shadcn/ui       | Base UI primitives, CVA for variants           |
+| Auth        | Auth.js v5                    | Magic link via Resend — **optional for users** |
+| Database    | Neon (Postgres) + Prisma ORM  |                                                |
+| Hosting     | Vercel                        | **Set spending limit before production**       |
+| Item images | CSS sprite sheet via jsDelivr | Always use `2x` version                        |
 
 ---
 
 ## Build status
 
-| Phase | Status |
-|---|---|
-| Foundation — Next.js scaffold, DB schema, Auth.js wiring | ✅ Done |
-| Auth — magic link flow, sign-in modal, user menu | ✅ Done |
-| Static UI — all tracker components, joker config | ✅ Done |
-| Component system — Button, design tokens, Storybook | ✅ Done |
-| Live data — localStorage + DB sync, Server Actions | ✅ Done (import prompt outstanding) |
-| Deploy | ⬜ Not started |
+| Phase                                                    | Status                              |
+| -------------------------------------------------------- | ----------------------------------- |
+| Foundation — Next.js scaffold, DB schema, Auth.js wiring | ✅ Done                             |
+| Auth — magic link flow, sign-in modal, user menu         | ✅ Done                             |
+| Static UI — all tracker components, joker config         | ✅ Done                             |
+| Component system — Button, design tokens, Storybook      | ✅ Done                             |
+| Live data — localStorage + DB sync, Server Actions       | ✅ Done (import prompt outstanding) |
+| Deploy                                                   | ⬜ Not started                      |
 
 **Outstanding before deploy:**
+
 - Progress bar should reflect filtered joker count, not global total
 - Sticker level filter (by stake tier) not yet in FilterBar
 - Import prompt: offer to sync localStorage → DB on first sign-in

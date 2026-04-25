@@ -1,13 +1,13 @@
-.item:focus:not([data-variant="destructive"]) {
+.item:focus:not([data-variant='destructive']) {
   background-color: var(--color-accent);
   color: var(--color-accent-foreground);
 }
 
-.item:focus:not([data-variant="destructive"]) * {
+.item:focus:not([data-variant='destructive']) * {
   color: var(--color-accent-foreground);
 }
 
-.item:focus:not([data-variant="destructive"]) .shortcut {
+.item:focus:not([data-variant='destructive']) .shortcut {
   color: var(--color-accent-foreground);
 }
 

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { colors } from "@/config/colors";
+import type { Meta, StoryObj } from '@storybook/react';
+import { colors } from '@/config/colors';
 
 const STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
 type Step = (typeof STEPS)[number];
@@ -12,13 +12,13 @@ type Scale = {
 const s = (steps: Record<number, string>) => steps as Record<Step, string>;
 
 const PALETTE: Scale[] = [
-  { name: "Zinc",   steps: s(colors.zinc)   },
-  { name: "Red",    steps: s(colors.red)    },
-  { name: "Orange", steps: s(colors.orange) },
-  { name: "Yellow", steps: s(colors.yellow) },
-  { name: "Green",  steps: s(colors.green)  },
-  { name: "Blue",   steps: s(colors.blue)   },
-  { name: "Purple", steps: s(colors.purple) },
+  { name: 'Zinc', steps: s(colors.zinc) },
+  { name: 'Red', steps: s(colors.red) },
+  { name: 'Orange', steps: s(colors.orange) },
+  { name: 'Yellow', steps: s(colors.yellow) },
+  { name: 'Green', steps: s(colors.green) },
+  { name: 'Blue', steps: s(colors.blue) },
+  { name: 'Purple', steps: s(colors.purple) },
 ];
 
 // ── Contrast utilities ────────────────────────────────────────────────────────
@@ -43,15 +43,15 @@ const contrastRatio = (bg: string, fg: string): number => {
   return (light + 0.05) / (dark + 0.05);
 };
 
-const ZINC_50  = "#fafafa";
-const ZINC_950 = "#09090b";
+const ZINC_50 = '#fafafa';
+const ZINC_950 = '#09090b';
 
 const getTextColor = (bg: string): { hex: string; ratio: number } => {
   const onLight = contrastRatio(bg, ZINC_50);
-  const onDark  = contrastRatio(bg, ZINC_950);
+  const onDark = contrastRatio(bg, ZINC_950);
   return onLight >= onDark
-    ? { hex: ZINC_50,  ratio: onLight }
-    : { hex: ZINC_950, ratio: onDark  };
+    ? { hex: ZINC_50, ratio: onLight }
+    : { hex: ZINC_950, ratio: onDark };
 };
 
 // ── Swatch ────────────────────────────────────────────────────────────────────
@@ -72,22 +72,22 @@ const Swatch = ({ scale, step }: { scale: Scale; step: Step }) => {
         height: SWATCH_H,
         borderRadius: 6,
         background: bg,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "8px 4px",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '8px 4px',
         flexShrink: 0,
-        boxSizing: "border-box",
+        boxSizing: 'border-box',
       }}
     >
       <span
         style={{
           fontSize: 12,
-          fontFamily: "monospace",
+          fontFamily: 'monospace',
           color: textColor,
           opacity: 0.75,
-          userSelect: "none",
+          userSelect: 'none',
         }}
       >
         {step}
@@ -96,11 +96,11 @@ const Swatch = ({ scale, step }: { scale: Scale; step: Step }) => {
       <span
         style={{
           fontSize: 11,
-          fontFamily: "monospace",
+          fontFamily: 'monospace',
           color: textColor,
-          letterSpacing: "0.02em",
-          userSelect: "none",
-          textAlign: "center",
+          letterSpacing: '0.02em',
+          userSelect: 'none',
+          textAlign: 'center',
         }}
       >
         {bg}
@@ -108,18 +108,18 @@ const Swatch = ({ scale, step }: { scale: Scale; step: Step }) => {
 
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
           gap: 4,
         }}
       >
         <span
           style={{
             fontSize: 11,
-            fontFamily: "monospace",
+            fontFamily: 'monospace',
             color: textColor,
             opacity: 0.7,
-            userSelect: "none",
+            userSelect: 'none',
           }}
         >
           {ratio.toFixed(2)}
@@ -127,14 +127,14 @@ const Swatch = ({ scale, step }: { scale: Scale; step: Step }) => {
         <span
           style={{
             fontSize: 10,
-            fontFamily: "monospace",
+            fontFamily: 'monospace',
             fontWeight: 700,
             color: textColor,
             opacity: passesAA ? 1 : 0.45,
-            userSelect: "none",
+            userSelect: 'none',
           }}
         >
-          {passesAA ? "AA✓" : "AA✗"}
+          {passesAA ? 'AA✓' : 'AA✗'}
         </span>
       </div>
     </div>
@@ -144,21 +144,21 @@ const Swatch = ({ scale, step }: { scale: Scale; step: Step }) => {
 // ── Scale block ───────────────────────────────────────────────────────────────
 
 const ColorScaleBlock = ({ scale }: { scale: Scale }) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
     <h3
       style={{
         margin: 0,
         fontSize: 13,
         fontWeight: 600,
-        color: "var(--zinc-50)",
-        fontFamily: "sans-serif",
-        letterSpacing: "0.04em",
-        textTransform: "uppercase",
+        color: 'var(--zinc-50)',
+        fontFamily: 'sans-serif',
+        letterSpacing: '0.04em',
+        textTransform: 'uppercase',
       }}
     >
       {scale.name}
     </h3>
-    <div style={{ display: "flex", gap: 3 }}>
+    <div style={{ display: 'flex', gap: 3 }}>
       {STEPS.map((step) => (
         <Swatch key={step} scale={scale} step={step} />
       ))}
@@ -171,13 +171,13 @@ const ColorScaleBlock = ({ scale }: { scale: Scale }) => (
 const BasePaletteView = () => (
   <div
     style={{
-      background: "var(--zinc-800)",
-      minHeight: "100vh",
-      padding: "40px 48px",
-      display: "flex",
-      flexDirection: "column",
+      background: 'var(--zinc-800)',
+      minHeight: '100vh',
+      padding: '40px 48px',
+      display: 'flex',
+      flexDirection: 'column',
       gap: 28,
-      fontFamily: "sans-serif",
+      fontFamily: 'sans-serif',
     }}
   >
     <div>
@@ -185,29 +185,29 @@ const BasePaletteView = () => (
         style={{
           margin: 0,
           fontSize: 11,
-          fontFamily: "monospace",
-          textTransform: "uppercase",
-          letterSpacing: "0.12em",
-          color: "var(--zinc-400)",
+          fontFamily: 'monospace',
+          textTransform: 'uppercase',
+          letterSpacing: '0.12em',
+          color: 'var(--zinc-400)',
         }}
       >
         Design Tokens
       </p>
       <h1
         style={{
-          margin: "4px 0 0",
+          margin: '4px 0 0',
           fontSize: 28,
           fontWeight: 700,
-          color: "var(--zinc-50)",
+          color: 'var(--zinc-50)',
         }}
       >
         Color Scales
       </h1>
       <p
         style={{
-          margin: "8px 0 0",
+          margin: '8px 0 0',
           fontSize: 13,
-          color: "var(--zinc-300)",
+          color: 'var(--zinc-300)',
           maxWidth: 600,
         }}
       >
@@ -225,9 +225,9 @@ const BasePaletteView = () => (
 // ── Story ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta = {
-  title: "Design Tokens/Colors",
+  title: 'Design Tokens/Colors',
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     a11y: { disable: true },
   },
 };

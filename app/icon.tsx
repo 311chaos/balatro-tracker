@@ -1,19 +1,20 @@
-export const contentType = "image/svg+xml";
+export const contentType = 'image/svg+xml';
 export const size = { width: 32, height: 32 };
 
 type ChipColors = { chip: string; ring: string };
 
 const ENV_COLORS: Record<string, ChipColors> = {
-  production: { chip: "#DB663C", ring: "#8B2800" }, // orange
-  preview:    { chip: "#2288DD", ring: "#114477" }, // blue
+  production: { chip: '#DB663C', ring: '#8B2800' }, // orange
+  preview: { chip: '#2288DD', ring: '#114477' }, // blue
 };
 
-const LOCAL_COLORS: ChipColors = { chip: "#339944", ring: "#1A5522" }; // green
+const LOCAL_COLORS: ChipColors = { chip: '#339944', ring: '#1A5522' }; // green
 
 const getColors = (): ChipColors =>
-  ENV_COLORS[process.env.VERCEL_ENV ?? ""] ?? LOCAL_COLORS;
+  ENV_COLORS[process.env.VERCEL_ENV ?? ''] ?? LOCAL_COLORS;
 
-const buildSvg = ({ chip, ring }: ChipColors) => `
+const buildSvg = ({ chip, ring }: ChipColors) =>
+  `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
     <radialGradient id="body" cx="16" cy="16" r="15" gradientUnits="userSpaceOnUse">
@@ -48,7 +49,7 @@ const buildSvg = ({ chip, ring }: ChipColors) => `
 
 const Icon = () =>
   new Response(buildSvg(getColors()), {
-    headers: { "Content-Type": "image/svg+xml" },
+    headers: { 'Content-Type': 'image/svg+xml' },
   });
 
 export default Icon;

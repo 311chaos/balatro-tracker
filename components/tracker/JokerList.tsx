@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import { JokerCard } from "@/components/ui/JokerCard";
-import { ProgressBar } from "@/components/ui/ProgressBar";
-import { FilterBar, parseFilters } from "@/components/tracker/FilterBar";
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { JokerCard } from '@/components/ui/JokerCard';
+import { ProgressBar } from '@/components/ui/ProgressBar';
+import { FilterBar, parseFilters } from '@/components/tracker/FilterBar';
 import {
   upsertJokerProgress,
   deleteJokerProgress,
-} from "@/lib/actions/jokerProgress";
-import { JOKERS } from "@/config/jokers";
-import type { StickerLevel } from "@/config/types";
+} from '@/lib/actions/jokerProgress';
+import { JOKERS } from '@/config/jokers';
+import type { StickerLevel } from '@/config/types';
 
-const STORAGE_KEY = "balatro-joker-progress";
+const STORAGE_KEY = 'balatro-joker-progress';
 
 type Progress = Record<string, StickerLevel>;
 
@@ -31,7 +31,7 @@ const saveProgress = (progress: Progress) => {
 
 const trackable = JOKERS.filter(
   (j): j is Extract<(typeof JOKERS)[number], { jokerNumber: number }> =>
-    "jokerNumber" in j,
+    'jokerNumber' in j,
 );
 
 type Props = {
@@ -77,8 +77,8 @@ const JokerListInner = ({ initialProgress, isAuthenticated }: Props) => {
     if (q && !joker.name.toLowerCase().includes(q.toLowerCase())) return false;
     if (rarities.length > 0 && !rarities.includes(joker.rarity)) return false;
     const collected = Boolean(progress[joker.id]);
-    if (status === "collected" && !collected) return false;
-    if (status === "missing" && collected) return false;
+    if (status === 'collected' && !collected) return false;
+    if (status === 'missing' && collected) return false;
     return true;
   });
 
@@ -99,7 +99,7 @@ const JokerListInner = ({ initialProgress, isAuthenticated }: Props) => {
         <div
           className="grid gap-3"
           style={{
-            gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+            gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
           }}
         >
           {filtered.map((joker) => (
@@ -112,7 +112,7 @@ const JokerListInner = ({ initialProgress, isAuthenticated }: Props) => {
           ))}
         </div>
         {filtered.length === 0 && (
-          <p className="text-center text-white py-16 font-bold text-lg font-balatro tracking-wide">
+          <p className="font-balatro py-16 text-center text-lg font-bold tracking-wide text-white">
             No jokers match your filters.
           </p>
         )}

@@ -1,33 +1,33 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '.';
 
 const VARIANTS = [
-  "default",
-  "outline",
-  "secondary",
-  "ghost",
-  "destructive",
-  "link",
+  'default',
+  'outline',
+  'secondary',
+  'ghost',
+  'destructive',
+  'link',
 ] as const;
 
-const SIZES = ["xs", "sm", "default", "lg"] as const;
+const SIZES = ['xs', 'sm', 'default', 'lg'] as const;
 
 const meta: Meta<typeof Button> = {
-  title: "UI/Button",
+  title: 'UI/Button',
   component: Button,
   parameters: {
-    layout: "padded",
+    layout: 'padded',
   },
   argTypes: {
-    variant: { control: "select", options: VARIANTS },
-    size: { control: "select", options: SIZES },
-    disabled: { control: "boolean" },
-    children: { control: "text" },
+    variant: { control: 'select', options: VARIANTS },
+    size: { control: 'select', options: SIZES },
+    disabled: { control: 'boolean' },
+    children: { control: 'text' },
   },
   args: {
-    children: "Button",
-    variant: "default",
-    size: "default",
+    children: 'Button',
+    variant: 'default',
+    size: 'default',
     disabled: false,
   },
 };
@@ -63,11 +63,11 @@ export const Variants: Story = {
 
 const STATE_COLS: { label: string; className?: string; disabled?: boolean }[] =
   [
-    { label: "Default" },
-    { label: "Hover", className: "pseudo-hover" },
-    { label: "Active", className: "pseudo-active" },
-    { label: "Focus", className: "pseudo-focus" },
-    { label: "Disabled", disabled: true },
+    { label: 'Default' },
+    { label: 'Hover', className: 'pseudo-hover' },
+    { label: 'Active', className: 'pseudo-active' },
+    { label: 'Focus', className: 'pseudo-focus' },
+    { label: 'Disabled', disabled: true },
   ];
 
 export const VariantStates: Story = {
@@ -78,7 +78,7 @@ export const VariantStates: Story = {
         {STATE_COLS.map(({ label }) => (
           <span
             key={label}
-            className="w-24 text-center text-[10px] font-medium uppercase tracking-widest text-foreground"
+            className="text-foreground w-24 text-center text-[10px] font-medium tracking-widest uppercase"
           >
             {label}
           </span>
@@ -86,11 +86,11 @@ export const VariantStates: Story = {
       </div>
       {VARIANTS.map((variant) => (
         <div key={variant} className="flex items-center gap-4">
-          <span className="w-24 shrink-0 text-[10px] font-mono text-foreground">
+          <span className="text-foreground w-24 shrink-0 font-mono text-[10px]">
             {variant}
           </span>
           {STATE_COLS.map(({ label, className, disabled }) => (
-            <div key={label} className="w-24 flex justify-center">
+            <div key={label} className="flex w-24 justify-center">
               <Button
                 variant={variant}
                 className={className}
@@ -114,18 +114,18 @@ export const AsAnchor: Story = {
         {STATE_COLS.map(({ label }) => (
           <span
             key={label}
-            className="w-24 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground"
+            className="text-muted-foreground w-24 text-center text-[10px] font-medium tracking-widest uppercase"
           >
             {label}
           </span>
         ))}
       </div>
       <div className="flex items-center gap-4">
-        <span className="w-24 shrink-0 text-[10px] font-mono text-muted-foreground">
+        <span className="text-muted-foreground w-24 shrink-0 font-mono text-[10px]">
           default
         </span>
         {STATE_COLS.map(({ label, className, disabled }) => (
-          <div key={label} className="w-24 flex justify-center">
+          <div key={label} className="flex w-24 justify-center">
             <Button
               render={<a href="#" />}
               className={className}

@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
 const TrackerPage = () => {
-  redirect("/tracker/jokers");
+  redirect('/tracker/jokers');
 };
 
 export default TrackerPage;

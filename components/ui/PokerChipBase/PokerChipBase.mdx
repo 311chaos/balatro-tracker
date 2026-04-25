@@ -58,20 +58,20 @@ The whole chip is rendered at 200×200 internally and scaled to `size` via `tran
 
 ```tsx
 <PokerChipBase
-  chipColor="#FA9108"    // main body
-  ringColor="#996600"    // rim, inner ring
-  notch1Color="#111111"  // N/E/S/W notches
-  notch2Color="#FFFFFF"  // NE/SE/SW/NW notches
-  size={40}              // px, default 40
+  chipColor="#FA9108" // main body
+  ringColor="#996600" // rim, inner ring
+  notch1Color="#111111" // N/E/S/W notches
+  notch2Color="#FFFFFF" // NE/SE/SW/NW notches
+  size={40} // px, default 40
 />
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `chipColor` | `string` | required | Main body and inner circle fill |
-| `ringColor` | `string` | required | Rim band, inner ring border, gradient bands |
-| `notch1Color` | `string` | required | Cardinal notch marks (N, E, S, W) |
-| `notch2Color` | `string` | required | Diagonal notch marks (NE, SE, SW, NW) |
-| `size` | `number` | `40` | Rendered size in pixels |
+| Prop          | Type     | Default  | Description                                 |
+| ------------- | -------- | -------- | ------------------------------------------- |
+| `chipColor`   | `string` | required | Main body and inner circle fill             |
+| `ringColor`   | `string` | required | Rim band, inner ring border, gradient bands |
+| `notch1Color` | `string` | required | Cardinal notch marks (N, E, S, W)           |
+| `notch2Color` | `string` | required | Diagonal notch marks (NE, SE, SW, NW)       |
+| `size`        | `number` | `40`     | Rendered size in pixels                     |

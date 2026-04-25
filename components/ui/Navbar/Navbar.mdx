@@ -22,8 +22,10 @@ The `action` prop is injectable so the component works in Storybook without a
 server environment — in production it defaults to the real `signInWithEmail`
 server action.
 
-<div className="flex items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950 px-6 py-3 not-prose">
-  <span className="font-balatro text-2xl text-zinc-100 tracking-wide mr-auto">Balatro Tracker</span>
+<div className="not-prose flex items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950 px-6 py-3">
+  <span className="font-balatro mr-auto text-2xl tracking-wide text-zinc-100">
+    Balatro Tracker
+  </span>
   <SignInModal action={() => alert('signInWithEmail() would fire here')} />
 </div>
 
@@ -34,9 +36,14 @@ server action.
 Shows the user's email as a dropdown trigger. The menu contains a "Sign out"
 item that calls the `onSignOut` server action.
 
-<div className="flex items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950 px-6 py-3 not-prose">
-  <span className="font-balatro text-2xl text-zinc-100 tracking-wide mr-auto">Balatro Tracker</span>
-  <UserMenu email="player@example.com" onSignOut={() => alert('signOutAction() would fire here')} />
+<div className="not-prose flex items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950 px-6 py-3">
+  <span className="font-balatro mr-auto text-2xl tracking-wide text-zinc-100">
+    Balatro Tracker
+  </span>
+  <UserMenu
+    email="player@example.com"
+    onSignOut={() => alert('signOutAction() would fire here')}
+  />
 </div>
 
 ---
@@ -59,5 +66,5 @@ The sub-components can also be used standalone with custom actions if needed:
 
 ```tsx
 import { SignInModal } from '@/components/ui/Navbar/SignInModal';
-import { UserMenu }    from '@/components/ui/Navbar/UserMenu';
+import { UserMenu } from '@/components/ui/Navbar/UserMenu';
 ```

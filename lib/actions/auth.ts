@@ -1,11 +1,11 @@
-"use server";
+'use server';
 
-import { signIn, signOut } from "@/lib/auth";
+import { signIn, signOut } from '@/lib/auth';
 
 export const signInWithEmail = async (formData: FormData) => {
-  await signIn("resend", formData, { redirectTo: "/tracker/jokers" });
+  await signIn('resend', formData, { redirectTo: '/tracker/jokers' });
 };
 
 export const signOutAction = async () => {
-  await signOut({ redirectTo: "/tracker/jokers" });
+  await signOut({ redirectTo: '/tracker/jokers' });
 };

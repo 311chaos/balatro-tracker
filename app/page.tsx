@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
 const LandingPage = () => {
-  redirect("/tracker/jokers");
+  redirect('/tracker/jokers');
 };
 
 export default LandingPage;

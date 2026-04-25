@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { UserIcon, SettingsIcon, LogOutIcon } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { UserIcon, SettingsIcon, LogOutIcon } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,22 +17,31 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from ".";
+} from '.';
 
 const BUTTON_VARIANTS = [
-  "default",
-  "outline",
-  "ghost",
-  "secondary",
-  "link",
+  'default',
+  'outline',
+  'ghost',
+  'secondary',
+  'link',
 ] as const;
 
-const STAKES = ["White", "Red", "Green", "Black", "Blue", "Purple", "Orange", "Gold"] as const;
+const STAKES = [
+  'White',
+  'Red',
+  'Green',
+  'Black',
+  'Blue',
+  'Purple',
+  'Orange',
+  'Gold',
+] as const;
 
 const meta: Meta = {
-  title: "UI/DropdownMenu",
+  title: 'UI/DropdownMenu',
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
 };
 
@@ -101,7 +110,9 @@ export const WithSubMenu: Story = {
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">Delete account</DropdownMenuItem>
+        <DropdownMenuItem variant="destructive">
+          Delete account
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ),
@@ -121,13 +132,22 @@ export const WithCheckboxItems: Story = {
         <DropdownMenuContent>
           <DropdownMenuGroup>
             <DropdownMenuLabel>Show categories</DropdownMenuLabel>
-            <DropdownMenuCheckboxItem checked={jokers} onCheckedChange={setJokers}>
+            <DropdownMenuCheckboxItem
+              checked={jokers}
+              onCheckedChange={setJokers}
+            >
               Jokers
             </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem checked={tarots} onCheckedChange={setTarots}>
+            <DropdownMenuCheckboxItem
+              checked={tarots}
+              onCheckedChange={setTarots}
+            >
               Tarots
             </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem checked={vouchers} onCheckedChange={setVouchers}>
+            <DropdownMenuCheckboxItem
+              checked={vouchers}
+              onCheckedChange={setVouchers}
+            >
               Vouchers
             </DropdownMenuCheckboxItem>
           </DropdownMenuGroup>
@@ -139,7 +159,7 @@ export const WithCheckboxItems: Story = {
 
 export const WithRadioItems: Story = {
   render: () => {
-    const [stake, setStake] = useState("Gold");
+    const [stake, setStake] = useState('Gold');
 
     return (
       <DropdownMenu>
@@ -175,7 +195,9 @@ export const TriggerVariants: Story = {
             <DropdownMenuItem>Action one</DropdownMenuItem>
             <DropdownMenuItem>Action two</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">Destructive</DropdownMenuItem>
+            <DropdownMenuItem variant="destructive">
+              Destructive
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ))}

@@ -1,27 +1,27 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { PokerChipBase } from "@/components/ui/PokerChipBase";
+import type { Meta, StoryObj } from '@storybook/react';
+import { PokerChipBase } from '@/components/ui/PokerChipBase';
 import {
   STICKER_LEVELS,
   STICKER_COLORS,
   type StickerLevel,
-} from "@/config/types";
+} from '@/config/types';
 
 const meta: Meta<typeof PokerChipBase> = {
-  title: "UI/PokerChipBase",
+  title: 'UI/PokerChipBase',
   component: PokerChipBase,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     backgrounds: {
-      default: "dark",
-      values: [{ name: "dark", value: "#09090b" }],
+      default: 'dark',
+      values: [{ name: 'dark', value: '#09090b' }],
     },
   },
   argTypes: {
-    chipColor: { control: "color" },
-    ringColor: { control: "color" },
-    notch1Color: { control: "color" },
-    notch2Color: { control: "color" },
-    size: { control: { type: "range", min: 20, max: 120, step: 4 } },
+    chipColor: { control: 'color' },
+    ringColor: { control: 'color' },
+    notch1Color: { control: 'color' },
+    notch2Color: { control: 'color' },
+    size: { control: { type: 'range', min: 20, max: 120, step: 4 } },
   },
 };
 
@@ -42,11 +42,11 @@ export const AllStakes: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 24,
         padding: 32,
-        background: "var(--zinc-950)",
+        background: 'var(--zinc-950)',
         borderRadius: 12,
       }}
     >
@@ -55,7 +55,7 @@ export const AllStakes: Story = {
         return (
           <div
             key={level}
-            style={{ display: "flex", alignItems: "center", gap: 16 }}
+            style={{ display: 'flex', alignItems: 'center', gap: 16 }}
           >
             <PokerChipBase
               chipColor={chip}
@@ -64,14 +64,14 @@ export const AllStakes: Story = {
               notch2Color={notch2}
               size={40}
             />
-            <span style={{ color: "#fff", fontSize: 14, width: 110 }}>
+            <span style={{ color: '#fff', fontSize: 14, width: 110 }}>
               {label}
             </span>
             <span
               style={{
-                color: "#fff",
+                color: '#fff',
                 fontSize: 11,
-                fontFamily: "monospace",
+                fontFamily: 'monospace',
               }}
             >
               chip: {chip} · ring: {ring} · n1: {notch1} · n2: {notch2}

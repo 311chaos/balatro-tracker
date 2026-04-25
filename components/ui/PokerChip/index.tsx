@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { PokerChipBase } from "@/components/ui/PokerChipBase";
-import { STICKER_COLORS, type StickerLevel } from "@/config/types";
+import { PokerChipBase } from '@/components/ui/PokerChipBase';
+import { STICKER_COLORS, type StickerLevel } from '@/config/types';
 
 type Props = {
   variant: StickerLevel;
@@ -19,4 +19,4 @@ export const PokerChip = ({ variant, size }: Props) => {
       size={size}
     />
   );
-}
+};

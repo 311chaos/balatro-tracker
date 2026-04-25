@@ -11,6 +11,7 @@ Balatro Tracker is a full-stack web app for tracking Gold Stake sticker progress
 ## Product Context
 
 ### The Core Loop
+
 - Browse all 150+ Jokers displayed as pixel-art cards on a green felt background
 - Each Joker can earn a **stake sticker** — a colored poker chip overlay — representing the highest difficulty completed with that Joker
 - Stake levels progress: **White → Red → Green → Black → Blue → Purple → Orange → Gold**
@@ -18,11 +19,13 @@ Balatro Tracker is a full-stack web app for tracking Gold Stake sticker progress
 - A progress bar at the top tracks overall completion
 
 ### Surfaces
+
 - **Tracker page** (`/tracker/jokers`) — the main app; joker grid with FilterBar, ProgressBar, JokerCards
 - **Navbar** — site header with magic-link sign-in modal and user menu
 - **Auth flow** — email sign-in via Resend magic links
 
 ### Tech Stack
+
 Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui + Base UI · Auth.js v5 · Prisma + Neon · Vercel
 
 ---
@@ -44,7 +47,9 @@ Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui + Base UI 
 ## Visual Foundations
 
 ### Color Philosophy
+
 The palette is built around three axes:
+
 1. **Zinc neutrals** — the UI scaffold. Almost everything background/foreground uses zinc. Dark mode is the default; zinc-950 is the base background.
 2. **Rarity colors** — semantic signal for Joker rarity. Non-negotiable; these match the game exactly.
 3. **Stake colors** — a progression from muted (white) to prestigious (gold). Gold is the primary brand accent.
@@ -52,15 +57,17 @@ The palette is built around three axes:
 The felt green (`#1a4d2e` + checkerboard overlay) is the single non-zinc background, used exclusively for the Joker grid container.
 
 ### Typography
-| Role | Font | Weight | Notes |
-|---|---|---|---|
-| Brand / Joker names | `m6x11` (pixel font) | 400 | `tracking-widest`, `letter-spacing: 0.1em` |
-| Body / UI | Geist Sans | 400–600 | System-quality sans |
-| Mono / Code | Geist Mono | 400 | Used for code samples |
+
+| Role                | Font                 | Weight  | Notes                                      |
+| ------------------- | -------------------- | ------- | ------------------------------------------ |
+| Brand / Joker names | `m6x11` (pixel font) | 400     | `tracking-widest`, `letter-spacing: 0.1em` |
+| Body / UI           | Geist Sans           | 400–600 | System-quality sans                        |
+| Mono / Code         | Geist Mono           | 400     | Used for code samples                      |
 
 Text scale: `text-xs` (12px) for rarity labels, `text-sm` (14px) for UI chrome, `text-base` (16px) for filter labels and counts, `text-lg` (18px) for joker names, `text-2xl` (24px) for the site title in Navbar.
 
 ### Backgrounds
+
 - **Page background:** `zinc-950` (`#09090b`) — near-black
 - **Navbar:** `zinc-950` with `border-b border-zinc-800`
 - **Filter bar:** `zinc-950` with `border: 2px solid var(--stake-gold)` — gold border is a key accent
@@ -69,11 +76,13 @@ Text scale: `text-xs` (12px) for rarity labels, `text-sm` (14px) for UI chrome, 
 - No light mode content; the app is dark-only in practice
 
 ### Cards
+
 - **Joker card:** `rounded-lg`, `p-3`, `bg-black/20`, `border: 2px solid {sticker ring color or transparent}`, hover `bg-black/35`
 - **Filter bar:** `rounded-xl`, `p-4`, `bg-zinc-950`, `border: 2px solid var(--stake-gold)`
 - No drop shadows on cards; depth is conveyed by the felt bg contrast
 
 ### Borders & Radius
+
 - Base radius: `0.625rem` (10px)
 - Scale: sm → md → lg → xl → 2xl → 3xl → 4xl (multiplied by base)
 - Joker cards: `rounded-lg` = `var(--radius)`
@@ -82,13 +91,16 @@ Text scale: `text-xs` (12px) for rarity labels, `text-sm` (14px) for UI chrome, 
 - Border color: `zinc-800` for structural; `stake-gold` for active/accent; rarity color for rarity filter pills
 
 ### Spacing
+
 Tailwind v4 defaults. Key landmarks:
+
 - Page padding: `px-6 py-6`
 - Card internal: `p-3` to `p-4`
 - Grid gap: `gap-3`
 - Stack gap: `gap-2` to `gap-6`
 
 ### Animations & Interactions
+
 - `transition-colors` on JokerCard hover (quick, no duration specified = 150ms default)
 - `transition-all duration-300` on ProgressBar indicator fill
 - Press state: `translate-y-px` on active Button (subtle press-down)
@@ -96,7 +108,9 @@ Tailwind v4 defaults. Key landmarks:
 - No entrance animations, no spring physics, no page transitions
 
 ### PokerChip Component
+
 The `PokerChipBase` is a custom SVG-style chip rendered entirely in CSS/React. Key details:
+
 - Radial gradient: chip color → ring color band → chip color rim → ring color edge
 - 8 notch marks (4 cardinal in `notch1Color`, 4 diagonal in `notch2Color`)
 - Inner circle with border
@@ -105,6 +119,7 @@ The `PokerChipBase` is a custom SVG-style chip rendered entirely in CSS/React. K
 - Size: `size` prop (default 40px, rendered at 200px then scaled)
 
 ### Iconography
+
 See ICONOGRAPHY section below.
 
 ---

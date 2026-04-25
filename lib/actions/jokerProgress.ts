@@ -1,10 +1,13 @@
-"use server";
+'use server';
 
-import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import type { StickerLevel } from "@/config/types";
+import { auth } from '@/lib/auth';
+import { db } from '@/lib/db';
+import type { StickerLevel } from '@/config/types';
 
-export async function upsertJokerProgress(jokerId: string, stickerLevel: StickerLevel) {
+export async function upsertJokerProgress(
+  jokerId: string,
+  stickerLevel: StickerLevel,
+) {
   const session = await auth();
   if (!session?.user?.id) return;
 
@@ -24,7 +27,9 @@ export async function deleteJokerProgress(jokerId: string) {
   });
 }
 
-export async function getJokerProgress(): Promise<Record<string, StickerLevel>> {
+export async function getJokerProgress(): Promise<
+  Record<string, StickerLevel>
+> {
   const session = await auth();
   if (!session?.user?.id) return {};
 
@@ -33,5 +38,7 @@ export async function getJokerProgress(): Promise<Record<string, StickerLevel>> 
     select: { jokerId: true, stickerLevel: true },
   });
 
-  return Object.fromEntries(rows.map((r) => [r.jokerId, r.stickerLevel as StickerLevel]));
+  return Object.fromEntries(
+    rows.map((r) => [r.jokerId, r.stickerLevel as StickerLevel]),
+  );
 }

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ItemSprite } from "@/components/ui/ItemSprite";
-import { JOKERS, JOKER_SHEET_URL, type JokerId } from "@/config/jokers";
+import type { Meta, StoryObj } from '@storybook/react';
+import { ItemSprite } from '@/components/ui/ItemSprite';
+import { JOKERS, JOKER_SHEET_URL, type JokerId } from '@/config/jokers';
 
 const JOKER_IDS = JOKERS.map((j) => j.id) as JokerId[];
 const JOKER_BY_ID = Object.fromEntries(JOKERS.map((j) => [j.id, j])) as Record<
@@ -9,18 +9,18 @@ const JOKER_BY_ID = Object.fromEntries(JOKERS.map((j) => [j.id, j])) as Record<
 >;
 
 const meta: Meta<{ jokerId: JokerId; size: number }> = {
-  title: "UI/ItemSprite",
-  tags: ["autodocs"],
+  title: 'UI/ItemSprite',
+  tags: ['autodocs'],
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     backgrounds: {
-      default: "dark",
-      values: [{ name: "dark", value: "#09090b" }],
+      default: 'dark',
+      values: [{ name: 'dark', value: '#09090b' }],
     },
   },
   argTypes: {
-    jokerId: { control: "select", options: JOKER_IDS },
-    size: { control: { type: "range", min: 20, max: 200, step: 4 } },
+    jokerId: { control: 'select', options: JOKER_IDS },
+    size: { control: { type: 'range', min: 20, max: 200, step: 4 } },
   },
 };
 
@@ -28,7 +28,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
-  args: { jokerId: "JOKER", size: 71 },
+  args: { jokerId: 'JOKER', size: 71 },
   render: ({ jokerId, size }) => {
     const joker = JOKER_BY_ID[jokerId];
     return (
@@ -36,7 +36,7 @@ export const Playground: Story = {
         spriteX={joker.spriteX}
         spriteY={joker.spriteY}
         additionalLayers={
-          "additionalLayers" in joker ? joker.additionalLayers : undefined
+          'additionalLayers' in joker ? joker.additionalLayers : undefined
         }
         sheetUrl={JOKER_SHEET_URL}
         name={joker.id}
@@ -50,11 +50,11 @@ export const AllJokers: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexWrap: "wrap",
+        display: 'flex',
+        flexWrap: 'wrap',
         gap: 8,
         padding: 24,
-        background: "var(--zinc-950)",
+        background: 'var(--zinc-950)',
         borderRadius: 12,
         maxWidth: 900,
       }}
@@ -63,9 +63,9 @@ export const AllJokers: Story = {
         <div
           key={joker.id}
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             gap: 4,
           }}
           title={joker.id}
@@ -74,7 +74,7 @@ export const AllJokers: Story = {
             spriteX={joker.spriteX}
             spriteY={joker.spriteY}
             additionalLayers={
-              "additionalLayers" in joker ? joker.additionalLayers : undefined
+              'additionalLayers' in joker ? joker.additionalLayers : undefined
             }
             sheetUrl={JOKER_SHEET_URL}
             name={joker.id}
@@ -82,14 +82,14 @@ export const AllJokers: Story = {
           />
           <span
             style={{
-              color: "#fff",
+              color: '#fff',
               fontSize: 9,
-              fontFamily: "monospace",
+              fontFamily: 'monospace',
               maxWidth: 48,
-              textAlign: "center",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
+              textAlign: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
             }}
           >
             {joker.name}
@@ -104,11 +104,11 @@ export const Sizes: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        alignItems: "flex-end",
+        display: 'flex',
+        alignItems: 'flex-end',
         gap: 24,
         padding: 24,
-        background: "var(--zinc-950)",
+        background: 'var(--zinc-950)',
         borderRadius: 12,
       }}
     >
@@ -116,9 +116,9 @@ export const Sizes: Story = {
         <div
           key={size}
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             gap: 6,
           }}
         >
@@ -129,7 +129,7 @@ export const Sizes: Story = {
             name="JOKER"
             size={size}
           />
-          <span style={{ color: "#fff", fontSize: 10 }}>{size}px</span>
+          <span style={{ color: '#fff', fontSize: 10 }}>{size}px</span>
         </div>
       ))}
     </div>

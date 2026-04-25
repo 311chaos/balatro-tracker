@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { PokerChip } from "@/components/ui/PokerChip";
-import { STICKER_LEVELS, type StickerLevel } from "@/config/types";
+import type { Meta, StoryObj } from '@storybook/react';
+import { PokerChip } from '@/components/ui/PokerChip';
+import { STICKER_LEVELS, type StickerLevel } from '@/config/types';
 
 const meta: Meta<typeof PokerChip> = {
-  title: "UI/PokerChip",
+  title: 'UI/PokerChip',
   component: PokerChip,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     backgrounds: {
-      default: "dark",
-      values: [{ name: "dark", value: "#09090b" }],
+      default: 'dark',
+      values: [{ name: 'dark', value: '#09090b' }],
     },
   },
   argTypes: {
     variant: {
-      control: "select",
+      control: 'select',
       options: STICKER_LEVELS,
     },
-    size: { control: { type: "range", min: 20, max: 120, step: 4 } },
+    size: { control: { type: 'range', min: 20, max: 120, step: 4 } },
   },
 };
 
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof PokerChip>;
 
 export const Playground: Story = {
   args: {
-    variant: "GOLD",
+    variant: 'GOLD',
     size: 80,
   },
 };
@@ -35,21 +35,21 @@ export const AllStakes: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 24,
         padding: 32,
-        background: "var(--zinc-950)",
+        background: 'var(--zinc-950)',
         borderRadius: 12,
       }}
     >
       {(STICKER_LEVELS as StickerLevel[]).map((level) => (
         <div
           key={level}
-          style={{ display: "flex", alignItems: "center", gap: 16 }}
+          style={{ display: 'flex', alignItems: 'center', gap: 16 }}
         >
           <PokerChip variant={level} size={40} />
-          <span style={{ color: "#fff", fontSize: 14 }}>
+          <span style={{ color: '#fff', fontSize: 14 }}>
             {level.charAt(0) + level.slice(1).toLowerCase()} Stake
           </span>
         </div>
@@ -60,17 +60,17 @@ export const AllStakes: Story = {
 
 export const Sizes: Story = {
   args: {
-    variant: "BLUE",
+    variant: 'BLUE',
   },
 
   render: () => (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
+        display: 'flex',
+        alignItems: 'center',
         gap: 24,
         padding: 32,
-        background: "var(--zinc-950)",
+        background: 'var(--zinc-950)',
         borderRadius: 12,
       }}
     >
@@ -78,14 +78,14 @@ export const Sizes: Story = {
         <div
           key={size}
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             gap: 8,
           }}
         >
           <PokerChip variant="GOLD" size={size} />
-          <span style={{ color: "#fff", fontSize: 11 }}>{size}px</span>
+          <span style={{ color: '#fff', fontSize: 11 }}>{size}px</span>
         </div>
       ))}
     </div>
