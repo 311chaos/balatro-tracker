@@ -5,7 +5,7 @@ addons.setConfig({
   theme: create({
     base: 'dark',
     brandTitle: 'Balatro Tracker',
-    brandImage: '/icons/logo.svg',
+    brandImage: './icons/logo.svg',
     brandUrl: '/',
     brandTarget: '_self',
   }),

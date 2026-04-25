@@ -32,10 +32,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Storybook
-        run: npm run build-storybook
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
 
-      - uses: actions/configure-pages@v5
+      - name: Build Storybook
+        run: npm run build-storybook -- --base-path "${{ steps.pages.outputs.base_path }}"
 
       - uses: actions/upload-pages-artifact@v3
         with:

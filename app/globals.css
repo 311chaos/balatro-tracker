@@ -7,6 +7,15 @@
 @custom-variant pseudo-active (&:active, &.pseudo-active);
 @custom-variant pseudo-focus-visible (&:focus-visible, &.pseudo-focus);
 
+@layer base {
+  button,
+  a,
+  select,
+  [role='button'] {
+    cursor: pointer;
+  }
+}
+
 @theme inline {
   /* Zinc */
   --color-zinc-50: var(--zinc-50);

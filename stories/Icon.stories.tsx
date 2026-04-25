@@ -18,20 +18,20 @@ type Story = StoryObj;
 const SIZES = [16, 32, 64, 128, 256] as const;
 
 const ENV_ICONS = [
-  { label: 'Local', url: '/icons/icon-local.svg', env: 'localhost' },
+  { label: 'Local', url: './icons/icon-local.svg', env: 'localhost' },
   {
     label: 'Preview',
-    url: '/icons/icon-preview.svg',
+    url: './icons/icon-preview.svg',
     env: 'VERCEL_ENV=preview',
   },
   {
     label: 'Production',
-    url: '/icons/icon-prod.svg',
+    url: './icons/icon-prod.svg',
     env: 'VERCEL_ENV=production',
   },
   {
     label: 'Storybook',
-    url: '/icons/icon-storybook.svg',
+    url: './icons/icon-storybook.svg',
     env: 'storybook dev',
   },
 ] as const;
