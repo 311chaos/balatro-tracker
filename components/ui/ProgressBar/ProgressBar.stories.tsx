@@ -62,7 +62,7 @@ export const ComposableExample: Story = {
     const rarityColors = [
       { fill: "var(--zinc-400)", label: "Common" },
       { fill: "var(--blue-500)", label: "Uncommon" },
-      { fill: "var(--red-500)", label: "Rare" },
+      { fill: "var(--red-400)", label: "Rare" },
       { fill: "var(--yellow-500)", label: "Legendary" },
     ];
     const values = [82, 41, 12, 3];

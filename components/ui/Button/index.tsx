@@ -10,8 +10,8 @@ const variantClasses = {
     "pseudo-hover:bg-blue-700", //hover
     "pseudo-active:bg-blue-800", //active
     "dark:bg-blue-500 dark:text-zinc-950", //dark default
-    "dark:pseudo-hover:bg-blue-500 dark:pseudo-hover:text-background", // dark hover
-    "dark:pseudo-active:bg-blue-400 dark:pseudo-active:text-background", // dark active
+    "dark:pseudo-hover:bg-blue-400 dark:pseudo-hover:text-background", // dark hover
+    "dark:pseudo-active:bg-blue-300 dark:pseudo-active:text-background", // dark active
   ]),
   outline: v([
     "border-primary bg-background text-primary", //default
@@ -22,14 +22,13 @@ const variantClasses = {
     "dark:pseudo-active:bg-blue-700 dark:pseudo-active:text-[color-mix(in_oklch,var(--color-primary)_20%,white)]", //dark active
     "aria-expanded:bg-muted aria-expanded:text-foreground", // expanded
   ]),
-  // dark variants failing a11y here
   secondary: v([
     "bg-zinc-100 text-primary", //default
     "pseudo-hover:bg-zinc-200 pseudo-hover:text-foreground", //hover
     "pseudo-active:bg-zinc-300 pseudo-active:text-foreground", //active
-    "dark:bg-zinc-800 dark:text-primary", //dark default
-    "dark:pseudo-hover:bg-zinc-700 dark:pseudo-hover:text-[color-mix(in_oklch,var(--color-primary)_80%,white)]", //dark hover
-    "dark:pseudo-active:bg-zinc-600 dark:pseudo-active:text-[color-mix(in_oklch,var(--color-primary)_80%,white)]", //dark active
+    "dark:bg-zinc-800 dark:text-blue-300", //dark default —
+    "dark:pseudo-hover:bg-zinc-700 dark:pseudo-hover:text-blue-300", //dark hover
+    "dark:pseudo-active:bg-zinc-600 dark:pseudo-active:text-blue-200", //dark active
   ]),
   ghost: v([
     "text-foreground",
@@ -103,6 +102,7 @@ const baseClasses = v([
   "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
   "dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
   "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "tracking-widest",
 ]);
 
 const buttonVariants = cva(baseClasses, {

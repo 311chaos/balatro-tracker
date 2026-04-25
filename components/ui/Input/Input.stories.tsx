@@ -43,7 +43,7 @@ export const Sizes: Story = {
     <div className="flex flex-col gap-4 w-72">
       {(["sm", "md", "lg"] as const).map((size) => (
         <div key={size} className="flex flex-col gap-1">
-          <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+          <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
             {size}
           </span>
           <Input size={size} placeholder={`Size ${size}`} />
@@ -109,7 +109,7 @@ export const States: Story = {
         {STATE_COLS.map(({ label }) => (
           <span
             key={label}
-            className="w-36 text-center text-[10px] font-medium uppercase tracking-widest text-zinc-500"
+            className="w-36 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground"
           >
             {label}
           </span>
@@ -117,7 +117,7 @@ export const States: Story = {
       </div>
       {SIZES.map((size) => (
         <div key={size} className="flex items-center gap-4">
-          <span className="w-12 shrink-0 text-[10px] font-mono text-zinc-600">
+          <span className="w-12 shrink-0 text-[10px] font-mono text-muted-foreground">
             {size}
           </span>
           {STATE_COLS.map(({ label, props, className }) => (
@@ -150,7 +150,7 @@ export const ClearableEmpty: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-72">
       <div className="flex flex-col gap-1">
-        <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+        <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
           With value — clear button visible
         </span>
         <Input
@@ -162,7 +162,7 @@ export const ClearableEmpty: Story = {
         />
       </div>
       <div className="flex flex-col gap-1">
-        <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+        <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
           Empty — clear button hidden
         </span>
         <Input size="md" clearable value="" placeholder="Search jokers…" />

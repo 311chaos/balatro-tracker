@@ -169,7 +169,7 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: var(--red-500);
+  --destructive: var(--red-600);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: var(--blue-500);

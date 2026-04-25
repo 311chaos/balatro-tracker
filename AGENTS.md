@@ -46,9 +46,24 @@ Use **Base UI** (`@base-ui/react/*`) for all interactive primitives (buttons, di
 - **Pseudo-state variants** — use `pseudo-hover:`, `pseudo-active:`, `pseudo-focus-visible:` (defined in `globals.css` via `@custom-variant`) instead of plain `hover:`/`active:`/`focus-visible:`. This keeps real browser states and Storybook simulation states defined in one place.
 - **CSS modules** — use a colocated `ComponentName.module.css` only when styles cannot be expressed as Tailwind classes (e.g. `color-mix()` values). Do not put component styles in `globals.css`.
 
+# Accessibility tests
+
+Run before every commit:
+
+```bash
+npx vitest run --project storybook
+```
+
+This runs `@storybook/addon-a11y` via `@storybook/addon-vitest` in headless Chromium against every story. The global `a11y: { test: "error" }` in `.storybook/preview.tsx` means any axe violation fails the suite.
+
+**Key rules that bite here:**
+- `color-contrast` (WCAG AA, 4.5:1 for normal text, 3:1 for large/bold) — the most common failure
+- Stories render in **light mode** by default (no dark CSS class in test env) — use solid dark backgrounds in story wrappers, not `bg-black/80` (semi-transparent composites to ~`#333333` over the white body)
+- Gold/yellow accents (e.g. the Sign In button) use `yellow-500` directly — not a custom token. Yellow on a light body background will fail contrast; always pair with a dark wrapper (`bg-black` / `bg-zinc-950`)
+
 ## Color system
 
-Rarity and stake colours live in `config/buttonColors.ts` and are exposed as Tailwind theme tokens (`rarity-legendary`, `stake-gold`, etc.). When a component needs a game colour:
+Rarity and stake colours live in `config/colors.ts` and are exposed as Tailwind theme tokens (`rarity-legendary`, `yellow-500` for gold, etc.). When a component needs a game colour:
 
 - Pass it via a `color` prop that maps to CSS variables (`--btn-color`, `--btn-text`).
 - Let the CSS module handle interaction states with `color-mix()` — do not pre-compute hover colours.

@@ -31,6 +31,32 @@ export default defineConfig({
           },
         },
       },
+      {
+        extends: true,
+        plugins: [
+          storybookTest({ configDir: path.join(dirname, '.storybook') }),
+          // storybookTest sets the project name to "storybook:<configDir>" via a pre-order
+          // config plugin. Override it here with a post-order plugin so the two projects
+          // have distinct names and don't collide in the workspace.
+          {
+            name: 'storybook-dark-name-override',
+            config: {
+              order: 'post',
+              handler: () => ({ test: { name: 'storybook-dark' } }),
+            },
+          },
+        ],
+        test: {
+          name: 'storybook-dark',
+          setupFiles: [path.join(dirname, 'vitest.setup-dark.ts')],
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [{ browser: 'chromium' }],
+          },
+        },
+      },
     ],
   },
 });

@@ -72,7 +72,7 @@ export const WithForm: Story = {
         render={
           <Button
             variant="outline"
-            className="border-stake-gold text-stake-gold"
+            className="bg-black border-yellow-500 text-yellow-500"
           />
         }
       >
@@ -104,7 +104,7 @@ export const WithForm: Story = {
             type="submit"
             variant="ghost"
             size="lg"
-            className="w-full bg-stake-gold text-black"
+            className="w-full bg-yellow-500 text-black"
           >
             Send magic link
           </Button>
@@ -132,7 +132,7 @@ export const NoCloseButton: Story = {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter showCloseButton>
-          <Button color="stake-gold">Got it</Button>
+          <Button>Got it</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

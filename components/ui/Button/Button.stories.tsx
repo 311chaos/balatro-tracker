@@ -114,14 +114,14 @@ export const AsAnchor: Story = {
         {STATE_COLS.map(({ label }) => (
           <span
             key={label}
-            className="w-24 text-center text-[10px] font-medium uppercase tracking-widest text-zinc-500"
+            className="w-24 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground"
           >
             {label}
           </span>
         ))}
       </div>
       <div className="flex items-center gap-4">
-        <span className="w-24 shrink-0 text-[10px] font-mono text-zinc-600">
+        <span className="w-24 shrink-0 text-[10px] font-mono text-muted-foreground">
           default
         </span>
         {STATE_COLS.map(({ label, className, disabled }) => (

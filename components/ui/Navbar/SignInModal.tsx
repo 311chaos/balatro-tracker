@@ -17,15 +17,7 @@ type Props = {
 
 export const SignInModal = ({ action }: Props) => (
   <Dialog>
-    <DialogTrigger
-      render={
-        <Button
-          variant="outline"
-          size="lg"
-          className="gap-1.5 bg-black border-stake-gold text-stake-gold hover:text-black hover:bg-stake-gold active:bg-stake-gold data-popup-open:bg-stake-gold data-popup-open:text-black"
-        />
-      }
-    >
+    <DialogTrigger render={<Button variant="outline" size="lg" />}>
       Sign in
     </DialogTrigger>
     <DialogContent className="bg-zinc-800">
@@ -47,12 +39,7 @@ export const SignInModal = ({ action }: Props) => (
           autoComplete="email"
           size="lg"
         />
-        <Button
-          type="submit"
-          variant="ghost"
-          size="lg"
-          className="w-full bg-stake-gold text-black"
-        >
+        <Button type="submit" size="lg" className="w-full">
           Send magic link
         </Button>
         <p className="text-center text-xs text-zinc-300">

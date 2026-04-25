@@ -20,12 +20,12 @@ export const UserMenu = ({ email, onSignOut }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={<Button variant="outline" size="lg" color="stake-gold" />}
+        render={<Button variant="outline" size="lg" />}
       >
         {email}
         <ChevronDownIcon className="size-3.5" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" color="stake-gold">
+      <DropdownMenuContent align="end">
         <DropdownMenuItem
           onClick={() =>
             startTransition(() => {

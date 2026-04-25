@@ -27,7 +27,7 @@ const SIZES = [
 
 export const BalatroFont: Story = {
   render: () => (
-    <div className="flex flex-col gap-8 p-6 bg-black/80">
+    <div className="flex flex-col gap-8 p-6 bg-zinc-950">
       <div className="flex flex-col gap-4">
         <p className="text-xs font-medium uppercase tracking-widest text-zinc-100">
           m6x11 — Sizes
@@ -89,7 +89,7 @@ export const BalatroFont: Story = {
           {[
             { label: "Common",   color: "var(--zinc-400)"   },
             { label: "Uncommon", color: "var(--blue-500)"   },
-            { label: "Rare",     color: "var(--red-500)"    },
+            { label: "Rare",     color: "var(--red-400)"    },
             { label: "Legendary",color: "var(--yellow-500)" },
           ].map(({ label, color }) => (
             <span
