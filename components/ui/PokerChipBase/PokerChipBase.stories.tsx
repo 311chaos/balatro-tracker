@@ -7,7 +7,7 @@ import {
 } from '@/config/types';
 
 const meta: Meta<typeof PokerChipBase> = {
-  title: 'UI/PokerChipBase',
+  title: 'Base Components/PokerChipBase',
   component: PokerChipBase,
   parameters: {
     layout: 'centered',

@@ -13,7 +13,7 @@ const VARIANTS = [
 const SIZES = ['xs', 'sm', 'default', 'lg'] as const;
 
 const meta: Meta<typeof Button> = {
-  title: 'UI/Button',
+  title: 'Base Components/Button',
   component: Button,
   parameters: {
     layout: 'padded',

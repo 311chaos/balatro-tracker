@@ -18,7 +18,7 @@ const NavbarShell = ({ children }: { children: React.ReactNode }) => (
 );
 
 const meta: Meta = {
-  title: 'UI/Navbar',
+  title: 'Components/Navbar',
   parameters: {
     layout: 'fullscreen',
     backgrounds: {

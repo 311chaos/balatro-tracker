@@ -39,7 +39,7 @@ const STAKES = [
 ] as const;
 
 const meta: Meta = {
-  title: 'UI/DropdownMenu',
+  title: 'Base Components/DropdownMenu',
   parameters: {
     layout: 'centered',
   },

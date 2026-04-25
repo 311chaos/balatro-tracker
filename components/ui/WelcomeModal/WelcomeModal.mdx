@@ -1,0 +1,38 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as WelcomeModalStories from './WelcomeModal.stories';
+
+<Meta of={WelcomeModalStories} />
+
+# WelcomeModal
+
+Auto-opens on first visit by checking `localStorage` for a `balatro-welcome-seen` key. On dismiss (button click or backdrop), sets that key so the modal never re-appears.
+
+Renders at the root layout level — no trigger required.
+
+---
+
+## Preview
+
+<Canvas of={WelcomeModalStories.Playground} />
+
+---
+
+## Behaviour
+
+- Starts closed (`open: false`) to avoid a flash on the server render.
+- A `useEffect` on mount checks `localStorage`. If the key is absent, the modal opens.
+- `onOpenChange(false)` writes the key before closing, covering both the "Start tracking" button and any future close paths.
+
+## Usage
+
+Drop `<WelcomeModal />` once in the root layout — it manages its own state internally.
+
+```tsx
+import { WelcomeModal } from '@/components/ui/WelcomeModal';
+
+// app/layout.tsx
+<body>
+  <WelcomeModal />
+  {children}
+</body>
+```

@@ -12,7 +12,7 @@ import {
 } from '.';
 
 const meta: Meta = {
-  title: 'UI/Dialog',
+  title: 'Base Components/Dialog',
   parameters: {
     layout: 'centered',
     backgrounds: {

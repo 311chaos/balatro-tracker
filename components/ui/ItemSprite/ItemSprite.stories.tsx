@@ -9,7 +9,7 @@ const JOKER_BY_ID = Object.fromEntries(JOKERS.map((j) => [j.id, j])) as Record<
 >;
 
 const meta: Meta<{ jokerId: JokerId; size: number }> = {
-  title: 'UI/ItemSprite',
+  title: 'Base Components/ItemSprite',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',

@@ -7,7 +7,7 @@ import { STICKER_LEVELS, type StickerLevel } from '@/config/types';
 const jokerOptions = Object.fromEntries(JOKERS.map((j) => [j.name, j]));
 
 const meta: Meta<typeof JokerCard> = {
-  title: 'UI/JokerCard',
+  title: 'Components/JokerCard',
   component: JokerCard,
   tags: ['autodocs'],
   parameters: {

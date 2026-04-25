@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/ProgressBar';
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'UI/ProgressBar',
+  title: 'Base Components/ProgressBar',
   component: ProgressBar,
   tags: ['autodocs'],
   decorators: [

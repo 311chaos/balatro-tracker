@@ -3,7 +3,7 @@ import { PokerChip } from '@/components/ui/PokerChip';
 import { STICKER_LEVELS, type StickerLevel } from '@/config/types';
 
 const meta: Meta<typeof PokerChip> = {
-  title: 'UI/PokerChip',
+  title: 'Base Components/PokerChip',
   component: PokerChip,
   parameters: {
     layout: 'centered',
