@@ -58,7 +58,7 @@ export const WithFooter: Story = {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter showCloseButton>
-          <Button color="rarity-legendary">Confirm</Button>
+          <Button>Confirm</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -100,12 +100,7 @@ export const WithForm: Story = {
             placeholder="balatro@example.com"
             size="lg"
           />
-          <Button
-            type="submit"
-            variant="ghost"
-            size="lg"
-            className="w-full bg-yellow-500 text-black"
-          >
+          <Button type="submit" size="lg" className="w-full">
             Send magic link
           </Button>
           <p className="text-center text-xs text-zinc-300">

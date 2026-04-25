@@ -55,8 +55,10 @@ const withDarkClass: Decorator = (Story, context) => {
     if (context.viewMode === "docs") { window.location.reload(); return; }
   }, [isDark, context.viewMode]);
 
-  // Apply canvas background
+  // Apply canvas background and propagate dark class to <html> so that
+  // portal-rendered content (dropdowns, dialogs) also receives dark variants.
   useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
     document.body.style.background = isDark ? "#09090b" : "";
   }, [isDark]);
 

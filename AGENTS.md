@@ -63,8 +63,12 @@ This runs `@storybook/addon-a11y` via `@storybook/addon-vitest` in headless Chro
 
 ## Color system
 
-Rarity and stake colours live in `config/colors.ts` and are exposed as Tailwind theme tokens (`rarity-legendary`, `yellow-500` for gold, etc.). When a component needs a game colour:
+Game colours use the existing OKLCH palette scales defined in `config/colors.ts` and `app/globals.css`. There are **no** `rarity-*` or `stake-*` Tailwind tokens, and **no** `color` prop on Button or DropdownMenu — that system is not implemented.
 
-- Pass it via a `color` prop that maps to CSS variables (`--btn-color`, `--btn-text`).
-- Let the CSS module handle interaction states with `color-mix()` — do not pre-compute hover colours.
-- `color` and `variant` are orthogonal: variant controls structure (ghost, outline, solid), colour fills that structure.
+Use palette utilities directly:
+- Legendary / gold → `yellow-500` (`#ffd500`), always on a dark background
+- Rare → `red-400` on dark surfaces, `red-600` on light (contrast-safe steps)
+- Uncommon → `blue-500` / `blue-300` (light/dark respectively)
+- Common → `zinc-400`
+
+Apply colour via `className` or inline `style={{ color: "var(--red-400)" }}`. Do not invent custom tokens or pass unimplemented props.
