@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
 import { signInWithEmail, signOutAction } from '@/lib/actions/auth';
+import { Logo } from '@/components/ui/Logo';
 import { SignInModal } from './SignInModal';
 import { UserMenu } from './UserMenu';
 
@@ -11,9 +12,9 @@ export const Navbar = async () => {
     <header className="flex items-center justify-between border-b border-zinc-800 bg-zinc-950 px-6 py-3">
       <Link
         href="/tracker/jokers"
-        className="font-balatro text-2xl tracking-wide text-zinc-100 transition-colors hover:text-white"
+        className="opacity-90 transition-opacity hover:opacity-100"
       >
-        Balatro Tracker
+        <Logo size={64} />
       </Link>
       {session?.user?.email ? (
         <UserMenu email={session.user.email} onSignOut={signOutAction} />

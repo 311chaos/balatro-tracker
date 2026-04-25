@@ -19,7 +19,7 @@ export const UserMenu = ({ email, onSignOut }: Props) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" size="lg" />}>
+      <DropdownMenuTrigger render={<Button variant="ghost" size="lg" />}>
         {email}
         <ChevronDownIcon className="size-3.5" />
       </DropdownMenuTrigger>

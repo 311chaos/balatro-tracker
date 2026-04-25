@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 36" width="233" height="48">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'm6x11';
+        src: url('data:font/woff2;base64,d09GMgABAAAAAAI0AA0AAAAABoQAAAHkAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGhYGVgBcCAQRCAqGNIcoATYCJAMYCxYABCAFgVAHIBv9BSAeB7lJ60qEtsjiEodm8TClxPP/f/i5z/39vpmhT0OTUqmBlAqUDhbNCnAs1oDSNfzFIhAOP///13VnZtUUyuD0Jd8qSQli+1uLlKTM9PN/Ob0PdGvSAj4dq20nFKZjTIO1OU803xR4B5pAQHEvm9dHeslZcU28THAEKBE7kXzM1NSXCh/sfP65nR1lvYDAeMtbb3cDkKjyAhNe198BARQW2BMEeypPwImtsnZfUlpOUXlO3JWU2vrEPMzffM77vM6LAHO+3hMyJ78a7MEJ+Ub+AJaAshAB9USu98XeXr/hVhSTWXf+uAN1N3QHHRm0of1ycKHjMYUz2tqrPJ3NV2MkEzWd0ryjIoAxHzkdjab0ksgxqA1BJyM8pbVhcFGSNF7K1FZBTD905A9LyknLPn5q6OXoK4OaaysMKHSLjTvUj5FH4M4KSyEiEdJgLsQSFHtQdCBPwJ2DMlZS+/cTu/9vQRDe3C/8mvrg/624BH9/++r+hklF9cdWgVCHSWpLQN3BQQKVd5Qc+B+0l9SgEMEdZgAbLwmy3OEUQiXaqVKOXFQWLrOuLmnKyplqYX307ya0LYz1zaSNLWxt9S3MuZ3Y2GT09YztzVNW/QqqvY2tPlpakFhZ2ZhZF1EiEMc8uw0A') format('woff2');
+        font-weight: 400;
+      }
+    </style>
+    <radialGradient id="lbody" cx="16" cy="16" r="15" gradientUnits="userSpaceOnUse">
+      <stop offset="58%" stop-color="#DB663C"/>
+      <stop offset="58%" stop-color="#8B2800"/>
+      <stop offset="66%" stop-color="#8B2800"/>
+      <stop offset="66%" stop-color="#DB663C"/>
+      <stop offset="88%" stop-color="#DB663C"/>
+      <stop offset="88%" stop-color="#8B2800"/>
+    </radialGradient>
+    <radialGradient id="lgloss" cx="11" cy="10" r="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="white" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="lchip">
+      <circle cx="16" cy="16" r="15"/>
+    </clipPath>
+    <linearGradient id="tgrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe566"/>
+      <stop offset="100%" stop-color="#DB663C"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0.6 0 0 0  0.8 0.4 0 0 0  0 0 0 0 0  0 0 0 0.4 0" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <svg x="0" y="2" width="32" height="32" viewBox="0 0 32 32">
+    <circle cx="16" cy="17" r="15" fill="black" fill-opacity="0.25"/>
+    <circle cx="16" cy="16" r="15" fill="url(#lbody)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#111" clip-path="url(#lchip)" transform="rotate(0   16 16)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#FFF" clip-path="url(#lchip)" transform="rotate(45  16 16)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#111" clip-path="url(#lchip)" transform="rotate(90  16 16)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#FFF" clip-path="url(#lchip)" transform="rotate(135 16 16)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#111" clip-path="url(#lchip)" transform="rotate(180 16 16)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#FFF" clip-path="url(#lchip)" transform="rotate(225 16 16)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#111" clip-path="url(#lchip)" transform="rotate(270 16 16)"/>
+    <rect x="14" y="1.5" width="4" height="5.5" fill="#FFF" clip-path="url(#lchip)" transform="rotate(315 16 16)"/>
+    <circle cx="16" cy="16" r="9.5" fill="#DB663C" stroke="#8B2800" stroke-width="1.5"/>
+    <circle cx="16" cy="16" r="15" fill="url(#lgloss)"/>
+  </svg>
+
+  <text x="40" y="19" font-family="m6x11, monospace" font-size="18" fill="url(#tgrad)" filter="url(#glow)" letter-spacing="1">BALATRO</text>
+  <text x="41" y="31" font-family="m6x11, monospace" font-size="9" fill="#a1a1aa" letter-spacing="4">TRACKER</text>
+</svg>
