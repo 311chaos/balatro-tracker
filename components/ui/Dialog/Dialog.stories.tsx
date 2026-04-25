@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import {
   Dialog,
   DialogContent,
@@ -9,15 +9,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from ".";
+} from '.';
 
 const meta: Meta = {
-  title: "UI/Dialog",
+  title: 'UI/Dialog',
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     backgrounds: {
-      default: "dark",
-      values: [{ name: "dark", value: "#09090b" }],
+      default: 'dark',
+      values: [{ name: 'dark', value: '#09090b' }],
     },
   },
 };
@@ -72,7 +72,7 @@ export const WithForm: Story = {
         render={
           <Button
             variant="outline"
-            className="bg-black border-yellow-500 text-yellow-500"
+            className="border-yellow-500 bg-black text-yellow-500"
           />
         }
       >
@@ -80,7 +80,7 @@ export const WithForm: Story = {
       </DialogTrigger>
       <DialogContent className="bg-zinc-800">
         <DialogHeader>
-          <DialogTitle className="text-zinc-50 text-2xl">
+          <DialogTitle className="text-2xl text-zinc-50">
             Sync your progress
           </DialogTitle>
           <DialogDescription className="text-zinc-50">
@@ -90,7 +90,7 @@ export const WithForm: Story = {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            alert("Form submitted");
+            alert('Form submitted');
           }}
           className="flex flex-col gap-3 pt-2"
         >

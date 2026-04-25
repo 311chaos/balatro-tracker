@@ -8,7 +8,13 @@
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "email": "email dev --dir emails -p 3738"
+    "email": "email dev --dir emails -p 3738",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,css,json,md}": "prettier --write"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
@@ -41,7 +47,11 @@
     "@vitest/browser-playwright": "^4.1.4",
     "@vitest/coverage-v8": "^4.1.4",
     "culori": "^4.0.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "playwright": "^1.59.1",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.7.3",
     "storybook": "^10.3.5",
     "storybook-dark-mode": "^5.0.0",
     "tailwindcss": "^4",
