@@ -31,12 +31,13 @@ const variantClasses = {
     'dark:pseudo-active:bg-zinc-600 dark:pseudo-active:text-blue-200', //dark active
   ]),
   ghost: v([
-    'text-foreground',
-    'pseudo-hover:bg-zinc-100 pseudo-hover:text-foreground',
-    'pseudo-active:bg-zinc-200',
-    'dark:pseudo-hover:bg-zinc-800',
-    'dark:pseudo-active:bg-zinc-700',
-    'aria-expanded:bg-muted aria-expanded:text-foreground',
+    'text-primary', //default
+    'pseudo-hover:bg-blue-50 pseudo-hover:text-[color-mix(in_oklch,var(--color-primary)_80%,black)]', //hover
+    'pseudo-active:bg-blue-100 pseudo-active:text-[color-mix(in_oklch,var(--color-primary)_90%,black)]', //active
+    'dark:text-blue-300', //dark default
+    'dark:pseudo-hover:bg-blue-800 dark:pseudo-hover:text-[color-mix(in_oklch,var(--color-primary)_20%,white)]', //dark hover
+    'dark:pseudo-active:bg-blue-700 dark:pseudo-active:text-[color-mix(in_oklch,var(--color-primary)_20%,white)]', //dark active
+    'aria-expanded:bg-muted aria-expanded:text-foreground', //expanded
   ]),
   destructive: v([
     'bg-red-600 text-zinc-50', //default

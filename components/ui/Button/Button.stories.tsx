@@ -128,6 +128,7 @@ export const AsAnchor: Story = {
           <div key={label} className="flex w-24 justify-center">
             <Button
               render={<a href="#" />}
+              nativeButton={false}
               className={className}
               disabled={disabled}
             >
