@@ -19,6 +19,7 @@ const config: StorybookConfig = {
   staticDirs: ['../public', '../app'],
   viteFinal: (config) => ({
     ...config,
+    base: process.env.BASE_PATH ?? '/',
     optimizeDeps: {
       ...config.optimizeDeps,
       include: [
