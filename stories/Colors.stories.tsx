@@ -95,11 +95,10 @@ const Swatch = ({ scale, step }: { scale: Scale; step: Step }) => {
 
       <span
         style={{
-          fontSize: 11,
+          fontSize: 14,
           fontFamily: 'monospace',
           color: textColor,
           letterSpacing: '0.02em',
-          userSelect: 'none',
           textAlign: 'center',
         }}
       >

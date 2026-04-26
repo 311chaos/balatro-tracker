@@ -1,7 +1,7 @@
 'use client';
 
 import { useTransition } from 'react';
-import { ChevronDownIcon } from 'lucide-react';
+import { UserIcon, ChevronDownIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
+
 type Props = {
   email: string;
   onSignOut: () => void | Promise<void>;
@@ -19,11 +20,23 @@ export const UserMenu = ({ email, onSignOut }: Props) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="ghost" size="lg" />}>
-        {email}
-        <ChevronDownIcon className="size-3.5" />
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={`Account menu for ${email}`}
+            className="w-auto px-2"
+          />
+        }
+      >
+        <UserIcon className="size-5" />
+        <ChevronDownIcon className="size-5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <DropdownMenuItem disabled className="text-muted-foreground text-xs">
+          {email}
+        </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() =>
             startTransition(() => {

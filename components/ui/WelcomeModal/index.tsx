@@ -38,8 +38,7 @@ const WelcomeModal = () => {
             Welcome to Balatro Tracker
           </DialogTitle>
           <DialogDescription className="text-zinc-400">
-            Track which jokers you&apos;ve earned a gold sticker on across every
-            run.
+            Track which jokers you&apos;ve earned a gold sticker on.
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col gap-3 text-sm">
@@ -53,8 +52,7 @@ const WelcomeModal = () => {
             <span className="font-semibold text-zinc-100">
               Playing on multiple devices?
             </span>{' '}
-            Sign in with your email and your gold stickers will follow you
-            everywhere.
+            Sign in and track your progress across devices.
           </p>
         </div>
         <DialogFooter>

@@ -1,9 +1,16 @@
 type LogoProps = {
   size?: number;
   className?: string;
+  'aria-label'?: string;
+  'aria-hidden'?: boolean | 'true' | 'false';
 };
 
-const Logo = ({ size = 36, className }: LogoProps) => {
+const Logo = ({
+  size = 36,
+  className,
+  'aria-label': ariaLabel = 'Balatro Tracker',
+  'aria-hidden': ariaHidden,
+}: LogoProps) => {
   const width = Math.round(size * (175 / 36));
 
   return (
@@ -13,6 +20,9 @@ const Logo = ({ size = 36, className }: LogoProps) => {
       width={width}
       height={size}
       className={className}
+      role={ariaHidden ? undefined : 'img'}
+      aria-label={ariaHidden ? undefined : ariaLabel}
+      aria-hidden={ariaHidden}
     >
       <defs>
         <radialGradient
