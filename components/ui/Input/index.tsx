@@ -82,7 +82,7 @@ export const Input = ({
         <button
           type="button"
           onClick={handleClear}
-          className="text-muted-foreground hover:text-stake-red absolute right-2.5 flex items-center justify-center transition-colors"
+          className="text-muted-foreground hover:text-stake-red absolute inset-y-0 right-0 flex items-center justify-center px-2.5 transition-colors"
           aria-label="Clear"
         >
           <X className={clearButtonSize[size ?? 'md']} />

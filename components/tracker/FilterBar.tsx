@@ -56,10 +56,11 @@ export const FilterBar = () => {
 
   const [inputValue, setInputValue] = useState(urlQ);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isFocused = useRef(false);
 
   // Keep local input in sync if URL changes externally (e.g. back/forward)
   useEffect(() => {
-    setInputValue(urlQ);
+    if (!isFocused.current) setInputValue(urlQ);
   }, [urlQ]);
 
   const update = useCallback(
@@ -101,6 +102,12 @@ export const FilterBar = () => {
         type="search"
         value={inputValue}
         onChange={(e) => handleSearchChange(e.target.value)}
+        onFocus={() => {
+          isFocused.current = true;
+        }}
+        onBlur={() => {
+          isFocused.current = false;
+        }}
         placeholder="Search jokers…"
         size="lg"
         clearable={true}
