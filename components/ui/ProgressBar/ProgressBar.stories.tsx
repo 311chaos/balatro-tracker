@@ -27,18 +27,8 @@ const meta: Meta<typeof ProgressBar> = {
   argTypes: {
     current: { control: { type: 'range', min: 0, max: 150, step: 1 } },
     total: { control: { type: 'range', min: 0, max: 150, step: 1 } },
-    fillColor: {
-      control: 'select',
-      options: [
-        'var(--red-500)',
-        'var(--orange-500)',
-        'var(--yellow-500)',
-        'var(--green-500)',
-        'var(--blue-500)',
-        'var(--purple-500)',
-        'var(--zinc-400)',
-      ],
-    },
+    from: { control: 'text' },
+    to: { control: 'text' },
   },
 };
 
@@ -60,10 +50,14 @@ export const Complete: Story = {
 export const ComposableExample: Story = {
   render: () => {
     const rarityColors = [
-      { fill: 'var(--zinc-400)', label: 'Common' },
-      { fill: 'var(--blue-500)', label: 'Uncommon' },
-      { fill: 'var(--red-400)', label: 'Rare' },
-      { fill: 'var(--yellow-500)', label: 'Legendary' },
+      { from: 'var(--zinc-300)', to: 'var(--zinc-500)', label: 'Common' },
+      { from: 'var(--blue-300)', to: 'var(--blue-500)', label: 'Uncommon' },
+      { from: 'var(--red-400)', to: 'var(--red-600)', label: 'Rare' },
+      {
+        from: 'var(--yellow-300)',
+        to: 'var(--yellow-500)',
+        label: 'Legendary',
+      },
     ];
     const values = [82, 41, 12, 3];
 
@@ -72,13 +66,13 @@ export const ComposableExample: Story = {
         <p className="mb-1 text-xs font-medium tracking-wide text-zinc-100 uppercase">
           Jokers collected by rarity
         </p>
-        {rarityColors.map(({ fill, label }, i) => {
+        {rarityColors.map(({ from, to, label }, i) => {
           const pct = values[i];
           return (
             <div key={label} className="flex items-center gap-3">
               <span
                 className="w-20 shrink-0 text-xs font-medium"
-                style={{ color: fill }}
+                style={{ color: to }}
               >
                 {label}
               </span>
@@ -88,7 +82,7 @@ export const ComposableExample: Story = {
                 aria-label={`${label} jokers collected`}
               >
                 <ProgressTrack height={12}>
-                  <ProgressIndicator color={fill} />
+                  <ProgressIndicator from={from} to={to} />
                 </ProgressTrack>
               </ProgressRoot>
               <span className="w-8 text-right text-xs text-zinc-400 tabular-nums">
@@ -104,18 +98,18 @@ export const ComposableExample: Story = {
 };
 
 const PALETTE_COLORS = [
-  { label: 'Red', fill: 'var(--red-500)' },
-  { label: 'Orange', fill: 'var(--orange-500)' },
-  { label: 'Yellow', fill: 'var(--yellow-500)' },
-  { label: 'Green', fill: 'var(--green-500)' },
-  { label: 'Blue', fill: 'var(--blue-500)' },
-  { label: 'Purple', fill: 'var(--purple-500)' },
+  { label: 'Red', from: 'var(--red-400)', to: 'var(--red-600)' },
+  { label: 'Orange', from: 'var(--yellow-400)', to: 'var(--orange-500)' },
+  { label: 'Yellow', from: 'var(--yellow-300)', to: 'var(--yellow-500)' },
+  { label: 'Green', from: 'var(--green-400)', to: 'var(--green-600)' },
+  { label: 'Blue', from: 'var(--blue-300)', to: 'var(--blue-500)' },
+  { label: 'Purple', from: 'var(--purple-400)', to: 'var(--purple-600)' },
 ];
 
 export const AllPaletteColors: Story = {
   render: () => (
     <div className="flex w-80 flex-col gap-5 rounded-xl bg-zinc-900 p-6">
-      {PALETTE_COLORS.map(({ label, fill }, i) => (
+      {PALETTE_COLORS.map(({ label, from, to }, i) => (
         <div key={label} className="flex flex-col gap-1">
           <span className="text-[10px] font-medium tracking-wide text-zinc-400 uppercase">
             {label}
@@ -123,7 +117,8 @@ export const AllPaletteColors: Story = {
           <ProgressBar
             current={Math.round(150 * ((i + 1) / PALETTE_COLORS.length))}
             total={150}
-            fillColor={fill}
+            from={from}
+            to={to}
             aria-label={`${label} progress`}
           />
         </div>

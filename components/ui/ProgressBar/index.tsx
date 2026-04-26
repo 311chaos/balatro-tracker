@@ -19,12 +19,16 @@ export const ProgressTrack = ({
 
 export const ProgressIndicator = ({
   className,
-  color = 'var(--orange-500)',
+  from = 'var(--yellow-400)',
+  to = 'var(--orange-500)',
   ...props
-}: Progress.Indicator.Props & { color?: string }) => (
+}: Progress.Indicator.Props & { from?: string; to?: string }) => (
   <Progress.Indicator
     className={cn('h-full', className)}
-    style={{ backgroundColor: color, transition: 'var(--transition-progress)' }}
+    style={{
+      background: `linear-gradient(to right, ${from}, ${to})`,
+      transition: 'var(--transition-progress)',
+    }}
     {...props}
   />
 );
@@ -32,7 +36,8 @@ export const ProgressIndicator = ({
 type ProgressBarProps = {
   current: number;
   total: number;
-  fillColor?: string;
+  from?: string;
+  to?: string;
   height?: number;
   'aria-label'?: string;
 };
@@ -40,7 +45,8 @@ type ProgressBarProps = {
 export const ProgressBar = ({
   current,
   total,
-  fillColor = 'var(--orange-500)',
+  from = 'var(--yellow-400)',
+  to = 'var(--orange-500)',
   height = 8,
   'aria-label': ariaLabel = `${current} of ${total}`,
 }: ProgressBarProps) => {
@@ -56,7 +62,7 @@ export const ProgressBar = ({
       </div>
       <ProgressRoot value={pct} className="w-full" aria-label={ariaLabel}>
         <ProgressTrack height={height}>
-          <ProgressIndicator color={fillColor} />
+          <ProgressIndicator from={from} to={to} />
         </ProgressTrack>
       </ProgressRoot>
     </div>

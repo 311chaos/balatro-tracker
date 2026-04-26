@@ -1,3 +1,5 @@
+import { STICKER_COLORS } from '@/config/types';
+
 type LogoProps = {
   size?: number;
   className?: string;
@@ -32,12 +34,12 @@ const Logo = ({
           r="15"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="58%" stopColor="#DB663C" />
-          <stop offset="58%" stopColor="#8B2800" />
-          <stop offset="66%" stopColor="#8B2800" />
-          <stop offset="66%" stopColor="#DB663C" />
-          <stop offset="88%" stopColor="#DB663C" />
-          <stop offset="88%" stopColor="#8B2800" />
+          <stop offset="58%" stopColor={STICKER_COLORS.GOLD.chip} />
+          <stop offset="58%" stopColor={STICKER_COLORS.GOLD.ring} />
+          <stop offset="66%" stopColor={STICKER_COLORS.GOLD.ring} />
+          <stop offset="66%" stopColor={STICKER_COLORS.GOLD.chip} />
+          <stop offset="88%" stopColor={STICKER_COLORS.GOLD.chip} />
+          <stop offset="88%" stopColor={STICKER_COLORS.GOLD.ring} />
         </radialGradient>
         <radialGradient
           id="lgloss"
@@ -150,8 +152,8 @@ const Logo = ({
           cx="16"
           cy="16"
           r="9.5"
-          fill="#DB663C"
-          stroke="#8B2800"
+          fill={STICKER_COLORS.GOLD.chip}
+          stroke={STICKER_COLORS.GOLD.ring}
           strokeWidth="1.5"
         />
         <circle cx="16" cy="16" r="15" fill="url(#lgloss)" />
