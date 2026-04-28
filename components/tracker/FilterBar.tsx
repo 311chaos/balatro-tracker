@@ -3,20 +3,10 @@
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Input } from '@/components/ui/Input';
+import { Tag } from '@/components/ui/Tag';
+import { colors } from '@/config/colors';
 import { RARITIES, type RarityType } from '@/config/types';
-
-const RARITY_LABELS: Record<RarityType, string> = {
-  COMMON: 'Common',
-  UNCOMMON: 'Uncommon',
-  RARE: 'Rare',
-  LEGENDARY: 'Legendary',
-};
-const RARITY_COLORS: Record<RarityType, string> = {
-  COMMON: 'var(--zinc-400)',
-  UNCOMMON: 'var(--blue-500)',
-  RARE: 'var(--red-500)',
-  LEGENDARY: 'var(--yellow-500)',
-};
+import { RARITY_COLORS, RARITY_LABELS } from '@/lib/colors';
 
 const STATUS_OPTIONS = [
   { value: 'all', label: 'All' },
@@ -118,37 +108,23 @@ export const FilterBar = () => {
         <span className="font-balatro text-base font-semibold tracking-wide text-zinc-400 uppercase">
           Rarity:
         </span>
-        <button
+        <Tag
+          color={colors.orange[500]}
+          active={rarities.length === 0}
           onClick={() => update('rarity', null)}
-          className="font-balatro cursor-pointer rounded-full border px-3 py-1 text-sm font-medium tracking-widest transition-colors"
-          style={{
-            borderColor:
-              rarities.length === 0 ? 'var(--orange-500)' : 'var(--zinc-600)',
-            color:
-              rarities.length === 0 ? 'var(--zinc-950)' : 'var(--zinc-400)',
-            backgroundColor:
-              rarities.length === 0 ? 'var(--orange-500)' : 'transparent',
-          }}
         >
           All
-        </button>
-        {RARITIES.map((rarity) => {
-          const active = rarities.includes(rarity);
-          return (
-            <button
-              key={rarity}
-              onClick={() => toggleRarityType(rarity)}
-              className="font-balatro cursor-pointer rounded-full border px-3 py-1 text-sm font-medium tracking-widest transition-colors"
-              style={{
-                borderColor: RARITY_COLORS[rarity],
-                color: active ? 'var(--zinc-950)' : RARITY_COLORS[rarity],
-                backgroundColor: active ? RARITY_COLORS[rarity] : 'transparent',
-              }}
-            >
-              {RARITY_LABELS[rarity]}
-            </button>
-          );
-        })}
+        </Tag>
+        {RARITIES.map((rarity) => (
+          <Tag
+            key={rarity}
+            color={RARITY_COLORS[rarity]}
+            active={rarities.includes(rarity)}
+            onClick={() => toggleRarityType(rarity)}
+          >
+            {RARITY_LABELS[rarity]}
+          </Tag>
+        ))}
       </div>
 
       <div className="flex items-center gap-2">
@@ -156,21 +132,14 @@ export const FilterBar = () => {
           Status:
         </span>
         {STATUS_OPTIONS.map(({ value, label }) => (
-          <button
+          <Tag
             key={value}
+            color={colors.orange[500]}
+            active={status === value}
             onClick={() => update('status', value === 'all' ? null : value)}
-            className="font-balatro cursor-pointer rounded-full border px-3 py-1 text-sm font-medium tracking-widest transition-colors"
-            style={{
-              borderColor:
-                status === value ? 'var(--orange-500)' : 'var(--zinc-600)',
-              color: status === value ? 'var(--zinc-950)' : 'var(--zinc-400)',
-              backgroundColor:
-                status === value ? 'var(--orange-500)' : 'transparent',
-            }}
-            data-active={status === value}
           >
             {label}
-          </button>
+          </Tag>
         ))}
       </div>
     </div>

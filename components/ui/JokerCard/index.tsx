@@ -4,25 +4,13 @@ import { ItemSprite } from '@/components/ui/ItemSprite';
 import { PokerChip } from '@/components/ui/PokerChip';
 import { JOKER_SHEET_URL, type JokerId } from '@/config/jokers';
 import { STICKER_COLORS, type Joker, type StickerLevel } from '@/config/types';
+import { RARITY_COLORS, RARITY_LABELS } from '@/lib/colors';
+import { Tag } from '@/components/ui/Tag';
 
 type Props = {
   joker: Joker & { id: JokerId };
   stickerLevel: StickerLevel | null;
   onToggle: (level: StickerLevel | null) => void;
-};
-
-const RARITY_COLORS: Record<Joker['rarity'], string> = {
-  COMMON: 'var(--zinc-400)',
-  UNCOMMON: 'var(--blue-500)',
-  RARE: 'var(--red-500)',
-  LEGENDARY: 'var(--yellow-500)',
-};
-
-const RARITY_LABELS: Record<Joker['rarity'], string> = {
-  COMMON: 'Common',
-  UNCOMMON: 'Uncommon',
-  RARE: 'Rare',
-  LEGENDARY: 'Legendary',
 };
 
 export const JokerCard = ({ joker, stickerLevel, onToggle }: Props) => {
@@ -62,12 +50,9 @@ export const JokerCard = ({ joker, stickerLevel, onToggle }: Props) => {
         <span className="font-balatro w-full truncate text-center text-lg font-semibold tracking-widest text-zinc-100">
           {joker.name}
         </span>
-        <span
-          className="font-balatro text-xs font-medium tracking-wide uppercase"
-          style={{ color: RARITY_COLORS[joker.rarity] }}
-        >
+        <Tag color={RARITY_COLORS[joker.rarity]} size="sm">
           {RARITY_LABELS[joker.rarity]}
-        </span>
+        </Tag>
       </div>
     </button>
   );

@@ -1,0 +1,117 @@
+/* Colour values are computed from --v2-r/g/b/h/s/l (set inline from JS).  */
+
+/* ── Shared ─────────────────────────────────────────────────────────────── */
+.tag {
+  /* Raw perceived lightness (gamma-encoded) — used for dark-mode boost only */
+  --pl: calc(
+    (var(--v2-r) * 0.2126 + var(--v2-g) * 0.7152 + var(--v2-b) * 0.0722) / 255
+  );
+  /* Gap colour for the active ring — sits between chip edge and outer ring.  */
+  /* Uses the Tailwind semantic token so it tracks the current theme surface. */
+  --chip-gap: var(--background);
+}
+
+/* ── Light mode ─────────────────────────────────────────────────────────── */
+/*  --ls: lightness switch — 0 → black text, 1 → white text                 */
+/*  Uses gamma-correct WCAG luminance (--v2-lum) so saturated reds/blues    */
+/*  are judged accurately. Threshold 0.179 = equal-contrast midpoint.       */
+.tag {
+  --ls: clamp(0, calc((var(--v2-lum) - 0.179) * -1000), 1);
+
+  background-color: rgb(var(--v2-r) var(--v2-g) var(--v2-b));
+  color: hsl(0, 0%, calc(var(--ls) * 100%));
+  border: 1px solid rgb(var(--v2-r) var(--v2-g) var(--v2-b) / 0.4);
+}
+
+.tag[data-active='true'] {
+  background-color: hsl(
+    var(--v2-h),
+    calc(var(--v2-s) * 1%),
+    calc((var(--v2-l) - 10) * 1%)
+  );
+  border-color: transparent;
+  /* 1px gap + 2px ring = 3px total protrusion. Keeps tags from overlapping  */
+  /* at typical gap sizes. --chip-gap tracks the theme surface automatically. */
+  box-shadow:
+    0 0 0 1px var(--chip-gap),
+    0 0 0 3px rgb(var(--v2-r) var(--v2-g) var(--v2-b));
+}
+
+.tag:hover:not([data-active='true']),
+.tag.pseudo-hover:not([data-active='true']) {
+  filter: brightness(0.88);
+}
+
+.tag[data-active='true']:hover,
+.tag[data-active='true'].pseudo-hover {
+  filter: brightness(0.92);
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────────────── */
+/*  --lb: amount to add to HSL lightness so text reads against dark bg      */
+:global(.dark) .tag {
+  --ls-d: clamp(0, calc((var(--pl) - 0.6) * -1000), 1);
+  --lb: calc(((0.6 - var(--pl)) * 100) * var(--ls-d));
+  background-color: color-mix(
+    in srgb,
+    rgb(var(--v2-r) var(--v2-g) var(--v2-b)) 18%,
+    var(--v2-surface, #000)
+  );
+  color: hsl(
+    var(--v2-h),
+    calc(var(--v2-s) * 1%),
+    calc((var(--v2-l) + var(--lb)) * 1%)
+  );
+  border: 1px solid
+    hsla(
+      var(--v2-h),
+      calc(var(--v2-s) * 1%),
+      calc((var(--v2-l) + var(--lb)) * 1%),
+      0.3
+    );
+}
+
+:global(.dark) .tag[data-active='true'] {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 1px var(--chip-gap),
+    0 0 0 3px
+      hsl(
+        var(--v2-h),
+        calc(var(--v2-s) * 1%),
+        calc((var(--v2-l) + var(--lb)) * 1%)
+      );
+}
+
+:global(.dark) .tag:hover:not([data-active='true']),
+:global(.dark) .tag.pseudo-hover:not([data-active='true']) {
+  filter: none;
+  background-color: hsla(
+    var(--v2-h),
+    calc(var(--v2-s) * 1%),
+    calc((var(--v2-l) + 10) * 1%),
+    0.3
+  );
+}
+
+:global(.dark) .tag[data-active='true']:hover,
+:global(.dark) .tag[data-active='true'].pseudo-hover {
+  filter: none;
+  background-color: rgb(var(--v2-r) var(--v2-g) var(--v2-b) / 0.28);
+}
+
+/* ── Focus ring ─────────────────────────────────────────────────────────── */
+.tag:focus-visible,
+.tag.pseudo-focus {
+  outline: 2px solid rgb(var(--v2-r) var(--v2-g) var(--v2-b));
+  outline-offset: 2px;
+}
+
+:global(.dark) .tag:focus-visible,
+:global(.dark) .tag.pseudo-focus {
+  outline-color: hsl(
+    var(--v2-h),
+    calc(var(--v2-s) * 1%),
+    calc((var(--v2-l) + var(--lb)) * 1%)
+  );
+}

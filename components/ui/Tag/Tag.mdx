@@ -1,0 +1,66 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TagStories from './Tag.stories';
+
+<Meta of={TagStories} />
+
+# Tag
+
+Colour-adaptive pill for labels, filter chips, and badges. Accepts any hex colour and automatically computes contrast-safe text (WCAG AA) and border treatment for both light and dark mode — no fixed palette required.
+
+---
+
+## Playground
+
+<Canvas of={TagStories.Playground} />
+<Controls of={TagStories.Playground} />
+
+---
+
+## Colors
+
+Each colour shown inactive (left) and active (right). Active state darkens the fill and adds a separated ring using the page surface as a gap.
+
+<Canvas of={TagStories.Colors} />
+
+---
+
+## With delete
+
+When `onDelete` is provided the tag renders as a `<span>` container with sibling `<button>` elements — no nested interactive elements.
+
+<Canvas of={TagStories.WithDelete} />
+
+---
+
+## Sizes
+
+<Canvas of={TagStories.Sizes} />
+
+---
+
+## Usage
+
+```tsx
+import { Tag } from '@/components/ui/Tag';
+
+// Display badge
+<Tag color="#3399ff">Uncommon</Tag>
+
+// Toggle (filter chip)
+<Tag color="#3399ff" active={isActive} onClick={toggle}>Uncommon</Tag>
+
+// Dismissible
+<Tag color="#ff3633" active onDelete={() => remove(id)}>Rare</Tag>
+```
+
+## Props
+
+| Prop        | Type                    | Default    | Description                                               |
+| ----------- | ----------------------- | ---------- | --------------------------------------------------------- |
+| `color`     | `string`                | required   | Hex colour — drives background, text, border, and ring    |
+| `size`      | `'sm' \| 'md' \| 'lg'` | `'md'`     | Tag size                                                  |
+| `active`    | `boolean`               | `false`    | Selected state — darkens fill and shows ring              |
+| `onClick`   | `() => void`            | —          | Makes the tag an interactive toggle button                |
+| `onDelete`  | `() => void`            | —          | Adds a dismiss button; tag root becomes a `<span>`        |
+| `surface`   | `string`                | —          | CSS colour of the surface the tag sits on, used for the active ring gap. Defaults to the `--background` token. |
+| `className` | `string`                | —          | Extra classes merged onto the root element                |

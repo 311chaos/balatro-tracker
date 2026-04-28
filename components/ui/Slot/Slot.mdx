@@ -1,0 +1,159 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Slot" />
+
+# Slot
+
+A zero-dependency prop-merging primitive. Lets a parent component delegate its behaviour — event handlers, aria attributes, refs — onto an arbitrary child element without adding a wrapper node to the DOM.
+
+Source: `components/ui/Slot/index.tsx`
+
+---
+
+## Why it's necessary
+
+Behaviour primitives (dialogs, tooltips, dropdowns) need to attach props to their trigger element. The naive approach wraps the trigger in another element:
+
+```tsx
+// Bad — adds a <div> to the DOM, breaks flex/grid layouts,
+// and creates a "button inside a button" if the child is already a button.
+const DialogTrigger = ({ children, ...props }) => (
+  <div {...props}>{children}</div>
+);
+
+<DialogTrigger onClick={openDialog}>
+  <Button>Open</Button>  {/* now: <div><button>Open</button></div> */}
+</DialogTrigger>
+```
+
+`Slot` fixes this by merging the parent's props directly onto the child's root element — no extra DOM node, no nesting violations.
+
+---
+
+## Prop merging rules
+
+| Prop type | Behaviour |
+|---|---|
+| `className` | Concatenated — slot classes first, child classes second |
+| `style` | Shallow merged — child wins on conflicts |
+| Event handlers (`on*`) | Both called — child runs first. If child calls `e.preventDefault()`, the slot handler is suppressed. |
+| `ref` | Composed — both refs receive the node |
+| Everything else | Child prop wins; slot prop used as fallback |
+
+---
+
+## Usage
+
+### 1. Direct usage
+
+`<Slot>` merges its own props onto its single child. The child element is what actually renders — `Slot` itself produces no DOM node.
+
+```tsx
+import { Slot } from '@/components/ui/Slot';
+
+// Slot merges onClick and className onto the <button>.
+// The DOM output is just: <button class="font-bold" onClick={...}>Click me</button>
+<Slot onClick={() => console.log('clicked')} className="font-bold">
+  <button>Click me</button>
+</Slot>
+
+// Works with any element, not just buttons.
+<Slot onClick={openDialog} aria-haspopup="dialog">
+  <a href="#">Open</a>
+</Slot>
+```
+
+---
+
+### 2. The `asChild` pattern
+
+The most common use of `Slot` is inside a primitive that needs to support element swapping. Accept an `asChild` prop and conditionally render `Slot` instead of the default element:
+
+```tsx
+import { Slot } from '@/components/ui/Slot';
+
+type TriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  asChild?: boolean;
+};
+
+const Trigger = ({ asChild, children, ...props }: TriggerProps) => {
+  const Comp = asChild ? Slot : 'button';
+  return <Comp {...props}>{children}</Comp>;
+};
+```
+
+```tsx
+// Without asChild — Trigger renders its own <button>
+<Trigger onClick={open}>
+  Click me
+</Trigger>
+// DOM: <button onClick={...}>Click me</button>
+
+// With asChild — Slot merges Trigger's props onto <Button>'s root element
+<Trigger asChild onClick={open}>
+  <Button variant="outline">Open dialog</Button>
+</Trigger>
+// DOM: <button class="...Button styles..." onClick={...}>Open dialog</button>
+```
+
+---
+
+### 3. Replacing Base UI's `render` prop
+
+`asChild` is the direct equivalent of Base UI's `render={<MyComponent />}` pattern:
+
+```tsx
+// Before (Base UI)
+<DialogTrigger render={<Button variant="outline" size="lg" />}>
+  Sign in
+</DialogTrigger>
+
+// After (asChild / Slot)
+<DialogTrigger asChild>
+  <Button variant="outline" size="lg">Sign in</Button>
+</DialogTrigger>
+```
+
+---
+
+### 4. Event handler composition
+
+Both handlers fire when the same event is present on `Slot` and its child. The child runs first; calling `e.preventDefault()` suppresses the `Slot`'s handler.
+
+```tsx
+// Both run — logs "child clicked" then "slot clicked"
+<Slot onClick={() => console.log('slot clicked')}>
+  <button onClick={() => console.log('child clicked')}>Open</button>
+</Slot>
+
+// Child prevents default — only logs "blocked", slot handler suppressed
+<Slot onClick={() => console.log('slot clicked')}>
+  <button onClick={(e) => { e.preventDefault(); console.log('blocked'); }}>
+    Open
+  </button>
+</Slot>
+```
+
+---
+
+### 5. Ref forwarding
+
+Pass a ref to `<Slot>` and it will be composed with any ref already on the child — both receive the DOM node.
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+<Slot ref={inputRef}>
+  <input type="text" />
+</Slot>
+
+// inputRef.current === the <input> DOM node
+```
+
+---
+
+## What Slot does not handle
+
+- **Multiple children** — `Slot` expects exactly one valid React element as its child. Passing fragments or arrays will return `null`.
+- **`Slottable`** — partial slot merging (where only part of the children is the slot target) is not implemented. If you need it, look at the Radix UI source for reference.
+- **Non-element children** — strings, numbers, and `null` are not valid slot targets and will render nothing.
